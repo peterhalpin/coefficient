@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>TogetherJS Example</title>
+    <style type="text/css">
+      textarea {
+        margin-top: 20px;
+        height: 300px;
+        width: 300px;
+      }
+    </style>
+    <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
+    <script  type="module" src="./chat.js"></script>
+  </head>
+
+  <body>
+    <!-- TODO: Position this in the middle -->
+    <div class = "container">
+      <h1 class="title">Letters-To-Numbers</h1>
+    </div>
+
+    <!-- id="togetherjs-chat"
+
+      * Use for later changing the location of the chat to be somewhere else on the screen
+
+    -->
+    <section class="section">
+        <div class="container" id="chat">
+            </div>
+    </section>
+    
+    <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
+    </body>

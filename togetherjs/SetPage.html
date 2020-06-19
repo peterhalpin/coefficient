@@ -1,0 +1,138 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TogetherJS Example</title>
+  <style type="text/css">
+    textarea {
+      margin-top: 20px;
+      height: 300px;
+      width: 300px;
+    }
+  </style>
+  <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+  <script src="https://togetherjs.com/togetherjs-min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
+  <script  type="module" src="./submit.js"></script>
+</head>
+<body>
+  <!--TODO:  Position this in the middle -->
+  <div class = "container">
+    <h1 class="title">A Collaborative Text Area</h1>
+  </div>
+  
+ <!-- TODO: Position this in the middle -->
+  <section class="section">
+    <div class="container">
+      <table class="table">
+        <tbody>
+
+          <tr>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/A.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/B.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/C.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/D.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/E.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/F.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/G.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/H.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/I.png">
+              </figure>
+            </td>
+            <td>
+              <figure class="image is-128x128">
+                <img src="./Letters/J.png">
+              </figure>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+
+      <div class="container">
+        <table class="table">
+          <tr>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea class="textarea" rows="1"></textarea>
+            </td>
+          </tr>
+        </table>
+      </div>
+  </section>
+
+
+  <!--  
+    Buton to submit that redirects to lobby
+  -->
+  <div class="buttons">
+    <button class="button is-primary" id="submit">Submit</button>
+  </div>
+  <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
+  <textarea id="textarea"></textarea>
+  <script type="text/javascript" src="config.js"></script>
+  <script type="text/javascript" src="example.js"></script>
+</body>
+</html>
