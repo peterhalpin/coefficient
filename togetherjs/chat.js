@@ -16,6 +16,14 @@ $(function () {
      });
 });
 
+/* .dropdown-content {
+  max-height: 13em;
+  overflow: auto;
+}
+
+ css for adding a scroll bar 
+
+*/
 
 function randomize () {
 
