@@ -1,0 +1,23 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TogetherJS Example</title>
+  <style type="text/css">
+    textarea {
+      margin-top: 20px;
+      height: 300px;
+      width: 300px;
+    }
+  </style>
+  <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+  <script src="https://togetherjs.com/togetherjs-min.js"></script>
+</head>
+<body>
+  <h2>A Collaborative Text Area</h2>
+  <div>(Open this in two browser windows side-by-side and start typing!)</div>
+  <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
+  <textarea id="textarea"></textarea>
+</body>
+</html>

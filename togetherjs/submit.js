@@ -1,7 +1,6 @@
-$(function () {
-    $("#submit").on("click", function (event) { 
-        redirect()
-     });
+$("#submit").on("click", function (event) { 
+        // window.location = '/../Excercise.html'
+        console.log("hello")
 });
 
 //TODO: Write code that checks if 
@@ -11,7 +10,3 @@ $(function () {
     * That the items entered are digits
     * 
     */
-
-function redirect(){
-    window.location = '/../Excercise.html';
-}
