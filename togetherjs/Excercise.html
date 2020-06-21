@@ -1,3 +1,4 @@
+<!-- MAJOR TODO: Center things / prettify the layout -->
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -9,6 +10,7 @@
         width: 300px;
       }
     </style>
+    <link rel="stylesheet" href="Excercise.css">
     <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
@@ -17,7 +19,6 @@
   </head>
 
   <body>
-    <!-- TODO: Position this in the middle -->
     <div class = "container">
       <h1 class="title">Letters-To-Numbers</h1>
     </div>
@@ -26,26 +27,76 @@
       <div class="container" id="topHalf">
         <div class="container" id="Chat">
           <div class="container" id="text">
+            <p id="text">
+              &nbsp;
+            </p>
 
           </div>
           <div class="container" id="question">
-            <div class="container" id="textbar">
-
-            </div>
-            <div class="container" id="submit_button">
-
-            </div>
+              <p id="textbar">
+                &nbsp;
+              </p>
+              <button class="button is-light" id="Send">Send</button>
           </div>
 
           </div>
 
          <div class="container" id="keyboard">
           <table id="buttons">
-            <!-- For buttons -->
             <tr>
-
+              <td id="A">
+                <button class="button is-light" id="A">A</button>
+              </td>
+              <td id="B">
+                <button class="button is-light" id="B">B</button>
+              </td>
+              <td id="C">
+                <button class="button is-light" id="C">C</button>
+              </td>
+              <td id="D">
+                <button class="button is-light" id="D">D</button>
+              </td>
+              <td id="E">
+                <button class="button is-light" id="E">E</button>
+              </td>
+              <td id="F">
+                <button class="button is-light" id="F">F</button>
+              </td>
+              <td id="G">
+                 <button class="button is-light" id="G">G</button>
+              </td>
+              <td id="H">
+                 <button class="button is-light" id="H">H</button>
+                </td>
+              <td id="I">
+                <button class="button is-light" id="I">I</button>
+              </td>
+              <td id="J">
+                <button class="button is-light" id="J">J</button>
+              </td>
             </tr>
             <tr>
+              <!-- TODO: Create a blank class to cut down code -->
+              <td id="blank" width="44" height="44"></td>
+              <td id="addition">
+                <button class="button is-light" id="addition">+</button>
+              </td>
+              <td id="blank" width="44" height="44"></td>
+              <td id="subtraction">
+                <button class="button is-light" id="subtraction">-</button>
+              </td>
+              <td id="blank" width="44" height="44"></td>
+              <td id="multiplication">
+                <button class="button is-light" id="multiplication">x</button>
+              </td>
+              <td id="blank" width="44" height="44"></td>
+              <td id="division">
+                <button class="button is-light" id="division">/</button>
+              </td>
+              <td id="blank" width="44" height="44"></td>
+              <td id="backspace">
+                <button class="button is-light" id="delete">Backspace</button>
+              </td>
 
             </tr>
           </table>
@@ -53,25 +104,109 @@
 
       </div>
       
-
+        <!-- TODO: Push this whole section a tab back. Make things more clear -->
+        <!-- This section is the submit area. -->
         <div class="container" id="bottomHalf">
           <div class="container" id="input">
             <table>
             <tr>
-
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/A.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/B.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/C.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/D.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/E.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/F.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/G.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/H.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/I.png">
+                </figure>
+              </td>
+              <td>
+                <figure class="image is-128x128">
+                  <img src="./Letters/J.png">
+                </figure>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <textarea class="textarea" rows="1" id="0"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="1"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="2"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="3"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="4"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="5"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="6"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="7"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="8"></textarea>
+              </td>
+              <td>
+                <textarea class="textarea" rows="1" id="9"></textarea>
+              </td>
             </tr>
           </table>
           <div id="submit_answer">
-            <button></button>
+            <button class="button is-light" id="submit_answer">Submit</button>
           </div>
           </div>
+      
+        <!-- id="togetherjs-chat"
+        *
+        * Use for later changing the location of the chat to be somewhere else on the screen
+        *
+        -->
+    
+    <button class="button is-light" onclick="TogetherJS(this); return false;">Start TogetherJS</button>
         </div>
     </section>
-    <!-- id="togetherjs-chat"
-
-      * Use for later changing the location of the chat to be somewhere else on the screen
-
-    -->
-    
-    <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
+   
     </body>
