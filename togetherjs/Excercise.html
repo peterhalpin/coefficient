@@ -1,4 +1,14 @@
-<!-- MAJOR TODO: Center things / prettify the layout -->
+<!-- MAJOR TODO: Center things / prettify the layout 
+  * Create a "blank" css class to cut down code 
+  * Create a modal css class to cut down code 
+  * Clean code
+  *
+  
+  id="togetherjs-chat"
+        *
+        * Use for later changing the location of the chat to be somewhere else on the screen
+        *
+-->
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -19,6 +29,8 @@
   </head>
 
   <body>
+   
+
     <div class = "container">
       <h1 class="title">Letters-To-Numbers</h1>
     </div>
@@ -27,7 +39,7 @@
       <div class="container" id="topHalf">
         <div class="container" id="Chat">
           <div class="container" id="text">
-            <p id="text">
+            <p id="text"></p>
               &nbsp;
             </p>
 
@@ -76,7 +88,7 @@
               </td>
             </tr>
             <tr>
-              <!-- TODO: Create a blank class to cut down code -->
+              
               <td id="blank" width="44" height="44"></td>
               <td id="addition">
                 <button class="button is-light" id="addition">+</button>
@@ -86,13 +98,15 @@
                 <button class="button is-light" id="subtraction">-</button>
               </td>
               <td id="blank" width="44" height="44"></td>
-              <td id="multiplication">
+              <!-- <td id="multiplication">
                 <button class="button is-light" id="multiplication">x</button>
-              </td>
+              </td> -->
               <td id="blank" width="44" height="44"></td>
-              <td id="division">
+              <td id="blank" width="44" height="44"></td>
+              <!-- <td id="division">
                 <button class="button is-light" id="division">/</button>
-              </td>
+              </td> -->
+              <td id="blank" width="44" height="44"></td>
               <td id="blank" width="44" height="44"></td>
               <td id="backspace">
                 <button class="button is-light" id="delete">Backspace</button>
@@ -104,7 +118,6 @@
 
       </div>
       
-        <!-- TODO: Push this whole section a tab back. Make things more clear -->
         <!-- This section is the submit area. -->
         <div class="container" id="bottomHalf">
           <div class="container" id="input">
@@ -194,16 +207,32 @@
               </td>
             </tr>
           </table>
+          
           <div id="submit_answer">
             <button class="button is-light" id="submit_answer">Submit</button>
           </div>
+          <!-- 
+            Modal Code
+          -->
+          <div class="modal" id="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content" style="background-color:white;"> 
+              <p>
+                Are you ok with these answers?
+              </p>
+              <p>
+                Awaiting: 0/4 Confirmations
+                <p>
+                <button class="button is-light" id="confirm">Confirm</button>
+                <button class="button is-light" id="cancel">Cancel</button>
+                </p>
+              </p>
+            </div>
+            <button class="modal-close is-large" aria-label="close" id="close_modal"></button>
+          </div>
           </div>
       
-        <!-- id="togetherjs-chat"
-        *
-        * Use for later changing the location of the chat to be somewhere else on the screen
-        *
-        -->
+   
     
     <button class="button is-light" onclick="TogetherJS(this); return false;">Start TogetherJS</button>
         </div>

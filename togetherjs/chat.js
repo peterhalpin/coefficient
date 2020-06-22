@@ -1,53 +1,162 @@
 // MAJOR TO DO:
-    // WRITE ERROR CHECKING FOR "TEXT"
-        /*
-        * Possible Errors
-        *  - Multiple expression markers put one right after each other
-        *  - No expression markers 
-        *  - Worrying about irrational numbers 
-        * Either try/catch for the conversion parts instead of error checking?
-        * 
+     
+    // MODAL FUNCTIONALITY  
+        /* 
+        * Change Modal screen pop up to show after alerts
+        * Connect Together.js functionality.
+        * Add functionality for the confirm/cancel buttons in the modal
         */
     // ASK ABOUT SPECIFIC FUNCTIONALITY OF EXAMPLE EXPRESSIONS
         /*
-        * Does peter want to have multi-variable expressions?
-        * Ask him if I should include division properties because of the possible issue of irrational numbers
-        * I hardly doubt students would do that but I'll ask anyway 
+        * Does Peter want to have multi-variable expressions?
         * If he does want multi-variable expressions I'll have to store the numbers in arrays and the expressions in arrays
         * /
-    // SUBMIT FUNCTIONALITY  
-        /* 
-        * Function for collecting answers and checking them against the combination
-        * Submit button pops up a screen asking if both players are ok 
-        *   - If so , then it will submit and show if they're correct or not
-        *   - It will stay on the small window until a user clicks out/cancels
+    // WRITE ERROR CHECKING FOR "TEXT"
+        /*
+        * Add on any possible errors as I go along
         */
+    // ADDING SCROLLBAR FOR "CHAT"
+    // MAKE CODE SHORTER
     // RENAME THIS FILE TO MAKE SENSE
-
-let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' ];
-
-//TO DO: Rename keys to be more clear
-    /*
-    * Made to hold the "number" value of the letters 
-    */
-let keys = {} ;
-
-
-$(function () {
-
-    randomize();
-    $("#submit").on("click", function (event) { redirect(); });
-    $("div#topHalf.container").on("click", "button.is-light", function (event) {keyboard(event)});
-});
-
+    // RENAME KEY VARIABLE WITH BETTER NAME
 /* 
 *
-*TO DO: CSS For adding in a scroll bar later
+*TO DO: CSS For adding in a scroll bar in the "TEXT"
 .dropdown-content {
   max-height: 13em;
   overflow: auto;
 }
 */
+
+let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' ];
+
+
+let keys = {} ;
+
+let trial_num = 0;
+
+
+$(function () {
+
+    randomize();
+    // Do not remove, for algorithm checking purposes
+    console.log(combination);
+
+    $("div#topHalf.container").on("click", "button.is-light", function (event) {keyboard(event)});
+    $("div#bottomHalf.container").on("click", "button.is-light#submit_answer", function (event) {
+        //Line 48 has to be put here to activate the mini-window
+        $("div#modal").addClass("is-active");
+        submit(event)});
+    $("div#modal").on("click", "button#close_modal", function (event) {
+        $("div#modal").removeClass("is-active")
+    });
+});
+
+
+
+function submit(event) {
+
+    let answers = new Array();
+    for (let i = 0 ; i < 9 ; i++){
+        answers[i] = $( "textarea#" + i + ".textarea").val();
+        
+        //Checks for answers that are not single digits
+        if (answers[i].length != 1){
+            alert("Hey, put in a serious answer you joker!");
+            return;
+        }
+
+        //Checks for answers that are not numbers
+        try {
+            parseInt(answers[i])
+          }
+          catch(err) {
+            alert("Hey, put in a number you joker!");
+            return;
+          }
+    
+        //Checks for if the answer is correct or not
+      let num = parseInt(answers[i]);
+      switch(i){
+          case 0:
+              if (combination[num] == "A"){
+                  continue;
+              } else {
+                alert("you're wrong");
+                return;
+            }
+          case 1:
+            if (combination[num] == "B"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 2:
+            if (combination[num] == "C"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 3:
+            if (combination[num] == "D"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 4:
+            if (combination[num] == "E"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 5:
+            if (combination[num] == "F"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 6:
+            if (combination[num] == "G"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 7:
+            if (combination[num] == "H"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 8:
+            if (combination[num] == "I"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          case 9:
+            if (combination[num] == "J"){
+                continue;
+            } else {
+                alert("you're wrong");
+                return;
+            }
+          default:
+              break;
+      }
+    }
+
+    alert("You're correct!");
+
+
+}
 
 //Handles all actions on the top half of the Excercise webpage
 
@@ -93,12 +202,12 @@ function keyboard(event) {
         case "subtraction":
             $( "p#textbar" ).text( textbar_content +  "-");
             break;
-        case "multiplication":
-            $( "p#textbar" ).text( textbar_content +  "x");
-            break;
-        case "division":
-            $( "p#textbar" ).text( textbar_content +  "/");
-            break;
+        // case "multiplication":
+        //     $( "p#textbar" ).text( textbar_content +  "x");
+        //     break;
+        // case "division":
+        //     $( "p#textbar" ).text( textbar_content +  "/");
+        //     break;
         case "delete":
             let length = textbar_content.length-1;
             let short_string = textbar_content.substring(0, length);
@@ -106,12 +215,12 @@ function keyboard(event) {
             break;
         case "Send":
             answer(textbar_content.trim());
+            $( "p#textbar").html("&nbsp;");
             break;
         default:
       }
 }
 
-//TO DO: ERROR CHECK
 /*
 * Takes in a string and returns nothing
 * Gives the user the computer answer 
@@ -125,6 +234,7 @@ function answer(textbar_content){
     let first_term = "";
     let expression = "";
     let second_term = "";
+    let expression_num = 0;
 
     //Breaks up the textbar string into seperate string values 
     for (let i = 0 ; i < textbar_content.length ; i++){
@@ -133,19 +243,21 @@ function answer(textbar_content){
             case "+":
                 expression = "+";
                 position++;
+                expression_num++;
                 break;
             case "-":
                 expression = "-";
                 position++;
+                expression_num++;
                 break;
-            case "x":
-                expression = "x";
-                position++;
-                break;
-            case "/":
-                expression = "/";
-                position++;
-                break;
+            // case "x":
+            //     expression = "x";
+            //     position++;
+            //     break;
+            // case "/":
+            //     expression = "/";
+            //     position++;
+            //     break;
             default:
                 if (position == 0) {
                     first_term += char
@@ -154,6 +266,12 @@ function answer(textbar_content){
                 }
         }
         
+    }
+
+    if(expression == "" || second_term == "" || expression_num > 1){
+        alert("Please write a correct full expression");
+        $( "p#textbar").html("&nbsp;");
+        return;
     }
 
     let first_num = translate(first_term);
@@ -167,18 +285,21 @@ function answer(textbar_content){
         case "-":
             result += first_num - second_num
             break;
-        case "x":
-            result += first_num * second_num
-            break;
-        case "/":
-            result += first_num / second_num
-            break;
+        // case "x":
+        //     result += first_num * second_num
+        //     break;
+        // case "/":
+        //     result += first_num / second_num
+        //     break;
         default:
             break;
         }
     
     answer = retranslate(result);
-    $( "p#text" ).text(textbar_content + " = " + answer);
+    trial_num++;
+    $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
+    $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
+    $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
 
     }
 
