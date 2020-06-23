@@ -6,11 +6,8 @@
         * Connect Together.js functionality.
         * Add functionality for the confirm/cancel buttons in the modal
         */
-    // ASK ABOUT SPECIFIC FUNCTIONALITY OF EXAMPLE EXPRESSIONS
-        /*
-        * Does Peter want to have multi-variable expressions?
-        * If he does want multi-variable expressions I'll have to store the numbers in arrays and the expressions in arrays
-        * /
+    // ADD MIDDLE SECTION / PART 2 -> LOOK AT PAGE 3.3
+    // ADD MULTIVARIABLE EXPRESSIONS
     // WRITE ERROR CHECKING FOR "TEXT"
         /*
         * Add on any possible errors as I go along
@@ -19,6 +16,7 @@
     // MAKE CODE SHORTER
     // RENAME THIS FILE TO MAKE SENSE
     // RENAME KEY VARIABLE WITH BETTER NAME
+    // ORGANIZE FUNCTIONS
 /* 
 *
 *TO DO: CSS For adding in a scroll bar in the "TEXT"
@@ -28,17 +26,19 @@
 }
 */
 
-let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' ];
+let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J', " "];
 
 
 let keys = {} ;
 
 let trial_num = 0;
 
+let seed = document.cookie;
+
 
 $(function () {
 
-    randomize();
+    randomize(seed);
     // Do not remove, for algorithm checking purposes
     console.log(combination);
 
@@ -333,14 +333,15 @@ function translate(term) {
 }
 
 // Creates the Encryption/Decryption system for the excercise
-function randomize () {
+function randomize (seed) {
 
-    // Shuffles letters in the array, creating the encryption formula
+    // Shuffles letters in the array using a seed to create the encryption formula
     for (let i = 0; i < 10 ; i++){
-        let index = Math.floor( Math.random() * 10 );
-        let temp = combination[index];
-        combination[index] = combination[i]
+        seed = (seed + 7)  % 11 ;
+        let temp = combination[seed];
+        combination[seed] = combination[i]
         combination[i] = temp 
+        document.cookie =　"";
     }
 
     // Makes a dictionaray that holds the decryption formula
