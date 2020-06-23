@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="main.css" />
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.15.4/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.15.4/firebase-auth.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+<!-- firebase UI -->
+<script src="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.css" />
+
+
+<script>  
+    // Track the UID of the current user.  
+    var currentUid = null;  
+    firebase.auth().onAuthStateChanged(function(user) {  
+     // onAuthStateChanged listener triggers every time the user ID token changes.  
+     // This could happen when a new user signs in or signs out.  
+     // It could also happen when the current user ID token expires and is refreshed.  
+     if (user && user.uid != currentUid) {  
+      // Update the UI when a new user signs in.  
+      // Otherwise ignore if this is a token refresh.  
+      // Update the current user UID.  
+      currentUid = user.uid;  
+      document.body.innerHTML = '<h1> Congrats ' + user.displayName + ', you are logged in! </h1>'; 
+     } else {  
+      // Sign out operation. Reset the current user UID.  
+      currentUid = null;  
+      console.log("no user signed in");  
+     }  
+    });  
+    </script>
+
+  </head>
+
+  <body>
+    
+    <h1>I don't know what to do from here. </h1>
+
+  </body>
+</html>
