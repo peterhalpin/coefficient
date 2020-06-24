@@ -1,7 +1,4 @@
-// MAJOR TO DO:
-/*
-*   // MAKE A COOKIE THAT DELETES AFTER BEING USED 
-*/
+
 
 $(function () {
 

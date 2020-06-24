@@ -34,8 +34,19 @@
     <div class = "container">
       <h1 class="title">Letters-To-Numbers</h1>
     </div>
+    <section class ="section" id="main1">
+        <!-- This section is the seed generation area. -->
+        <div class="container">
+                <h1 class="subtitle is-1">Seed:</h1>
+                <textarea class="textarea" placeholder="Choose a number from 1-50" rows="1" id="seed"></textarea>
+        </div>
+        <div class="container">
+            <button class="button" id="seed">Start Game</button>
+        </div>
+    </section>
 
-    <section class ="section" id="main">
+    <section class ="section" id="main2">
+        <!-- This section is the "chat" feature . -->
       <div class="container" id="topHalf">
         <div class="container" id="Chat">
           <div class="container" id="text">
@@ -51,7 +62,7 @@
               <button class="button is-light" id="Send">Send</button>
           </div>
 
-          </div>
+        </div>
 
          <div class="container" id="keyboard">
           <table id="buttons">
@@ -118,6 +129,18 @@
 
       </div>
       
+      <div class="container" id="middleHalf">
+        <div class ="container" id="guess">
+          <p><h1 class="title">
+              Guesses
+          </h1></p>
+          <p><pre><h6 class="subtitle"> Letter  =   Number
+        </h6></pre></p>
+        <div class="container" id="factcheck">
+
+        </div>
+        </div>
+      </div>
         <!-- This section is the submit area. -->
         <div class="container" id="bottomHalf">
           <div class="container" id="input">

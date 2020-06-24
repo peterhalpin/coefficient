@@ -5,55 +5,72 @@
         * Change Modal screen pop up to show after alerts
         * Connect Together.js functionality.
         * Add functionality for the confirm/cancel buttons in the modal
-        */
-    // ADD MIDDLE SECTION / PART 2 -> LOOK AT PAGE 3.3
     // ADD MULTIVARIABLE EXPRESSIONS
+        //CONTINUE WORKING ON THAT AND CHECKING IF IT WORKS
     // WRITE ERROR CHECKING FOR "TEXT"
         /*
-        * Add on any possible errors as I go along
+        * check for inputs that arent numbers in the middle section 
+        * there's an issue with retranslate and it's relationship with submit() , fix it
         */
-    // ADDING SCROLLBAR FOR "CHAT"
     // MAKE CODE SHORTER
     // RENAME THIS FILE TO MAKE SENSE
     // RENAME KEY VARIABLE WITH BETTER NAME
     // ORGANIZE FUNCTIONS
-/* 
-*
-*TO DO: CSS For adding in a scroll bar in the "TEXT"
-.dropdown-content {
-  max-height: 13em;
-  overflow: auto;
-}
-*/
 
-let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J', " "];
 
+let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J'];
 
 let keys = {} ;
 
 let trial_num = 0;
 
-let seed = document.cookie;
-
+let has_guessed = false;
 
 $(function () {
 
-    randomize(seed);
-    // Do not remove, for algorithm checking purposes
-    console.log(combination);
-
+    $("section#main2.section").hide();
+    $("section#main1.section").on("click", "button#seed", function (event) {
+        seed();
+    });
     $("div#topHalf.container").on("click", "button.is-light", function (event) {keyboard(event)});
+    $("div#middleHalf.container").on("click", "button.is-light#check_guess", function (event) {
+        checkguess();
+    })
     $("div#bottomHalf.container").on("click", "button.is-light#submit_answer", function (event) {
-        //Line 48 has to be put here to activate the mini-window
         $("div#modal").addClass("is-active");
         submit(event)});
     $("div#modal").on("click", "button#close_modal", function (event) {
         $("div#modal").removeClass("is-active")
     });
 });
+    
+
+// Takes in submitted seed , hides seed portion and puts in the first 2 steps of the excercise
+function seed(){
+    let submit_seed = $("textarea#seed").val();
+    try {
+        parseInt(submit_seed)
+    } catch(err) {
+        alert("Please input a number in the range of 0-50");
+        $("textarea#seed").val("");
+        return;
+      }
+
+    if(submit_seed < 0 || submit_seed == ""){
+        alert("Please input an integer > 0 ");
+        $("textarea#seed").val("");
+        return;
+    }
+
+    randomize(submit_seed);
+    $("section#main2.section").show();
+    $("section#main1.section").hide();
+    $("div#bottomHalf.container").hide();
+    console.log(combination);
+}
 
 
-
+// Final Portion
 function submit(event) {
 
     let answers = new Array();
@@ -161,8 +178,15 @@ function submit(event) {
 //Handles all actions on the top half of the Excercise webpage
 
 function keyboard(event) {
+
     let id = event.currentTarget.id;
     let textbar_content =  $("p#textbar").text();
+
+    //Makes sure user follows step 2 before doing step 1 again
+    if ( !has_guessed && trial_num != 0){
+        alert("Please guess first before asking the computer a question");
+        return;
+    }
 
     //Determines which button is pressed and changes the text bar accordingly
     switch(id) {
@@ -222,33 +246,33 @@ function keyboard(event) {
 }
 
 /*
-* Takes in a string and returns nothing
-* Gives the user the computer answer 
+* Does the work for the chat in step 1
 */
 function answer(textbar_content){
-    // Assuming that only 2 variables are given 
-    // If that isn't the case, will change the code 
+    // TODO : Working on multivariable  expressions
 
+    if(trial_num == 9) {
+        $("div#question.container").remove();
+        $("div#keyboard.container").remove();
+        $("div#bottomHalf.container").show();
+    }
+    // from line 259 - 332 Work on fixing it for multi-variable equations
     let position = 0;
     let answer  = "";
-    let first_term = "";
-    let expression = "";
-    let second_term = "";
-    let expression_num = 0;
+    let terms = ["","","","","","","","","","",""]
+    let expressions = new Array();
 
     //Breaks up the textbar string into seperate string values 
     for (let i = 0 ; i < textbar_content.length ; i++){
         let char = textbar_content.charAt(i);
         switch (char) {
             case "+":
-                expression = "+";
+                expressions.push("+");
                 position++;
-                expression_num++;
                 break;
             case "-":
-                expression = "-";
+                expressions.push("-");
                 position++;
-                expression_num++;
                 break;
             // case "x":
             //     expression = "x";
@@ -259,26 +283,25 @@ function answer(textbar_content){
             //     position++;
             //     break;
             default:
-                if (position == 0) {
-                    first_term += char
-                } else {
-                    second_term += char
-                }
+                terms[position] += char;
         }
         
     }
 
-    if(expression == "" || second_term == "" || expression_num > 1){
+    if(expressions.length == 0 || expressions.length != terms.length-1 || terms.length == 0 ){
         alert("Please write a correct full expression");
         $( "p#textbar").html("&nbsp;");
         return;
     }
 
-    let first_num = translate(first_term);
-    let second_num = translate (second_term);
-    let result = ""; 
+    
+    for(let i = 0 ; i < terms.length-1 ; i++){
+     let result = "";
+     let first_num = translate(terms[i]);
+     let second_num = translate(terms[i+1])
+     let operation = expressions[i];
 
-    switch(expression) {
+    switch(operation) {
         case "+":
             result += first_num + second_num
             break;
@@ -294,15 +317,51 @@ function answer(textbar_content){
         default:
             break;
         }
+    terms[i+1] = retranslate(result);
+
+    }
+
     
-    answer = retranslate(result);
+    
+    answer = retranslate(terms[terms.legnth-1]);
     trial_num++;
     $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
     $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
     $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
-
+    has_guessed = false;
+    addguess();
     }
 
+
+function addguess(){
+    $("div.container#factcheck").append(`
+    <div class="container" id="guess` + trial_num + `">
+        <p> Trial ` + trial_num + `</p>
+        <br>
+        <textarea class="textarea" rows="1" id="letter`+  trial_num + `" cols="1"></textarea>
+        = 
+        <textarea class="textarea" rows="1" id="number`+  trial_num + `" cols="1"></textarea>
+        <button class="button is-light" id="check_guess">Check Guess</button>
+    </div>
+    `);
+}
+
+function checkguess(){
+     //TODO: Write some error checking here, regarding if they're valid inputs or not 
+
+    let letter = $("textarea#letter" + trial_num + ".textarea").val();
+    let number = $("textarea#number" + trial_num + ".textarea").val();
+
+    if(keys[letter] == number){
+        $("div#guess" + trial_num).append("<p>TRUE</p>")
+    } else {
+        $("div#guess" + trial_num).append("<p>FALSE</p>")
+    }
+    $("button#check_guess").remove();
+    has_guessed = true;
+   
+
+}
 
 // Encrypts the number into a string
 function retranslate(result) {
@@ -336,12 +395,15 @@ function translate(term) {
 function randomize (seed) {
 
     // Shuffles letters in the array using a seed to create the encryption formula
+
     for (let i = 0; i < 10 ; i++){
         seed = (seed + 7)  % 11 ;
+        if (seed > 9){
+            seed = 9;
+        }
         let temp = combination[seed];
         combination[seed] = combination[i]
         combination[i] = temp 
-        document.cookie =　"";
     }
 
     // Makes a dictionaray that holds the decryption formula
