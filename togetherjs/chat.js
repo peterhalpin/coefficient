@@ -1,21 +1,22 @@
 // MAJOR TO DO:
-     
     // MODAL FUNCTIONALITY  
         /* 
-        * Change Modal screen pop up to show after alerts
         * Connect Together.js functionality.
-        * Add functionality for the confirm/cancel buttons in the modal
-    // ADD MULTIVARIABLE EXPRESSIONS
-        //CONTINUE WORKING ON THAT AND CHECKING IF IT WORKS
+        * Add functionality for the confirm/cancel buttons in the modal to work with clicking and together.js
     // WRITE ERROR CHECKING FOR "TEXT"
         /*
-        * check for inputs that arent numbers in the middle section 
-        * there's an issue with retranslate and it's relationship with submit() , fix it
+        * Check for inputs that arent numbers in the middle section 
         */
-    // MAKE CODE SHORTER
-    // RENAME THIS FILE TO MAKE SENSE
-    // RENAME KEY VARIABLE WITH BETTER NAME
-    // ORGANIZE FUNCTIONS
+    // COSMETIC
+        /*
+        * Change middle portion from textboxes to plaintext after someone clicks the button
+        * MAKE CODE SHORTER
+        * RENAME THIS FILE TO MAKE SENSE
+        * RENAME KEY VARIABLE WITH BETTER NAME
+        * ORGANIZE FUNCTIONS
+        */ 
+
+
 
 
 let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J'];
@@ -29,19 +30,39 @@ let has_guessed = false;
 $(function () {
 
     $("section#main2.section").hide();
-    $("section#main1.section").on("click", "button#seed", function (event) {
+
+    $("section#main1.section").on("click", "button#submit_seed", function (event) {
         seed();
     });
-    $("div#topHalf.container").on("click", "button.is-light", function (event) {keyboard(event)});
+
+    $("section#main1.section").on("click", "button#random_seed", function (event) {
+        randomize(Math.floor(Math.random() * 10000));
+    });
+
+    $("div#topHalf.container").on("click", "button.is-light", function (event) {
+        keyboard(event)});
+
     $("div#middleHalf.container").on("click", "button.is-light#check_guess", function (event) {
         checkguess();
     })
+    $("div#middleHalf.container").on("click", "button#final_Answer.button.is-light", function (event) {
+        $("div#bottomHalf.container").show();
+    });
+
     $("div#bottomHalf.container").on("click", "button.is-light#submit_answer", function (event) {
-        $("div#modal").addClass("is-active");
-        submit(event)});
+        $("div#modal").addClass("is-active");});
+
     $("div#modal").on("click", "button#close_modal", function (event) {
         $("div#modal").removeClass("is-active")
     });
+    $("div#modal").on("click", "button#confirm.button.is-light", function (event) {
+         submit(event)
+    });
+    $("div#modal").on("click", "button#cancel.button.is-light", function (event) {
+        $("div#modal").removeClass("is-active")
+    });
+    
+    
 });
     
 
@@ -63,10 +84,7 @@ function seed(){
     }
 
     randomize(submit_seed);
-    $("section#main2.section").show();
-    $("section#main1.section").hide();
-    $("div#bottomHalf.container").hide();
-    console.log(combination);
+    
 }
 
 
@@ -100,6 +118,9 @@ function submit(event) {
                   continue;
               } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 1:
@@ -107,6 +128,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 2:
@@ -114,6 +138,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 3:
@@ -121,6 +148,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 4:
@@ -128,6 +158,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 5:
@@ -135,6 +168,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 6:
@@ -142,6 +178,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 7:
@@ -149,6 +188,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 8:
@@ -156,6 +198,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           case 9:
@@ -163,6 +208,9 @@ function submit(event) {
                 continue;
             } else {
                 alert("you're wrong");
+                if(trial_num != 10){
+                    $("div#bottomHalf.container").hide();
+                }
                 return;
             }
           default:
@@ -176,7 +224,6 @@ function submit(event) {
 }
 
 //Handles all actions on the top half of the Excercise webpage
-
 function keyboard(event) {
 
     let id = event.currentTarget.id;
@@ -249,22 +296,28 @@ function keyboard(event) {
 * Does the work for the chat in step 1
 */
 function answer(textbar_content){
-    // TODO : Working on multivariable  expressions
 
     if(trial_num == 9) {
         $("div#question.container").remove();
         $("div#keyboard.container").remove();
         $("div#bottomHalf.container").show();
     }
-    // from line 259 - 332 Work on fixing it for multi-variable equations
+
     let position = 0;
     let answer  = "";
-    let terms = ["","","","","","","","","","",""]
+    let terms = new Array();
     let expressions = new Array();
 
     //Breaks up the textbar string into seperate string values 
     for (let i = 0 ; i < textbar_content.length ; i++){
         let char = textbar_content.charAt(i);
+
+        if(i == 0 && (char == "+" || char == "-")){
+            alert("Please write a correct full expression");
+            $( "p#textbar").html("&nbsp;");
+            return;
+        }
+
         switch (char) {
             case "+":
                 expressions.push("+");
@@ -283,7 +336,9 @@ function answer(textbar_content){
             //     position++;
             //     break;
             default:
-                terms[position] += char;
+                if(terms[position] === null || terms[position] == undefined){
+                    terms[position] = char;
+                }else{terms[position] += char;}
         }
         
     }
@@ -317,20 +372,21 @@ function answer(textbar_content){
         default:
             break;
         }
-    terms[i+1] = retranslate(result);
+    
+        terms[i+1] = retranslate(result);
 
     }
 
     
-    
-    answer = retranslate(terms[terms.legnth-1]);
+    let index = terms.length - 1;
+    answer = terms[index];
     trial_num++;
     $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
     $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
     $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
     has_guessed = false;
     addguess();
-    }
+}
 
 
 function addguess(){
@@ -349,7 +405,7 @@ function addguess(){
 function checkguess(){
      //TODO: Write some error checking here, regarding if they're valid inputs or not 
 
-    let letter = $("textarea#letter" + trial_num + ".textarea").val();
+    let letter = $("textarea#letter" + trial_num + ".textarea").val().toUpperCase();
     let number = $("textarea#number" + trial_num + ".textarea").val();
 
     if(keys[letter] == number){
@@ -359,7 +415,6 @@ function checkguess(){
     }
     $("button#check_guess").remove();
     has_guessed = true;
-   
 
 }
 
@@ -395,14 +450,11 @@ function translate(term) {
 function randomize (seed) {
 
     // Shuffles letters in the array using a seed to create the encryption formula
-
+    Math.seedrandom(seed+"");
     for (let i = 0; i < 10 ; i++){
-        seed = (seed + 7)  % 11 ;
-        if (seed > 9){
-            seed = 9;
-        }
-        let temp = combination[seed];
-        combination[seed] = combination[i]
+        let place = Math.floor(Math.random() * 9);
+        let temp = combination[place];
+        combination[place] = combination[i]
         combination[i] = temp 
     }
 
@@ -411,5 +463,12 @@ function randomize (seed) {
       let char = combination[i];
       keys[char] = i;
     }
+
+    $("section#main2.section").show();
+    $("section#main1.section").hide();
+    $("div#bottomHalf.container").hide();
+
+    //LEFT FOR TESTING PURPOSES
+    console.log(combination);
 
 }

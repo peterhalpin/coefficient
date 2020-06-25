@@ -1,7 +1,6 @@
-<!-- MAJOR TODO: Center things / prettify the layout 
-  * Create a "blank" css class to cut down code 
-  * Create a modal css class to cut down code 
-  * Clean code
+<!-- MAJOR TODO: C
+  * Center things / prettify the layout 
+  * Clean code to be shorter
   *
   
   id="togetherjs-chat"
@@ -25,6 +24,7 @@
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
     <script src= "..\node_modules\jquery\dist\jquery.js"></script>
+    <script src="..\node_modules\seedrandom\seedrandom.js"></script>
     <script src=".\chat.js"></script>
   </head>
 
@@ -34,19 +34,23 @@
     <div class = "container">
       <h1 class="title">Letters-To-Numbers</h1>
     </div>
+
+    <!-- This section is the seed generation area. -->
     <section class ="section" id="main1">
-        <!-- This section is the seed generation area. -->
         <div class="container">
                 <h1 class="subtitle is-1">Seed:</h1>
                 <textarea class="textarea" placeholder="Choose a number from 1-50" rows="1" id="seed"></textarea>
         </div>
         <div class="container">
-            <button class="button" id="seed">Start Game</button>
+            <button class="button" id="submit_seed">Submit Seed</button>
+            <button class="button" id="random_seed">Random Seed</button>
         </div>
     </section>
 
+    
     <section class ="section" id="main2">
-        <!-- This section is the "chat" feature . -->
+
+      <!-- This section is the "chat" feature . -->
       <div class="container" id="topHalf">
         <div class="container" id="Chat">
           <div class="container" id="text">
@@ -129,6 +133,7 @@
 
       </div>
       
+      <!-- This section is the guess area. -->
       <div class="container" id="middleHalf">
         <div class ="container" id="guess">
           <p><h1 class="title">
@@ -139,8 +144,10 @@
         <div class="container" id="factcheck">
 
         </div>
+        <button class="button is-light" id="final_Answer">Guess Full Answer?</button>
         </div>
       </div>
+
         <!-- This section is the submit area. -->
         <div class="container" id="bottomHalf">
           <div class="container" id="input">
