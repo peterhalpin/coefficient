@@ -21,9 +21,14 @@
     </style>
     <link rel="stylesheet" href="Excercise.css">
     <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+    <script src= "..\node_modules\jquery\dist\jquery.js"></script>
+    <!-- This script makes sure to clone clicks between webpages-->
+    <script>
+      var TogetherJSConfig_cloneClicks = true;
+      var TogetherJSConfig_suppressJoinConfirmation = true;
+    </script>
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
-    <script src= "..\node_modules\jquery\dist\jquery.js"></script>
     <script src="..\node_modules\seedrandom\seedrandom.js"></script>
     <script src=".\chat.js"></script>
   </head>
@@ -33,6 +38,7 @@
 
     <div class = "container">
       <h1 class="title">Letters-To-Numbers</h1>
+      <button class="button is-light" onclick="TogetherJS(this); return false;">Start TogetherJS</button>
     </div>
 
     <!-- This section is the seed generation area. -->
@@ -262,9 +268,6 @@
           </div>
           </div>
       
-   
-    
-    <button class="button is-light" onclick="TogetherJS(this); return false;">Start TogetherJS</button>
         </div>
     </section>
    

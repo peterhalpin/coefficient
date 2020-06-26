@@ -3,9 +3,14 @@
         /* 
         * Connect Together.js functionality.
         * Add functionality for the confirm/cancel buttons in the modal to work with clicking and together.js
-    // WRITE ERROR CHECKING FOR "TEXT"
+    // ADD IN FUNCTIONALITY THAT UPDATES A NEW USER WITH ALL THE CHANGES OF THE WEBPAGE
+    // WRITE ERROR CHECKING 
         /*
         * Check for inputs that arent numbers in the middle section 
+        * Will update twice after someone presses submit
+        *   -Possible solution is to remove click cloning?
+        * The text area doesn't update after someone deletes. 
+        * At some points the pages stop mirroring each other.
         */
     // COSMETIC
         /*
@@ -27,6 +32,8 @@ let trial_num = 0;
 
 let has_guessed = false;
 
+
+
 $(function () {
 
     $("section#main2.section").hide();
@@ -39,30 +46,52 @@ $(function () {
         randomize(Math.floor(Math.random() * 10000));
     });
 
+    // TogetherJS sends the message to the other web page 
+    // The functions have to be repeated again so that the current webpage also updates
+
     $("div#topHalf.container").on("click", "button.is-light", function (event) {
-        keyboard(event)});
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "keyboard", event: event.currentTarget.id});
+        }
+        keyboard(event.currentTarget.id);
+    });
 
     $("div#middleHalf.container").on("click", "button.is-light#check_guess", function (event) {
-        checkguess();
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "checkguess"});
+        }
+        checkguess()
     })
     $("div#middleHalf.container").on("click", "button#final_Answer.button.is-light", function (event) {
         $("div#bottomHalf.container").show();
     });
 
     $("div#bottomHalf.container").on("click", "button.is-light#submit_answer", function (event) {
-        $("div#modal").addClass("is-active");});
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "modalactive"});
+        }
+        $("div#modal").addClass("is-active");
+    });
 
     $("div#modal").on("click", "button#close_modal", function (event) {
-        $("div#modal").removeClass("is-active")
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "modalinactive"});
+        };
+        $("div#modal").removeClass("is-active");
     });
+
     $("div#modal").on("click", "button#confirm.button.is-light", function (event) {
-         submit(event)
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "submit"});
+            submit(event);
+        };
     });
     $("div#modal").on("click", "button#cancel.button.is-light", function (event) {
-        $("div#modal").removeClass("is-active")
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "modalinactive" , event:event});
+        };
+        $("div#modal").removeClass("is-active");
     });
-    
-    
 });
     
 
@@ -225,8 +254,9 @@ function submit(event) {
 
 //Handles all actions on the top half of the Excercise webpage
 function keyboard(event) {
+    console.log(event);
 
-    let id = event.currentTarget.id;
+    let id = event;
     let textbar_content =  $("p#textbar").text();
 
     //Makes sure user follows step 2 before doing step 1 again
@@ -472,3 +502,43 @@ function randomize (seed) {
     console.log(combination);
 
 }
+
+
+// RECIEVES A MESSAGE FROM ANOTHER WEBAGE ON WHAT TO DO 
+
+TogetherJS.hub.on("keyboard", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    keyboard(msg.event)
+
+  });
+  
+TogetherJS.hub.on("checkguess", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    checkguess();
+  });
+
+TogetherJS.hub.on("modalactive", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    $("div#modal").addClass("is-active");
+  });
+
+
+  TogetherJS.hub.on("modalinactive", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    $("div#modal").removeClass("is-active");
+  });
+
+  TogetherJS.hub.on("submit", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    submit(msg.event);
+  }); 
