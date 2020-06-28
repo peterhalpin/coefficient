@@ -4,8 +4,7 @@
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
-        
-        
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
     </head>
     <body>
 
@@ -16,14 +15,16 @@
             <form id="add-game-form">
                 <!--Add input forms for file structure of a game-->
                 <h2>Upload HTML, CSS, and JS game files.</h2>
-                <input type="file", id="fileUpload", name="html">
+                <input type="file", id="html", name="html", accept=".html">
                 <br>
-                <input type="file", id="fileUpload", name="css">
+                <input type="file", id="css", name="css", accept=".css">
                 <br>
-                <input type="file", id="fileUpload", name="js">
+                <input type="file", id="js", name="js", accept=".js">
                 <br>
-                <button>Add Game</button>
+                <button id="add">Add Game</button>
             </form>
+
+        
 
             <ul id="game-list"></ul>
 
