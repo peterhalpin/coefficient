@@ -25,6 +25,7 @@
     <!-- This script makes sure to clone clicks between webpages-->
     <script>
       var TogetherJSConfig_cloneClicks = true;
+      var TogetherJSConfig_dontShowClicks = true;
       var TogetherJSConfig_suppressJoinConfirmation = true;
     </script>
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
@@ -148,7 +149,76 @@
           <p><pre><h6 class="subtitle"> Letter  =   Number
         </h6></pre></p>
         <div class="container" id="factcheck">
-
+          <div class="container" id="guess1">
+            <p> Trial 1</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter1" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number1" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess2">
+            <p> Trial 2</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter2" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number2" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess3">
+            <p> Trial 3</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter3" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number3" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess4">
+            <p> Trial 4</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter4" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number4" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess5">
+            <p> Trial 5</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter5" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number5" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess6">
+            <p> Trial 6</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter6" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number6" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess7">
+            <p> Trial 7</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter7" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number7" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess8">
+            <p> Trial 8</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter8" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number8" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess9">
+            <p> Trial 9</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter9" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number9" cols="1"></textarea>
+          </div>
+          <div class="container" id="guess10">
+            <p> Trial 10</p>
+            <br>
+            <textarea class="textarea" rows="1" id="letter10" cols="1"></textarea>
+            = 
+            <textarea class="textarea" rows="1" id="number10" cols="1"></textarea>
+          </div>
         </div>
         <button class="button is-light" id="final_Answer">Guess Full Answer?</button>
         </div>
@@ -257,7 +327,7 @@
                 Are you ok with these answers?
               </p>
               <p>
-                Awaiting: 0/4 Confirmations
+                Awaiting: <span id="members">0</span>/<span id="group">4</span> Confirmations
                 <p>
                 <button class="button is-light" id="confirm">Confirm</button>
                 <button class="button is-light" id="cancel">Cancel</button>

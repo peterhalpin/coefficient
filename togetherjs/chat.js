@@ -3,18 +3,17 @@
         /* 
         * Connect Together.js functionality.
         * Add functionality for the confirm/cancel buttons in the modal to work with clicking and together.js
-    // ADD IN FUNCTIONALITY THAT UPDATES A NEW USER WITH ALL THE CHANGES OF THE WEBPAGE
     // WRITE ERROR CHECKING 
         /*
         * Check for inputs that arent numbers in the middle section 
         * Will update twice after someone presses submit
-        *   -Possible solution is to remove click cloning?
-        * The text area doesn't update after someone deletes. 
-        * At some points the pages stop mirroring each other.
+        *   -Can not remove click cloning
+        * Bug that removes 2 characters when backspace
+        * Check for things like "a++b" in the chat 
         */
     // COSMETIC
         /*
-        * Change middle portion from textboxes to plaintext after someone clicks the button
+        * Change middle portion from textboxes to plaintext after someone clicks the button <- Can not
         * MAKE CODE SHORTER
         * RENAME THIS FILE TO MAKE SENSE
         * RENAME KEY VARIABLE WITH BETTER NAME
@@ -32,7 +31,8 @@ let trial_num = 0;
 
 let has_guessed = false;
 
-
+let group = 4;
+let members = 0;
 
 $(function () {
 
@@ -44,6 +44,10 @@ $(function () {
 
     $("section#main1.section").on("click", "button#random_seed", function (event) {
         randomize(Math.floor(Math.random() * 10000));
+        let z = combination;
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "randomseed", combo: z, key: keys});
+        }
     });
 
     // TogetherJS sends the message to the other web page 
@@ -81,10 +85,24 @@ $(function () {
     });
 
     $("div#modal").on("click", "button#confirm.button.is-light", function (event) {
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "submit"});
+        members++;
+        if (members == group) {
+            if (TogetherJS.running) {
+                TogetherJS.send({type: "update" , member: members});
+                TogetherJS.send({type: "submit" , member: members});   
+                members = 0; 
+            };
+            $("#members").html(""+members);
+            $("div#modal").removeClass("is-active");
+            TogetherJS.send({type: "update" , member: members});
             submit(event);
-        };
+        } else {
+            if (TogetherJS.running) {
+                TogetherJS.send({type: "update" , member: members});    
+            };
+            $("#members").html(""+members);
+        }
+       
     });
     $("div#modal").on("click", "button#cancel.button.is-light", function (event) {
         if (TogetherJS.running) {
@@ -261,7 +279,9 @@ function keyboard(event) {
 
     //Makes sure user follows step 2 before doing step 1 again
     if ( !has_guessed && trial_num != 0){
-        alert("Please guess first before asking the computer a question");
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "alert"});
+        }
         return;
     }
 
@@ -303,12 +323,6 @@ function keyboard(event) {
         case "subtraction":
             $( "p#textbar" ).text( textbar_content +  "-");
             break;
-        // case "multiplication":
-        //     $( "p#textbar" ).text( textbar_content +  "x");
-        //     break;
-        // case "division":
-        //     $( "p#textbar" ).text( textbar_content +  "/");
-        //     break;
         case "delete":
             let length = textbar_content.length-1;
             let short_string = textbar_content.substring(0, length);
@@ -357,14 +371,6 @@ function answer(textbar_content){
                 expressions.push("-");
                 position++;
                 break;
-            // case "x":
-            //     expression = "x";
-            //     position++;
-            //     break;
-            // case "/":
-            //     expression = "/";
-            //     position++;
-            //     break;
             default:
                 if(terms[position] === null || terms[position] == undefined){
                     terms[position] = char;
@@ -393,12 +399,6 @@ function answer(textbar_content){
         case "-":
             result += first_num - second_num
             break;
-        // case "x":
-        //     result += first_num * second_num
-        //     break;
-        // case "/":
-        //     result += first_num / second_num
-        //     break;
         default:
             break;
         }
@@ -406,8 +406,7 @@ function answer(textbar_content){
         terms[i+1] = retranslate(result);
 
     }
-
-    
+  
     let index = terms.length - 1;
     answer = terms[index];
     trial_num++;
@@ -415,26 +414,20 @@ function answer(textbar_content){
     $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
     $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
     has_guessed = false;
-    addguess();
+
+    if (TogetherJS.running) {
+        TogetherJS.send({type: "addguess"});
+    }
 }
 
-
+//Adds guess button
 function addguess(){
-    $("div.container#factcheck").append(`
-    <div class="container" id="guess` + trial_num + `">
-        <p> Trial ` + trial_num + `</p>
-        <br>
-        <textarea class="textarea" rows="1" id="letter`+  trial_num + `" cols="1"></textarea>
-        = 
-        <textarea class="textarea" rows="1" id="number`+  trial_num + `" cols="1"></textarea>
+    $("div.container#guess"+trial_num).append(`
         <button class="button is-light" id="check_guess">Check Guess</button>
-    </div>
     `);
 }
 
 function checkguess(){
-     //TODO: Write some error checking here, regarding if they're valid inputs or not 
-
     let letter = $("textarea#letter" + trial_num + ".textarea").val().toUpperCase();
     let number = $("textarea#number" + trial_num + ".textarea").val();
 
@@ -442,7 +435,7 @@ function checkguess(){
         $("div#guess" + trial_num).append("<p>TRUE</p>")
     } else {
         $("div#guess" + trial_num).append("<p>FALSE</p>")
-    }
+    }  
     $("button#check_guess").remove();
     has_guessed = true;
 
@@ -506,6 +499,20 @@ function randomize (seed) {
 
 // RECIEVES A MESSAGE FROM ANOTHER WEBAGE ON WHAT TO DO 
 
+TogetherJS.hub.on("randomseed", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+
+    combination = msg.combo;
+    keys = msg.key;
+    console.log(combination);
+    $("section#main2.section").show();
+    $("section#main1.section").hide();
+    $("div#bottomHalf.container").hide();
+  });
+  
+
 TogetherJS.hub.on("keyboard", function (msg) {
     if (! msg.sameUrl) {
       return;
@@ -542,3 +549,37 @@ TogetherJS.hub.on("modalactive", function (msg) {
     }
     submit(msg.event);
   }); 
+
+  TogetherJS.hub.on("alert", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    alert("Please guess first before asking the computer a question");
+  }); 
+
+  TogetherJS.hub.on("addguess", function (msg) {
+    if (! msg.sameUrl) {
+      return;
+    }
+    addguess();
+  }); 
+
+// Makes sure to synch other pages if players come in to load late
+  TogetherJS.hub.on("togetherjs.hello", function (msg) {
+    if (! msg.sameUrl) {
+        return;
+    }
+    TogetherJS.send({
+        type: "randomseed",
+        combo: combination,
+        key: keys,
+    });
+});
+
+TogetherJS.hub.on("update", function (msg) {
+    if (! msg.sameUrl) {
+        return;
+    }
+    $("#members").html(""+msg.member);
+});
+
