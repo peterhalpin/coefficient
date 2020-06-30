@@ -1,0 +1,1 @@
+const api = require('firebase-tools/lib/api');

@@ -1,6 +1,6 @@
 This is an example of a minimal web application that uses TogetherJS. 
 
-To add TogetherJS functionality to your application, you must add 3 lines of HTML:
+To add TogetherJS functionality to your application, you must add 4 lines of HTML:
 
 1. <script src="https://togetherjs.com/togetherjs-min.js"></script>
 This provides the interface for TogetherJS. It is hosted on Mozilla's site.
@@ -10,9 +10,11 @@ This specifies the server hub that processes everybody's TogetherJS activity.
 The Mozilla-hosted one is down, so this is a copy of their server code that I am hosting on a free site.
 The server code is available in the server.js file in this directory.
 
-3. <button onclick="TogetherJS(this); return false;">Start TogetherJS</button>
-This creates a button that is used to activate TogetherJS.
+3. <script> TogetherJSConfig_suppressJoinConfirmation = true </script>  
+This makes it so that there is no pop-up to explain TogetherJS when the page opens up.
 
+4. <script> TogetherJSConfig_autoStart = true </script>  
+This makes it so that TogetherJS is loaded at the time when the page itself loads.
 
 
 
