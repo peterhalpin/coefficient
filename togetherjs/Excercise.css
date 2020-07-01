@@ -1,5 +1,4 @@
 div {
-    border-style: solid;
     padding: 15px;
 }
 
@@ -17,4 +16,60 @@ div#guess.container{
     overflow-y: auto;
     height: 500px;
     width: 888px;
+}
+
+section#main2.section {
+    padding: 15px;
+    margin: 15px;
+}
+
+div#topHalf.container {
+    margin: 15px;
+    height: 480px;
+    width: 800px;
+}
+
+div#keyboard.container {
+    height: 120px;
+    width: 500px;
+}
+
+div#text.container {
+    border-style: solid;
+    height: 200px;
+    width: 540px;
+}
+
+div#question.container {
+    height: 100px;
+    width: 540px;
+}
+
+div.column {
+    border-style: solid;
+}
+
+table#buttons {
+    width:540px;
+}
+
+table#buttons > tr > td  {
+    width:54px;
+}
+
+td#I {
+    width: 34px;
+}
+
+div#guess.container{
+    width:640px;
+}
+
+div#bottomHalf.container{
+    border-style: solid;
+}
+
+td#blank {
+    width: 44px;
+    height: 44px;
 }

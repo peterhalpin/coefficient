@@ -1,12 +1,5 @@
 <!-- MAJOR TODO: C
   * Center things / prettify the layout 
-  * Clean code to be shorter
-  *
-  
-  id="togetherjs-chat"
-        *
-        * Use for later changing the location of the chat to be somewhere else on the screen
-        *
 -->
 <!DOCTYPE html>
 <head>
@@ -56,27 +49,34 @@
 
     
     <section class ="section" id="main2">
-
+      <!--Columns necessary to keep guess/chat area on the same level-->
+      <div class="columns">
       <!-- This section is the "chat" feature . -->
+      <div class="column">
       <div class="container" id="topHalf">
         <div class="container" id="Chat">
           <div class="container" id="text">
+
             <p id="text"></p>
               &nbsp;
             </p>
 
           </div>
           <div class="container" id="question">
+
               <p id="textbar">
                 &nbsp;
               </p>
+
               <button class="button is-light" id="Send">Send</button>
           </div>
 
         </div>
 
          <div class="container" id="keyboard">
+
           <table id="buttons">
+
             <tr>
               <td id="A">
                 <button class="button is-light" id="A">A</button>
@@ -106,41 +106,37 @@
                 <button class="button is-light" id="I">I</button>
               </td>
               <td id="J">
-                <button class="button is-light" id="J">J</button>
+                <button class="button is-light" id="J" >J</button>
               </td>
             </tr>
+
             <tr>
-              
-              <td id="blank" width="44" height="44"></td>
+              <td id="blank"></td>
               <td id="addition">
                 <button class="button is-light" id="addition">+</button>
               </td>
-              <td id="blank" width="44" height="44"></td>
+              <td id="blank"></td>
               <td id="subtraction">
                 <button class="button is-light" id="subtraction">-</button>
               </td>
-              <td id="blank" width="44" height="44"></td>
-              <!-- <td id="multiplication">
-                <button class="button is-light" id="multiplication">x</button>
-              </td> -->
-              <td id="blank" width="44" height="44"></td>
-              <td id="blank" width="44" height="44"></td>
-              <!-- <td id="division">
-                <button class="button is-light" id="division">/</button>
-              </td> -->
-              <td id="blank" width="44" height="44"></td>
-              <td id="blank" width="44" height="44"></td>
+              <td id="blank"></td>
+              <td id="blank"></td>
+              <td id="blank"></td>
+              <td id="blank"></td>
+              <td id="blank"></td>
               <td id="backspace">
                 <button class="button is-light" id="delete">Backspace</button>
               </td>
-
             </tr>
-          </table>
-          </div>
 
+          </table>
+
+          </div>
+        </div>
       </div>
-      
+
       <!-- This section is the guess area. -->
+      <div class ="column">
       <div class="container" id="middleHalf">
         <div class ="container" id="guess">
           <p><h1 class="title">
@@ -223,11 +219,15 @@
         <button class="button is-light" id="final_Answer">Guess Full Answer?</button>
         </div>
       </div>
+      </div>
+    </div>
+  </div>
 
         <!-- This section is the submit area. -->
         <div class="container" id="bottomHalf">
           <div class="container" id="input">
             <table>
+
             <tr>
               <td>
                 <figure class="image is-128x128">
@@ -280,6 +280,7 @@
                 </figure>
               </td>
             </tr>
+
             <tr>
               <td>
                 <textarea class="textarea" rows="1" id="0"></textarea>
@@ -312,14 +313,14 @@
                 <textarea class="textarea" rows="1" id="9"></textarea>
               </td>
             </tr>
+
           </table>
           
           <div id="submit_answer">
             <button class="button is-light" id="submit_answer">Submit</button>
           </div>
-          <!-- 
-            Modal Code
-          -->
+          
+          <!-- Modal Code -->
           <div class="modal" id="modal">
             <div class="modal-background"></div>
             <div class="modal-content" style="background-color:white;"> 

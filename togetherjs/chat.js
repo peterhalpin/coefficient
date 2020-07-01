@@ -31,7 +31,7 @@ let trial_num = 0;
 
 let has_guessed = false;
 
-let group = 4;
+let group = 1;
 let members = 0;
 
 $(function () {
@@ -270,6 +270,7 @@ function submit(event) {
 
 }
 
+
 //Handles all actions on the top half of the Excercise webpage
 function keyboard(event) {
     console.log(event);
@@ -499,6 +500,21 @@ function randomize (seed) {
 
 // RECIEVES A MESSAGE FROM ANOTHER WEBAGE ON WHAT TO DO 
 
+// Does not work
+// TogetherJS.hub.on("togetherjs.init-connection", function (msg) {
+//     if (! msg.sameUrl) {
+//         return;
+//     }
+//     console.log("hello");
+//     group = msg.peerCount;
+// });
+
+// Does not work
+// if (TogetherJs.running) {
+//     TogetherJS.hub.checkForUsersOnChannel;
+// }
+
+
 TogetherJS.hub.on("randomseed", function (msg) {
     if (! msg.sameUrl) {
       return;
@@ -510,6 +526,7 @@ TogetherJS.hub.on("randomseed", function (msg) {
     $("section#main2.section").show();
     $("section#main1.section").hide();
     $("div#bottomHalf.container").hide();
+    
   });
   
 
@@ -569,11 +586,39 @@ TogetherJS.hub.on("modalactive", function (msg) {
     if (! msg.sameUrl) {
         return;
     }
+    group++;
     TogetherJS.send({
         type: "randomseed",
         combo: combination,
         key: keys,
     });
+
+    let chat_text = $("p#text").html();
+    let hasguessed = has_guessed;
+    let groupnum = group;
+    console.log(chat_text);
+    $("#group").html(groupnum + "");
+    TogetherJS.send({
+        type: "standardize",
+        trialnum: trial_num,
+        chattext: chat_text,
+        hasguessed: hasguessed,
+        groupn: groupnum,
+    });
+
+});
+
+TogetherJS.hub.on("standardize", function (msg) {
+    if (! msg.sameUrl) {
+        return;
+    }
+//   console.log(msg.trialnum);
+  trial_num = msg.trialnum;
+  hasguessed = has_guessed;
+//   console.log(msg.chattext);
+  group = msg.groupn;
+  $("p#text").replaceWith("<p id='text'>" + msg.chattext + "</p>");
+  $("#group").html(msg.groupn + "");
 });
 
 TogetherJS.hub.on("update", function (msg) {
