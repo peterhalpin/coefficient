@@ -11,6 +11,9 @@ div#text.container {
     height: 200px;
     width: 888px;
 }
+body {
+    overflow-x: auto;
+}
 
 div#guess.container{
     overflow-y: auto;

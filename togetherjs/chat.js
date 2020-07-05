@@ -6,10 +6,8 @@
     // WRITE ERROR CHECKING 
         /*
         * Check for inputs that arent numbers in the middle section 
-        * Will update twice after someone presses submit
-        *   -Can not remove click cloning
-        * Bug that removes 2 characters when backspace
-        * Check for things like "a++b" in the chat 
+        * Will update twice for wrong expression? Why?
+        *   -Do not know what's causing this
         */
     // COSMETIC
         /*
@@ -31,8 +29,16 @@ let trial_num = 0;
 
 let has_guessed = false;
 
+let backspace = false;
+
+let express = 0;
+
+let expressdouble = false;
+
 let group = 1;
+
 let members = 0;
+
 
 $(function () {
 
@@ -105,9 +111,11 @@ $(function () {
        
     });
     $("div#modal").on("click", "button#cancel.button.is-light", function (event) {
+        members = 0;
         if (TogetherJS.running) {
             TogetherJS.send({type: "modalinactive" , event:event});
         };
+        $("#members").html(""+members);
         $("div#modal").removeClass("is-active");
     });
 });
@@ -327,7 +335,14 @@ function keyboard(event) {
         case "delete":
             let length = textbar_content.length-1;
             let short_string = textbar_content.substring(0, length);
+            //If statement here because of clone clicking in together.js 
+            //Without it, two characters would be deleted. 
+            if (!backspace){
+                backspace=true;
+                return;
+            }
             $( "p#textbar" ).text(short_string);
+            backspace=false;
             break;
         case "Send":
             answer(textbar_content.trim());
@@ -357,9 +372,11 @@ function answer(textbar_content){
     for (let i = 0 ; i < textbar_content.length ; i++){
         let char = textbar_content.charAt(i);
 
-        if(i == 0 && (char == "+" || char == "-")){
+        if((i == 0 && (char == "+" || char == "-")) || express >= 2){
             alert("Please write a correct full expression");
+            console.log("1");
             $( "p#textbar").html("&nbsp;");
+            express = 0;
             return;
         }
 
@@ -367,21 +384,28 @@ function answer(textbar_content){
             case "+":
                 expressions.push("+");
                 position++;
+                express++;
                 break;
             case "-":
                 expressions.push("-");
                 position++;
+                express++;
                 break;
             default:
                 if(terms[position] === null || terms[position] == undefined){
                     terms[position] = char;
-                }else{terms[position] += char;}
+                    express = 0;
+                }else{
+                    terms[position] += char;
+                    express = 0;
+                }
         }
         
     }
 
     if(expressions.length == 0 || expressions.length != terms.length-1 || terms.length == 0 ){
         alert("Please write a correct full expression");
+        console.log("2");
         $( "p#textbar").html("&nbsp;");
         return;
     }
@@ -414,6 +438,9 @@ function answer(textbar_content){
     $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
     $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
     $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
+    // $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
+    // $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
+    // $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
     has_guessed = false;
 
     if (TogetherJS.running) {
@@ -500,7 +527,7 @@ function randomize (seed) {
 
 // RECIEVES A MESSAGE FROM ANOTHER WEBAGE ON WHAT TO DO 
 
-// Does not work
+// Does not work for checking users in a channel
 // TogetherJS.hub.on("togetherjs.init-connection", function (msg) {
 //     if (! msg.sameUrl) {
 //         return;
@@ -508,8 +535,6 @@ function randomize (seed) {
 //     console.log("hello");
 //     group = msg.peerCount;
 // });
-
-// Does not work
 // if (TogetherJs.running) {
 //     TogetherJS.hub.checkForUsersOnChannel;
 // }
@@ -557,6 +582,8 @@ TogetherJS.hub.on("modalactive", function (msg) {
     if (! msg.sameUrl) {
       return;
     }
+    members = 0;
+    $("#members").html(""+ members);
     $("div#modal").removeClass("is-active");
   });
 
@@ -594,16 +621,17 @@ TogetherJS.hub.on("modalactive", function (msg) {
     });
 
     let chat_text = $("p#text").html();
-    let hasguessed = has_guessed;
     let groupnum = group;
     console.log(chat_text);
     $("#group").html(groupnum + "");
+    let text = $( "p#textbar" ).text();
     TogetherJS.send({
         type: "standardize",
         trialnum: trial_num,
         chattext: chat_text,
-        hasguessed: hasguessed,
+        hasguessed: has_guessed,
         groupn: groupnum,
+        textbar: text
     });
 
 });
@@ -614,11 +642,18 @@ TogetherJS.hub.on("standardize", function (msg) {
     }
 //   console.log(msg.trialnum);
   trial_num = msg.trialnum;
-  hasguessed = has_guessed;
+  has_guessed = msg.hasguessed;
 //   console.log(msg.chattext);
+    if(!has_guessed) {
+        $("div.container#guess"+trial_num).append(`
+        <button class="button is-light" id="check_guess">Check Guess</button>
+    `);
+    }
   group = msg.groupn;
-  $("p#text").replaceWith("<p id='text'>" + msg.chattext + "</p>");
+  $("p#text").append(msg.chattext);
   $("#group").html(msg.groupn + "");
+  $( "p#textbar" ).text(msg.textbar);
+
 });
 
 TogetherJS.hub.on("update", function (msg) {
