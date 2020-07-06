@@ -6,6 +6,7 @@
     // WRITE ERROR CHECKING 
         /*
         * Check for inputs that arent numbers in the middle section 
+        * Make sure that the popup only shows up AFTER the number changes in the modal
         * Will update twice for wrong expression? Why?
         *   -Do not know what's causing this
         */
@@ -460,9 +461,9 @@ function checkguess(){
     let number = $("textarea#number" + trial_num + ".textarea").val();
 
     if(keys[letter] == number){
-        $("div#guess" + trial_num).append("<p>TRUE</p>")
+        $("div#guess" + trial_num).append("<p id='value'>TRUE</p>");
     } else {
-        $("div#guess" + trial_num).append("<p>FALSE</p>")
+        $("div#guess" + trial_num).append("<p id='value'>FALSE</p>")
     }  
     $("button#check_guess").remove();
     has_guessed = true;
@@ -622,16 +623,23 @@ TogetherJS.hub.on("modalactive", function (msg) {
 
     let chat_text = $("p#text").html();
     let groupnum = group;
-    console.log(chat_text);
+
     $("#group").html(groupnum + "");
     let text = $( "p#textbar" ).text();
+    let values = $( "p#value" ).get();
+    let textValues = new Array(values.length)
+    for(let i = 0 ; i < values.length ; i++){
+        textValues[i] = values[i].outerHTML;
+    }
+
     TogetherJS.send({
         type: "standardize",
         trialnum: trial_num,
         chattext: chat_text,
         hasguessed: has_guessed,
         groupn: groupnum,
-        textbar: text
+        textbar: text,
+        values: textValues
     });
 
 });
@@ -640,21 +648,28 @@ TogetherJS.hub.on("standardize", function (msg) {
     if (! msg.sameUrl) {
         return;
     }
-//   console.log(msg.trialnum);
+
   trial_num = msg.trialnum;
   has_guessed = msg.hasguessed;
-//   console.log(msg.chattext);
-    if(!has_guessed) {
-        $("div.container#guess"+trial_num).append(`
-        <button class="button is-light" id="check_guess">Check Guess</button>
+
+  if(!has_guessed) {
+    $("div.container#guess"+trial_num).append(`
+    <button class="button is-light" id="check_guess">Check Guess</button>
     `);
-    }
+   }
+
   group = msg.groupn;
   $("p#text").append(msg.chattext);
   $("#group").html(msg.groupn + "");
   $( "p#textbar" ).text(msg.textbar);
 
+    let val = msg.values;
+    for(let i = 0 ; i < val.length; i++){
+        let v = i + 1;
+        $("div.container#guess" + v).append(val[i]);
+    }
 });
+
 
 TogetherJS.hub.on("update", function (msg) {
     if (! msg.sameUrl) {
