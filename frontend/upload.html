@@ -5,6 +5,15 @@
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.709.0.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
+            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
+     
+
     </head>
     <body>
 
@@ -12,42 +21,33 @@
 
         <div class="content">
 
-            <form id="add-game-form">
-                <!--Add input forms for file structure of a game-->
-                <h2>Upload HTML, CSS, and JS game files.</h2>
+
+            <form id="add-game-form" name = "input">
+                <h2>Upload HTML, CSS, JS, and .csv (data) game files.</h2>
                 <input type="file", id="html", name="html", accept=".html">
                 <br>
                 <input type="file", id="css", name="css", accept=".css">
                 <br>
                 <input type="file", id="js", name="js", accept=".js">
                 <br>
+                <input type="file", id="data", name="data", accept=".json">
+                <br>
+                <h6>Game Name</h6>
+                <input type="text", id="gameName", placeholder="Game Name"> 
+                <br>
                 <button id="add">Add Game</button>
             </form>
 
-        
+            <br>
 
-            <ul id="game-list"></ul>
+            <form action="/file-upload"
+                class="dropzone"
+                id="my-awesome-dropzone">
+            </form>
+
 
         </div>
-
-    
-
-        <script>
-            // Initialize Firebase
-            const firebaseConfig = {
-                apiKey: "AIzaSyBqmO5EvF3KUrXn7XGEHjku9Z7a_C_P-AM",
-                authDomain: "multiplayer-math-maker.firebaseapp.com",
-                databaseURL: "https://multiplayer-math-maker.firebaseio.com",
-                projectId: "multiplayer-math-maker",
-                storageBucket: "multiplayer-math-maker.appspot.com",
-                messagingSenderId: "489127211642",
-                appId: "1:489127211642:web:f71688bd2932cb9c8281c3",
-                measurementId: "G-TGFPT2WKPK"
-            };
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-            db.settings({ timestampsInSnapshots: true }); 
-        </script>
+        <script src="aws-sdk-2.709.0.js"></script>
         <script src="app.js"></script>
     </body>
 </html>

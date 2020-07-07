@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <!--Import Firebase libraries-->
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+        <!--Import Firebase UI-->
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+        <!--Lastly, reference personal style sheet-->
+        <link rel="stylesheet" href="/login/styles.css">
+    <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+    <script> TogetherJSConfig_suppressJoinConfirmation = true </script> 
+    <script> TogetherJSConfig_autoStart = true </script> 
+    <script src="https://togetherjs.com/togetherjs-min.js"></script> 
+</head>
+
+    <body>
+        <div class="intro">
+            <h1>Multiplayer Math Maker Login</h1>
+            <p>Enter your email and either login or sign up with a password.</p>
+        </div>
+        
+        
+        <div id="firebaseui-auth-container"></div>
+
+        <script>
+            // Initialize Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyBqmO5EvF3KUrXn7XGEHjku9Z7a_C_P-AM",
+                authDomain: "multiplayer-math-maker.firebaseapp.com",
+                databaseURL: "https://multiplayer-math-maker.firebaseio.com",
+                projectId: "multiplayer-math-maker",
+                storageBucket: "multiplayer-math-maker.appspot.com",
+                messagingSenderId: "489127211642",
+                appId: "1:489127211642:web:f71688bd2932cb9c8281c3",
+                measurementId: "G-TGFPT2WKPK"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            db.settings({ timestampsInSnapshots: true }); 
+        </script>
+        <script src="auth.js"></script>
+    </body>
+</html>
