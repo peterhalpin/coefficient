@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Covid-19 Excercise</title>
+    <link rel="stylesheet" href="covid.css">
+    <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+    <script src= "..\node_modules\jquery\dist\jquery.js"></script>
+    <script>
+      var TogetherJSConfig_cloneClicks = true;
+      var TogetherJSConfig_dontShowClicks = true;
+      var TogetherJSConfig_suppressJoinConfirmation = true;
+    </script>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+    <script src="..\node_modules\papaparse\papaparse.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
+    <script src=".\covid.js"></script>
+  </head>
+
+
+
+  <body>
+    <section class ="section" id="page">
+        <div class="container" id="page">
+            <div class="columns" id="data">
+                <div class="column" id="input_fields">
+                    <div id="input">
+                     <span> Date: </span> <input class="input"></input>
+                    </div>
+                    <div id="dropdown">
+                     <div class="select">
+                        <select>
+                            <!-- This section will be added at run time when parsing the csv file-->
+                          <option value="TBA">TBA</option>
+                          <option value="TBA">TBA</option>
+                          <option value="TBA">TBA</option>
+                          <option value="TBA">TBA</option>
+                          <option value="TBA">TBA</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div id="file-upload">
+                     <div class="file has-name">
+                        <label class="file-label">
+                          <input class="file-input" type="file" name="resume">
+                          <span class="file-cta">
+                            <span class="file-icon">
+                              <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                              Choose a file…
+                            </span>
+                          </span>
+                          <span class="file-name">
+                            Screen Shot 2017-07-29 at 15.54.25.png
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <script>
+                        const fileInput = document.querySelector('#file-js-example input[type=file]');
+                        fileInput.onchange = () => {
+                          if (fileInput.files.length > 0) {
+                            const fileName = document.querySelector('#file-js-example .file-name');
+                            fileName.textContent = fileInput.files[0].name;
+                          }
+                        }
+                      </script>
+                </div>
+                <div class="column" id="map">
+                    <figure class="image">
+                        <img src="https://geology.com/world/united-states-map-with-state-names.gif">
+                      </figure>
+                </div>
+            </div>
+                
+            
+            </div>
+        </div>
+      </section>
+  </body>
