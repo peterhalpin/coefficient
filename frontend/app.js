@@ -25,17 +25,6 @@ AWS.config.region = 'us-east-1';
 s3 = new AWS.S3({apiVersion: '2006-03-01'});
 console.log(s3);
 
-// function getLink(storageRef) {
-//     return new Promise((resolve, reject) => {
-//         ;
-//     })
-//     let link = storageRef.getDownloadURL().then(async function(downloadURL) {
-//         console.log("File available at ", downloadURL);
-//         return downloadURL;
-//     });
-
-
-// }
 
 
 function readFileAsync(file) {
@@ -53,6 +42,9 @@ function readFileAsync(file) {
     })
   }
 
+  function redirect() {
+      window.location = "/launch.html";
+  }
 var html;
 var css;
 var js;
@@ -61,16 +53,18 @@ var file;
 var togetherJS_String;
 var submit = document.getElementById("add");
 var gameName;
-// "myAwesomeDropzone" is the camelized version of the HTML element's ID
-Dropzone.options.myAwesomeDropzone = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
-    acceptedFiles: '*.csv, *.html, *.css, *.js'
-  };
-// Create the dropzone 
-var myDropzone = new Dropzone("#my-awesome-dropzone");
+var uploaded = new Map();
 
-// Dropzone for additional files
+// // "myAwesomeDropzone" is the camelized version of the HTML element's ID
+// Dropzone.options.myAwesomeDropzone = {
+//     paramName: "file", // The name that will be used to transfer the file
+//     maxFilesize: 2, // MB
+//     acceptedFiles: '*.csv, *.html, *.css, *.js'
+//   };
+// // Create the dropzone 
+// var myDropzone = new Dropzone("#my-awesome-dropzone");
+
+// // Dropzone for additional files
 
 
 var htmlFileButton = document.getElementById("html");
@@ -97,6 +91,9 @@ htmlFileButton.addEventListener('change', async function(e) {
             console.log("File available at ", downloadURL);
         })
     });
+
+    uploaded.set('html', false);
+
 });
  
   
@@ -110,6 +107,7 @@ cssFileButton.addEventListener('change', function(e) {
                 console.log("File available at ", downloadURL);
             })
         });
+    uploaded.set('css', false);
 });
   
 var jsFileButton = document.getElementById("js");
@@ -121,7 +119,7 @@ jsFileButton.addEventListener('change', function(e) {
                 console.log("File available at ", downloadURL);
             })
         });
-
+    uploaded.set('js', false);
 });
 
 // make event listener for .json or .csv files 
@@ -134,13 +132,14 @@ csvFileButton.addEventListener('change', function(e) {
                 console.log("File available at ", downloadURL);
             })
         });
+    uploaded.set('csv', false);
 });
 
 
 submit.addEventListener("click", function(e) {
     e.preventDefault();
     var gameName = document.getElementById("gameName").value;
-    document.forms['input'].reset();
+    
     // Create the parameters for calling createBucket
         var bucketParams = {
             Bucket : 'helpinghalpin' + gameName,
@@ -221,7 +220,8 @@ submit.addEventListener("click", function(e) {
             if (err) console.log(err, err.stack); // an error occurred
             else     
                 console.log("success" + data); // successful response
-                
+                setTimeout(redirect(), 5000);
+
                 s3.putBucketPolicy(policyParams, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
@@ -230,14 +230,24 @@ submit.addEventListener("click", function(e) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
                 });
-                //s3.putObject("helpinghalpin" + gameName, "index.html", togetherJS_String);
-                s3.upload (uploadParams, function (err, data) {
-                    if (err) {
-                    console.log("Error", err);
-                    } if (data) {
-                    console.log("Upload Success", data.Location);
-                    }
-                });
+                if(html != undefined) {
+                    s3.upload (uploadParams, function (err, data) {
+                        if (err) {
+                        console.log("Error", err);
+                        } if (data) {
+                        console.log("Upload Success", data.Location);
+                        }
+                    });
+                //     s3.waitFor('objectExists', uploadParams, function(err, data) {
+                //         if(err) {
+                //             console.log(err, err.stack);
+                //         } else {
+                //             console.log(data);
+                //             uploaded.set('html', true);
+                //         }
+                //    });
+                }
+                
                 if(css != undefined) {
                     s3.upload (uploadParamsCSS, function (err, data) {
                         if (err) {
@@ -246,6 +256,14 @@ submit.addEventListener("click", function(e) {
                         console.log("Upload Success", data.Location);
                         }
                     });
+                //     s3.waitFor('objectExists', uploadParamsCSS, function(err, data) {
+                //         if(err) {
+                //             console.log(err, err.stack);
+                //         } else {
+                //             console.log(data);
+                //             uploaded.set('css', true);
+                //         }
+                //    });
                 }
                 if(js != undefined) {
                     s3.upload (uploadParamsJS, function (err, data) {
@@ -255,6 +273,14 @@ submit.addEventListener("click", function(e) {
                         console.log("Upload Success", data.Location);
                         }
                     });
+                //     s3.waitFor('objectExists', uploadParamsJS, function(err, data) {
+                //         if(err) {
+                //             console.log(err, err.stack);
+                //         } else {
+                //             console.log(data);
+                //             uploaded.set('js', true);
+                //         }
+                //    });
                 }
                 if(csv != undefined) {
                     s3.upload (uploadParamsCSV, function (err, data) {
@@ -264,16 +290,26 @@ submit.addEventListener("click", function(e) {
                         console.log("Upload Success", data.Location);
                         }
                     });
+                //     s3.waitFor('objectExists', uploadParamsCSV, function(err, data) {
+                //         if(err) {
+                //             console.log(err, err.stack);
+                //         } else {
+                //             console.log(data);
+                //             uploaded.set('csv', true);
+                //         }
+                //    });
+                    
                 }
                 
         });
        
- 
+       // set timeout
+       
    
     var name = document.getElementById("gameName").value;
     const docRef = db.doc("games/" + name);
     var user = firebase.auth().currentUser;
-
+    console.log(docRef);
     docRef.set({
         gameTitle: name,
         userID: user.uid,
@@ -282,6 +318,6 @@ submit.addEventListener("click", function(e) {
         console.log("Game saved!");
         
     });
-   
+    document.forms['input'].reset();
     
 });

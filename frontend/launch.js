@@ -34,6 +34,13 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
 
 
+// async function getURLs(url, groups) {
+//     let response = await fetch('https://oxreg1dkaa.execute-api.us-east-1.amazonaws.com/prod/scraper?url=' + url + '&groups=' + groups);
+//     let data = await response.json();
+//     return data;
+// }
+
+
 
 const gameList = document.querySelector("#game-list")
 
@@ -63,36 +70,34 @@ function renderGame(doc) {
 }
 
 let submit = document.getElementById('submit');
-// submit.addEventListener("submit", function(e) {
-//     var inputs = gameList.getElementsByTagName("input");
-//     var selected;
-//     for(var i = 0; i < inputs.length; i++) {
-//         if (inputs[i].checked) {
-//             selected = inputs[i];
-//             break;
-//          } 
-//     }
 
-//     window.game = selected.getAttribute('url');
-//     console.log(selected.getAttribute('url'));
-
-// });
 
 function myFunction() {
+   // e.preventDefault();
     var inputs = gameList.getElementsByTagName("input");
     var selected;
-    for(var i = 0; i < inputs.length; i++) {
-        if (inputs[i].checked) {
-            selected = inputs[i];
-            break;
-         } 
-    }
-
-    window.game = selected.getAttribute('url');
-    console.log(selected.getAttribute('url'));
-
+    
+    
+        for(var i = 0; i < inputs.length; i++) {
+            if (inputs[i].checked) {
+                selected = inputs[i];
+                break;
+             } 
+        }
+        if(selected != undefined) {
+            window.game = selected.getAttribute('url');
+            console.log(selected.getAttribute('url'));
+            
+        }
+    
+        window.groups = document.getElementById('groups').value;
+        console.log(document.getElementById('groups').value);
+        window.location = "sessions.html"
+     
+    // getURLs(window.game, numGroups).then(data => console.log(data));
+    
 
 
 }
-submit.addEventListener("submit", myFunction());
+submit.addEventListener("click", myFunction());
 
