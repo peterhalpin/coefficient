@@ -24,6 +24,8 @@
 
 let combination = ['A', 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J'];
 
+let hasSeed = false;
+
 let keys = {} ;
 
 let trial_num = 0;
@@ -43,18 +45,15 @@ let members = 0;
 
 $(function () {
 
-    $("section#main2.section").hide();
+    // $("section#main2.section").hide();
 
-    $("section#main1.section").on("click", "button#submit_seed", function (event) {
+    $("body").on("click", "button#submit_seed", function (event) {
         seed();
-    });
-
-    $("section#main1.section").on("click", "button#random_seed", function (event) {
-        randomize(Math.floor(Math.random() * 10000));
-        let z = combination;
         if (TogetherJS.running) {
-            TogetherJS.send({type: "randomseed", combo: z, key: keys});
-        }
+            TogetherJS.send({type: "modalinactive"});
+        };
+        hasSeed=true;
+        $("div#modal").removeClass("is-active");
     });
 
     // TogetherJS sends the message to the other web page 
@@ -125,6 +124,14 @@ $(function () {
 // Takes in submitted seed , hides seed portion and puts in the first 2 steps of the excercise
 function seed(){
     let submit_seed = $("textarea#seed").val();
+    if(submit_seed == "") {
+        randomize(Math.floor(Math.random() * 10000));
+        let z = combination;
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "randomseed", combo: z, key: keys});
+        }
+        return;
+    }
     try {
         parseInt(submit_seed)
     } catch(err) {
@@ -133,7 +140,7 @@ function seed(){
         return;
       }
 
-    if(submit_seed < 0 || submit_seed == ""){
+    if(submit_seed < 0){
         alert("Please input an integer > 0 ");
         $("textarea#seed").val("");
         return;
@@ -439,9 +446,6 @@ function answer(textbar_content){
     $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
     $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
     $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
-    // $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
-    // $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
-    // $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
     has_guessed = false;
 
     if (TogetherJS.running) {

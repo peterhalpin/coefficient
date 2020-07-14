@@ -57,63 +57,77 @@
   <section class="section" id="page">
     <div class="container" id="page">
       <div class="columns" id="data">
-        <div class="column" id="input_fields">
-          <div id="input">
-            <input class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range">
+        <div class="column">
+          <div id="months" class="slidecontainer">
+            <p>Month</p>
+            <input id="sliderWithValue1" class="slider has-output-tooltip is-fullwidth" step="1" min="1" max="12"
+              value="1" type="range">
+          </div>
+          <div id="days" class="slidecontainer">
+            <p>Day</p>
+            <input class="slider is-fullwidth" step="1" min="1" max="30" value="1" type="range" id="sliderWithValue2">
+            <p>Date: <span id="Value1">January</span> <span id="Value2">1</span></p>
           </div>
           <div id="dropdown">
             <div class="select">
-              <select>
+              <select id="dropdown">
                 <!-- This section will be added at run time when parsing the csv file-->
+                <!-- <option value="TBA">TBA</option>
                 <option value="TBA">TBA</option>
                 <option value="TBA">TBA</option>
                 <option value="TBA">TBA</option>
-                <option value="TBA">TBA</option>
-                <option value="TBA">TBA</option>
+                <option value="TBA">TBA</option> -->
               </select>
             </div>
           </div>
-          <!-- <div id="file-upload">
-                     <div class="file has-name">
-                        <label class="file-label">
-                          <input class="file-input" type="file" name="resume">
-                          <span class="file-cta">
-                            <span class="file-icon">
-                              <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                              Choose a file…
-                            </span>
-                          </span>
-                          <span class="file-name">
-                            Screen Shot 2017-07-29 at 15.54.25.png
-                          </span> -->
-          <!-- </label>
-                      </div>
-                    </div> -->
-          <!-- <script>
-                        const fileInput = document.querySelector('#file-js-example input[type=file]');
-                        fileInput.onchange = () => {
-                          if (fileInput.files.length > 0) {
-                            const fileName = document.querySelector('#file-js-example .file-name');
-                            fileName.textContent = fileInput.files[0].name;
-                          }
-                        }
-                      </script> -->
-          <!-- The `multiple` attribute lets users select multiple files. -->
-          <input type="file" id="file-selector">
+          <input type="file" id="fileInput">
           <script>
-            const fileSelector = document.getElementById('file-selector');
-            fileSelector.addEventListener('change', (event) => {
-              const fileList = event.target.files;
-          //     Papa.parse(fileList.File, {
-          //   header: true,
-          //   dynamicTyping: true,
-          // complete: function (results) {
-          //   console.log(results);
-          // },
-          // });
-              console.log(fileList);
+            let svc;
+            document.getElementById('fileInput').addEventListener('change', function selectedFileChanged() {
+              if (this.files.length === 0) {
+                console.log('No file selected.');
+                return;
+              }
+              Papa.parse(this.files[0], {
+                delimiter: "",	// auto-detect
+                newline: "",	// auto-detect
+                quoteChar: '"',
+                escapeChar: '"',
+                header: false,
+                transformHeader: false,
+                dynamicTyping: true,
+                preview: 0,
+                encoding: "",
+                worker: false,
+                comments: false,
+                step: undefined,
+                complete: function (results, file) {
+                  console.log("Parsing complete:", results, file);
+                  svc = results;
+                  console.log(svc);
+                  let keys =  svc.data[0];
+                  for(let i = 0 ; i < keys.length ; i++){
+                    if(keys[i] == null) {
+                      continue;
+                    } else {
+                      $("select#dropdown").append("<option>"+ keys[i]+"</option>");
+                    }
+                
+                  }
+                  console.log(keys);
+                },
+                error: undefined,
+                download: false,
+                downloadRequestHeaders: undefined,
+                downloadRequestBody: undefined,
+                skipEmptyLines: true,
+                chunk: undefined,
+                fastMode: undefined,
+                beforeFirstChunk: undefined,
+                withCredentials: undefined,
+                transform: undefined,
+                delimitersToGuess: [',', '\t', '|', ';', Papa.RECORD_SEP, Papa.UNIT_SEP]
+              });
             });
           </script>
         </div>
