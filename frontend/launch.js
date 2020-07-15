@@ -34,11 +34,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
 
 
-// async function getURLs(url, groups) {
-//     let response = await fetch('https://oxreg1dkaa.execute-api.us-east-1.amazonaws.com/prod/scraper?url=' + url + '&groups=' + groups);
-//     let data = await response.json();
-//     return data;
-// }
+async function getURLs(url, groups) {
+    console.log('inside getURLs');
+    let response = await fetch('https://oxreg1dkaa.execute-api.us-east-1.amazonaws.com/prod/scraper?url=' + url + '&groups=' + groups);
+    let data = await response.json();
+    return data;
+}
 
 
 
@@ -69,14 +70,13 @@ function renderGame(doc) {
 
 }
 
-let submit = document.getElementById('submit');
+let submit = document.getElementById('generate');
 
-
-function myFunction() {
-   // e.preventDefault();
+submit.addEventListener("click", async function(e) {
+    e.preventDefault();
+    document.getElementById('generate').disabled = 'true';
     var inputs = gameList.getElementsByTagName("input");
     var selected;
-    
     
         for(var i = 0; i < inputs.length; i++) {
             if (inputs[i].checked) {
@@ -91,13 +91,38 @@ function myFunction() {
         }
     
         window.groups = document.getElementById('groups').value;
-        console.log(document.getElementById('groups').value);
-        window.location = "sessions.html"
+        // window.location = "sessions.html"
      
-    // getURLs(window.game, numGroups).then(data => console.log(data));
+    let urls = await getURLs(window.game, window.groups).then(data => renderURLs(data));
+    console.log(urls);
     
+});
+
+function renderURLs(urls) {
+
+    let list = document.createElement('ul');
+    
+    // textbox.value = urls;
+
+    for(i = 1; i < urls.length + 1; i++) {
+       
+        // create list item for every element 
+        var listItem = document.createElement("li");
+        
+        // create a text node to store value
+        var text = document.createTextNode("Group " + i);
+        var a = document.createElement('a');
+        a.appendChild(text);
+        a.href = urls[i] + '\n'; 
+        
+        // append the list item in the list
+        listItem.appendChild(a);
+        list.appendChild(listItem);
 
 
+    }
+
+
+    document.getElementById('launch').appendChild(list);
 }
-submit.addEventListener("click", myFunction());
 

@@ -43,6 +43,7 @@ function readFileAsync(file) {
   }
 
   function redirect() {
+      // setTimeout(function() {window.location = "/launch.html"}, 10000);
       window.location = "/launch.html";
   }
 var html;
@@ -136,7 +137,7 @@ csvFileButton.addEventListener('change', function(e) {
 });
 
 
-submit.addEventListener("click", function(e) {
+submit.addEventListener("click", async function(e) {
     e.preventDefault();
     var gameName = document.getElementById("gameName").value;
     
@@ -208,7 +209,7 @@ submit.addEventListener("click", function(e) {
 
 
         // call S3 to create the bucket
-        s3.createBucket(bucketParams, function(err, data) {
+        await s3.createBucket(bucketParams, function(err, data) {
             if (err) {
             console.log("Error", err);
             } else {
@@ -216,94 +217,70 @@ submit.addEventListener("click", function(e) {
             }
         });
 
-        s3.waitFor('bucketExists', params, function(err, data) {
+        await s3.waitFor('bucketExists', params, async function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
             else     
                 console.log("success" + data); // successful response
-                setTimeout(redirect(), 5000);
+               //  setTimeout(redirect(), 15000);
 
-                s3.putBucketPolicy(policyParams, function(err, data) {
+                await s3.putBucketPolicy(policyParams, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
                 });
-                s3.putBucketWebsite(websiteParams, function(err, data) {
+                await s3.putBucketWebsite(websiteParams, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
                 });
-                if(html != undefined) {
-                    s3.upload (uploadParams, function (err, data) {
-                        if (err) {
-                        console.log("Error", err);
-                        } if (data) {
-                        console.log("Upload Success", data.Location);
-                        }
-                    });
-                //     s3.waitFor('objectExists', uploadParams, function(err, data) {
-                //         if(err) {
-                //             console.log(err, err.stack);
-                //         } else {
-                //             console.log(data);
-                //             uploaded.set('html', true);
-                //         }
-                //    });
-                }
+                
                 
                 if(css != undefined) {
-                    s3.upload (uploadParamsCSS, function (err, data) {
+                    await s3.upload (uploadParamsCSS, function (err, data) {
                         if (err) {
                         console.log("Error", err);
                         } if (data) {
                         console.log("Upload Success", data.Location);
                         }
                     });
-                //     s3.waitFor('objectExists', uploadParamsCSS, function(err, data) {
-                //         if(err) {
-                //             console.log(err, err.stack);
-                //         } else {
-                //             console.log(data);
-                //             uploaded.set('css', true);
-                //         }
-                //    });
+                
                 }
                 if(js != undefined) {
-                    s3.upload (uploadParamsJS, function (err, data) {
+                    await s3.upload (uploadParamsJS, function (err, data) {
                         if (err) {
                         console.log("Error", err);
                         } if (data) {
                         console.log("Upload Success", data.Location);
                         }
                     });
-                //     s3.waitFor('objectExists', uploadParamsJS, function(err, data) {
-                //         if(err) {
-                //             console.log(err, err.stack);
-                //         } else {
-                //             console.log(data);
-                //             uploaded.set('js', true);
-                //         }
-                //    });
+              
                 }
                 if(csv != undefined) {
-                    s3.upload (uploadParamsCSV, function (err, data) {
+                    await s3.upload (uploadParamsCSV, function (err, data) {
                         if (err) {
                         console.log("Error", err);
                         } if (data) {
                         console.log("Upload Success", data.Location);
                         }
                     });
-                //     s3.waitFor('objectExists', uploadParamsCSV, function(err, data) {
-                //         if(err) {
-                //             console.log(err, err.stack);
-                //         } else {
-                //             console.log(data);
-                //             uploaded.set('csv', true);
-                //         }
-                //    });
+                
                     
+                }
+
+                if(html != undefined) {
+                    await s3.upload (uploadParams, function (err, data) {
+                        if (err) {
+                        console.log("Error", err);
+                        } if (data) {
+                        console.log("Upload Success", data.Location);
+                        setTimeout(redirect(), 5000);
+                        }
+                        
+                    });
+                
                 }
                 
         });
        
-       // set timeout
+       
        
    
     var name = document.getElementById("gameName").value;
