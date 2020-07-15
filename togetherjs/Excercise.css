@@ -1,11 +1,116 @@
+p#title {
+position: absolute;
+width: 1170px;
+height: 199px;
+top: 100px;
+left: 200px;
+width: 1170px;
+height: 199px;
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 144px;
+line-height: 199px;
+/* identical to box height */
+
+text-align: center;
+}
+
+div.modal-background{
+width: 2093px;
+height: 1024px;
+background: #FEFEFE;
+}
+
+div.modal-content {
+    width: 1500px;
+    height: 700px;
+}
+
+p#l2nseedsubmit {
+    position: absolute;
+width: 1110px;
+height: 59px;
+top: 300px;
+left: 200px;
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 88px;
+text-align: center;
+
+color: #000000;
+}
+
+span#button_text {
+    
+width: 787px;
+height: 171px;
+
+
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 144px;
+line-height: 150px;
+text-align: center;
+
+color: #000000;
+
+
+}
 div {
     padding: 15px;
+}
+
+textarea#seed{
+    width: 442px;
+height: 72px;
+}
+
+button#submit_seed, button#submit_start{
+    width: 798px;
+height: 175px;
 }
 
 p#textbar {
     border-style: solid;
 }
 
+p#l2nmodal_Subtitle {
+    position: absolute;
+width: 597px;
+height: 96px;
+left: 450px;
+top: 278px;
+
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 88px;
+text-align: center;
+
+color: #000000;
+
+}
+
+div#l2nmodal_Instructions > * {
+position: absolute;
+height: 165px;
+left: 320px;
+top: 360px;
+
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 48px;
+line-height: 66px;
+
+color: #000000;
+
+}
 div#text.container {
     overflow-y: auto;
     height: 200px;

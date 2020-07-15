@@ -30,18 +30,42 @@
 
 <body>
 
-  <div class="modal is-active" id="modal">
+  <div class="modal is-active" id="l2nmodal">
     <div class="modal-background"></div>
     <div class="modal-content" style="background-color:white;">
-      <p>
+      <p id="title">
         Letters to Numbers
       </p>
-      <p>
+      <p id="l2nseedsubmit">
         If you were given a code, enter it here
-        <textarea class="textarea" placeholder="Code" rows="1" id="seed"></textarea>
+        <textarea class="textarea"  rows="1" id="seed"></textarea>
     </div>
     <div class="container">
-      <button class="button" id="submit_seed">Begin</button>
+      <button class="button" id="submit_seed"><span id="button_text">Begin</span></button>
+    </div>
+  </div>
+
+  <div class="modal" id="l2nmodal_instructions">
+    <div class="modal-background"></div>
+    <div class="modal-content" style="background-color:white;">
+      <p id="title">
+        Letters to Numbers
+      </p>
+      <p id="l2nmodal_Subtitle">
+       How To Play 
+      </p>
+      
+      <div id="l2nmodal_Instructions"> 
+        <ol>
+          <li>Try to guess the number value of each letter in 10 tries!</li>
+          <li>Step 1: Enter a sentence equation into the calculator!</li>
+          <li>Step 2: Try to guess a single letter value!</li>
+          <li>Step 3: Repeat 1-2 or try to guess the final code!</li>
+        </ol>
+      </div>  
+    </div>
+    <div class="container">
+      <button class="button" id="submit_start"><span id="button_text">Start</span></button>
     </div>
   </div>
 
@@ -49,18 +73,6 @@
     <h1 class="title">Letters-To-Numbers</h1>
     <button class="button is-light" onclick="TogetherJS(this); return false;">Start TogetherJS</button>
   </div>
-
-  <!-- This section is the seed generation area. -->
-  <!-- <section class="section" id="main1">
-    <div class="container">
-      <h1 class="subtitle is-1">Seed:</h1>
-      <textarea class="textarea" placeholder="Choose a number from 1-50" rows="1" id="seed"></textarea>
-    </div>
-    <div class="container">
-      <button class="button" id="submit_seed">Submit Seed</button>
-      <button class="button" id="random_seed">Random Seed</button>
-    </div>
-  </section> -->
 
 
   <section class="section" id="main2">

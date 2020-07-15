@@ -33,7 +33,6 @@ let trial_num = 0;
 let has_guessed = false;
 
 let backspace = false;
-
 let express = 0;
 
 let expressdouble = false;
@@ -50,10 +49,18 @@ $(function () {
     $("body").on("click", "button#submit_seed", function (event) {
         seed();
         if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive"});
+            TogetherJS.send({type: "modalinactive" , modal: "12nmodal"});
         };
         hasSeed=true;
-        $("div#modal").removeClass("is-active");
+        $("div#l2nmodal").removeClass("is-active");
+        $("div#l2nmodal_instructions").addClass("is-active");
+    });
+
+    $("body").on("click", "button#submit_start", function (event) {
+        if (TogetherJS.running) {
+            TogetherJS.send({type: "modalinactive" , modal: "12nmodal_Instructions"});
+        };
+        $("div#l2nmodal_instructions").removeClass("is-active");s
     });
 
     // TogetherJS sends the message to the other web page 
@@ -85,7 +92,7 @@ $(function () {
 
     $("div#modal").on("click", "button#close_modal", function (event) {
         if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive"});
+            TogetherJS.send({type: "modalinactive",  modal: "12nmodal"});
         };
         $("div#modal").removeClass("is-active");
     });
@@ -113,7 +120,7 @@ $(function () {
     $("div#modal").on("click", "button#cancel.button.is-light", function (event) {
         members = 0;
         if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive" , event:event});
+            TogetherJS.send({type: "modalinactive" , event:event ,  modal: "12nmodal"});
         };
         $("#members").html(""+members);
         $("div#modal").removeClass("is-active");
@@ -587,9 +594,13 @@ TogetherJS.hub.on("modalactive", function (msg) {
     if (! msg.sameUrl) {
       return;
     }
+  
     members = 0;
     $("#members").html(""+ members);
-    $("div#modal").removeClass("is-active");
+    $("div#" + msg.modal).removeClass("is-active");
+    if(msg.modal == "l2nmodal") {
+        $("div#12nmodal_instructions").addClass("is-active");
+    }
   });
 
   TogetherJS.hub.on("submit", function (msg) {
