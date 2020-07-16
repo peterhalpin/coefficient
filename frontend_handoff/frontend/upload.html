@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <!--Import Firebase libraries-->
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.709.0.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
+            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
+     
+
+    </head>
+    <body>
+
+        <h1>Games</h1>
+
+        <div class="content">
+
+
+            <form id="add-game-form" name = "input">
+                <h2>Upload HTML, CSS, JS, and .csv (data) game files.</h2>
+                <input type="file", id="html", name="html", accept=".html">
+                <br>
+                <input type="file", id="css", name="css", accept=".css">
+                <br>
+                <input type="file", id="js", name="js", accept=".js">
+                <br>
+                <input type="file", id="data", name="data", accept=".json">
+                <br>
+                
+                <input type="text", id="gameName", placeholder="Game Name"> 
+                <br>
+                
+                
+                <br>
+                <button id="add">Add Game</button>
+            </form>
+
+            <br>
+           
+
+
+        </div>
+        <script src="aws-sdk-2.709.0.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

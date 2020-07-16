@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <!--Import Firebase libraries-->
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+    </head>
+    <body>
+        <h2>Create a game or launch a saved one.</h2>
+        <a href="upload.html">
+            <button type="button" class="btn btn-primary" id="create">Create</button>
+        </a>
+        <a href="launch.html">
+            <button type="button" class="btn btn-primary" id="launch">Launch</button>
+        </a>
+    
+
+        <script>
+            // Initialize Firebase
+            // You will get these settings after creating the Firebase project in the console
+            const firebaseConfig = {
+                apiKey: "",
+                authDomain: "",
+                databaseURL: "",
+                projectId: "",
+                storageBucket: "",
+                messagingSenderId: "",
+                appId: "",
+                measurementId: ""
+            };
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            db.settings({ timestampsInSnapshots: true }); 
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    var uid = user.uid;
+                    window.user = user;
+                    // console.log(window.user);
+
+                } else {
+                    // No user is signed in.
+                }
+                });
+            // console.log(window.user);
+        </script>
+        
+
+
+    </body>
+</html>
