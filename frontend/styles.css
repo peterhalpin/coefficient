@@ -1,5 +1,5 @@
 html {
-    background: #83A1D9;
+    background: #8FAADC;
 }
 
 /* */
@@ -8,29 +8,24 @@ INDEX
  */ 
 /* */
 /* */ 
-
-/* Not sure if there is an easier way to include logo
-.intro{
-    background-image: url();
-    background-position: right middle;
-    background-size: 1018px, 714px;
-    background-repeat: no-repeat;
-
+img {
+  display: block;
+  margin-left: 100px;
+  margin-right: 2000px;
 }
-*/
 
-h1.intro{
+h1.intro1{
    /* Orange Welcome */    
     position: absolute;
     width: 610px;
     height: 175px;
-    left: 1349px;
-    top: 152px;
+    left: 875px;
+    top: 30px;
 
     font-family: Staatliches;
     font-style: normal;
     font-weight: normal;
-    font-size: 144px;
+    font-size: 72px;
     line-height: 180px;
 
     color: #EB7021;
@@ -38,18 +33,18 @@ h1.intro{
 
 
 
-h2.intro{
+h2.intro1{
     /* White Welcome */    
     position: absolute;
     width: 610px;
     height: 175px;
-    left: 1343px;
-    top: 143px;
+    left: 875px;
+    top: 15px;
 
     font-family: Staatliches;
     font-style: normal;
     font-weight: normal;
-    font-size: 144px;
+    font-size: 72px;
     line-height: 180px;
 
     color: #FFFFFF;
@@ -60,8 +55,8 @@ h2.intro{
     position: absolute;
     width: 685px;
     height: 522px;
-    left: 1253px;
-    top: 358px;
+    left: 675px;
+    top: 220px;
 }
 
 h2.content{
@@ -98,7 +93,6 @@ UPlOAD
     border: 10px solid #FFFFFF;
     width: 568px;
     height: 101px;
-    transition-duration: 0.4s;
 }
 
 /*
@@ -707,393 +701,3 @@ background: #FFFFFF;
 }
 
 /* need to sync new layout to old ones and hyperlinks*/
-#launch
-{
-    /* Line 98 */
-
-
-position: absolute;
-width: 543.12px;
-height: 295.39px;
-left: 1078.97px;
-top: 412.31px;
-
-border: 20px solid #EB7021;
-transform: rotate(178.65deg);
-
-
-/* Line 99 */
-
-
-position: absolute;
-width: 541.9px;
-height: 296.42px;
-left: 1077.99px;
-top: 443.33px;
-
-border: 20px solid #EB7021;
-transform: rotate(178.65deg);
-
-
-/* Line 100 */
-
-
-position: absolute;
-width: 542.9px;
-height: 296.39px;
-left: 1078.99px;
-top: 474.31px;
-
-border: 20px solid #EB7021;
-transform: rotate(178.65deg);
-
-
-/* Line 101 */
-
-
-position: absolute;
-width: 540.9px;
-height: 296.44px;
-left: 1076.99px;
-top: 505.36px;
-
-border: 20px solid #EB7021;
-transform: rotate(178.65deg);
-
-
-/* Line 102 */
-
-
-position: absolute;
-width: 542.9px;
-height: 296.39px;
-left: 1078.99px;
-top: 536.31px;
-
-border: 20px solid #EB7021;
-transform: rotate(178.65deg);
-
-
-/* Launch */
-
-
-position: absolute;
-width: 813px;
-height: 246px;
-left: 1190px;
-top: 0px;
-
-font-family: Staatliches;
-font-style: normal;
-font-weight: normal;
-font-size: 300px;
-line-height: 375px;
-
-color: #EB7021;
-
-
-
-/* Launch */
-
-
-position: absolute;
-width: 799px;
-height: 375px;
-left: 1204px;
-top: 0px;
-
-font-family: Staatliches;
-font-style: normal;
-font-weight: normal;
-font-size: 300px;
-line-height: 375px;
-/* identical to box height */
-
-
-color: #FFFFFF;
-
-
-
-/* Create */
-
-
-position: absolute;
-width: 813px;
-height: 246px;
-left: 130px;
-top: 635px;
-
-font-family: Staatliches;
-font-style: normal;
-font-weight: normal;
-font-size: 300px;
-line-height: 375px;
-
-color: #EB7021;
-
-
-
-/* Create */
-
-
-position: absolute;
-width: 782px;
-height: 246px;
-left: 113px;
-top: 635px;
-
-font-family: Staatliches;
-font-style: normal;
-font-weight: normal;
-font-size: 300px;
-line-height: 375px;
-
-color: #FFFFFF;
-
-
-
-/* Line 59 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: -0.02px;
-top: 127.5px;
-
-border: 20px solid #FFFFFF;
-
-
-/* Line 60 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: -0.02px;
-top: 251.5px;
-
-border: 20px solid #FFFFFF;
-
-
-/* Line 61 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: -0.02px;
-top: 220.5px;
-
-border: 20px solid #FFFFFF;
-
-
-/* Line 62 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: -0.02px;
-top: 189.5px;
-
-border: 20px solid #FFFFFF;
-
-
-/* Line 63 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: -0.02px;
-top: 158.5px;
-
-border: 20px solid #FFFFFF;
-
-
-/* Line 108 */
-
-
-position: absolute;
-width: 534px;
-height: 302px;
-left: 1081px;
-top: 552px;
-
-border: 20px solid #EB7021;
-
-
-/* Line 109 */
-
-
-position: absolute;
-width: 533px;
-height: 304px;
-left: 1082px;
-top: 520px;
-
-border: 20px solid #EB7021;
-
-
-/* Line 110 */
-
-
-position: absolute;
-width: 534px;
-height: 304px;
-left: 1081px;
-top: 488px;
-
-border: 20px solid #EB7021;
-
-
-/* Line 111 */
-
-
-position: absolute;
-width: 532px;
-height: 303px;
-left: 1084px;
-top: 457px;
-
-border: 20px solid #EB7021;
-
-
-/* Line 112 */
-
-
-position: absolute;
-width: 534px;
-height: 303px;
-left: 1082px;
-top: 425px;
-
-border: 20px solid #EB7021;
-
-
-/* Line 118 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: 2154.02px;
-top: 840.86px;
-
-border: 20px solid #FFFFFF;
-transform: rotate(180deg);
-
-
-/* Line 119 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: 2155.06px;
-top: 716.86px;
-
-border: 20px solid #FFFFFF;
-transform: rotate(180deg);
-
-
-/* Line 120 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: 2154.8px;
-top: 747.86px;
-
-border: 20px solid #FFFFFF;
-transform: rotate(180deg);
-
-
-/* Line 121 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: 2154.54px;
-top: 778.86px;
-
-border: 20px solid #FFFFFF;
-transform: rotate(180deg);
-
-
-/* Line 122 */
-
-
-position: absolute;
-width: 1077.04px;
-height: 0px;
-left: 2154.28px;
-top: 809.86px;
-
-border: 20px solid #FFFFFF;
-transform: rotate(180deg);
-
-
-/* Line 69 */
-
-
-position: absolute;
-width: 1079px;
-height: 0px;
-left: 541px;
-top: 435px;
-
-border: 24px solid #FFFFFF;
-
-
-/* Line 70 */
-
-
-position: absolute;
-width: 1079px;
-height: 0px;
-left: 541px;
-top: 548px;
-
-border: 24px solid #FFFFFF;
-
-
-/* Line 71 */
-
-
-position: absolute;
-width: 1079px;
-height: 0px;
-left: 541px;
-top: 527px;
-
-border: 24px solid #FFFFFF;
-
-
-/* Line 72 */
-
-
-position: absolute;
-width: 1079px;
-height: 0px;
-left: 541px;
-top: 496px;
-
-border: 24px solid #FFFFFF;
-
-
-/* Line 73 */
-
-
-position: absolute;
-width: 1079px;
-height: 0px;
-left: 541px;
-top: 466px;
-
-border: 24px solid #FFFFFF;
-}
-
