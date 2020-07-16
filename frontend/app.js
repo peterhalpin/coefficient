@@ -51,11 +51,9 @@ var html;
 var css;
 var js;
 var csv;
-var file;
 var togetherJS_String;
 var submit = document.getElementById("add");
 var gameName;
-var uploaded = new Map();
 
 // Add event listener to the HTML file upload button
 var htmlFileButton = document.getElementById("html");
@@ -73,16 +71,6 @@ htmlFileButton.addEventListener('change', async function(e) {
             '</head>\n');
     // console.log(togetherJS_String);
 
-    // Get reference to firebase storage and put file inside
-    var storageRef = firebase.storage().ref(html.name);
-    storageRef.putString(togetherJS_String).then((snapshot) => {
-    storageRef.getDownloadURL().then(async function(downloadURL) {
-            // console.log("File available at ", downloadURL);
-        })
-    });
-    // Allows us to wait until file is uploaded to AWS S3 bucket before redirect
-    uploaded.set('html', false);
-
 });
  
   
@@ -90,39 +78,18 @@ htmlFileButton.addEventListener('change', async function(e) {
 var cssFileButton = document.getElementById("css");
 cssFileButton.addEventListener('change', function(e) {
     css = e.target.files[0]; 
-    var storageRef = firebase.storage().ref(css.name);
-    var task = storageRef.put(css).then((snapshot) => {
-        storageRef.getDownloadURL().then(async function(downloadURL) {
-                console.log("File available at ", downloadURL);
-            })
-        });
-    uploaded.set('css', false);
 });
   
 // Add event listener to the JS file upload button
 var jsFileButton = document.getElementById("js");
 jsFileButton.addEventListener('change', function(e) {
-    js = e.target.files[0]; 
-    var storageRef = firebase.storage().ref(js.name);
-    var task = storageRef.put(js).then((snapshot) => {
-        storageRef.getDownloadURL().then(async function(downloadURL) {
-                console.log("File available at ", downloadURL);
-            })
-        });
-    uploaded.set('js', false);
+    js = e.target.files[0];   
 });
 
 // Add event listener for .json or .csv files 
 var csvFileButton = document.getElementById('data');
 csvFileButton.addEventListener('change', function(e) {
     csv = e.target.files[0];
-    var storageRef = firebase.storage().ref(csv.name);
-    var task = storageRef.put(csv).then((snapshot) => {
-        storageRef.getDownloadURL().then(async function(downloadURL) {
-                console.log("File available at ", downloadURL);
-            })
-        });
-    uploaded.set('csv', false);
 });
 
 // Add event listener for when user submits files that handles AWS S3 uploads and database URL
@@ -194,8 +161,6 @@ submit.addEventListener("click", async function(e) {
 
 
         };
-
-
 
         // Call S3 to create the bucket
         await s3.createBucket(bucketParams, function(err, data) {
