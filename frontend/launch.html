@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <!--Import Firebase libraries-->
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+    </head>
+    <body>
+
+        <h1>Saved Games</h1>
+        
+        <form id = "game-list">           
+        </form>
+
+        <form>
+            <input id = "groups" type="text", placeholder="Number of Groups">
+            <br>
+            <button id = "generate" type = "button">Generate Session</button>
+        </form>
+        
+        <a href='upload.html'>
+            <button>Upload New Game</button>
+        </a>
+        <div id="launch"></div>
+        
+        <script src="launch.js"></script>
+    </body>
+</html>
