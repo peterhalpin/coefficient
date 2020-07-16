@@ -1,4 +1,4 @@
-
+// Declare firebase settings for initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBqmO5EvF3KUrXn7XGEHjku9Z7a_C_P-AM",
     authDomain: "multiplayer-math-maker.firebaseapp.com",
@@ -11,11 +11,11 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+// Reference the firestore database
 const db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });  
 
 // AWS configuration 
-// var AWS = require('aws-sdk');
 AWS.config = new AWS.Config();
 AWS.config.accessKeyId = "AKIAUYKTSY5UQLZFQCVV";
 AWS.config.secretAccessKey = "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";
@@ -26,7 +26,7 @@ s3 = new AWS.S3({apiVersion: '2006-03-01'});
 console.log(s3);
 
 
-
+// Reads a file and returns a promise to return the file as text
 function readFileAsync(file) {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
@@ -41,11 +41,12 @@ function readFileAsync(file) {
 
     })
   }
-
+// Window redirect function
   function redirect() {
-      // setTimeout(function() {window.location = "/launch.html"}, 10000);
       window.location = "/launch.html";
   }
+
+// Declare global variables
 var html;
 var css;
 var js;
@@ -56,49 +57,36 @@ var submit = document.getElementById("add");
 var gameName;
 var uploaded = new Map();
 
-// // "myAwesomeDropzone" is the camelized version of the HTML element's ID
-// Dropzone.options.myAwesomeDropzone = {
-//     paramName: "file", // The name that will be used to transfer the file
-//     maxFilesize: 2, // MB
-//     acceptedFiles: '*.csv, *.html, *.css, *.js'
-//   };
-// // Create the dropzone 
-// var myDropzone = new Dropzone("#my-awesome-dropzone");
-
-// // Dropzone for additional files
-
-
+// Add event listener to the HTML file upload button
 var htmlFileButton = document.getElementById("html");
 htmlFileButton.addEventListener('change', async function(e) {
     html = e.target.files[0]; 
     let fileAsString = await readFileAsync(html);
     // console.log(file);
     
-
+    // Call script to add TogetherJS functionality 
     togetherJS_String = fileAsString.replace("</head>", 
             '<script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>\n' + 
             '<script> TogetherJSConfig_suppressJoinConfirmation = true </script> \n' +
             '<script> TogetherJSConfig_autoStart = true </script> \n' +
             '<script src="https://togetherjs.com/togetherjs-min.js"></script> \n' +
             '</head>\n');
-    console.log(togetherJS_String);
+    // console.log(togetherJS_String);
 
-    // var fileAsBuffer = str2ab(togetherJS_String);
-    // file = new File([fileAsBuffer], "index.html", {type : 'text/html'});
+    // Get reference to firebase storage and put file inside
     var storageRef = firebase.storage().ref(html.name);
-    //stringObj = new S3Object("index.html", togetherJS_String);
     storageRef.putString(togetherJS_String).then((snapshot) => {
     storageRef.getDownloadURL().then(async function(downloadURL) {
-            console.log("File available at ", downloadURL);
+            // console.log("File available at ", downloadURL);
         })
     });
-
+    // Allows us to wait until file is uploaded to AWS S3 bucket before redirect
     uploaded.set('html', false);
 
 });
  
   
-
+// Add event listener to CSS file upload button
 var cssFileButton = document.getElementById("css");
 cssFileButton.addEventListener('change', function(e) {
     css = e.target.files[0]; 
@@ -111,6 +99,7 @@ cssFileButton.addEventListener('change', function(e) {
     uploaded.set('css', false);
 });
   
+// Add event listener to the JS file upload button
 var jsFileButton = document.getElementById("js");
 jsFileButton.addEventListener('change', function(e) {
     js = e.target.files[0]; 
@@ -123,7 +112,7 @@ jsFileButton.addEventListener('change', function(e) {
     uploaded.set('js', false);
 });
 
-// make event listener for .json or .csv files 
+// Add event listener for .json or .csv files 
 var csvFileButton = document.getElementById('data');
 csvFileButton.addEventListener('change', function(e) {
     csv = e.target.files[0];
@@ -136,12 +125,12 @@ csvFileButton.addEventListener('change', function(e) {
     uploaded.set('csv', false);
 });
 
-
+// Add event listener for when user submits files that handles AWS S3 uploads and database URL
 submit.addEventListener("click", async function(e) {
     e.preventDefault();
     var gameName = document.getElementById("gameName").value;
     
-    // Create the parameters for calling createBucket
+    // Create the parameters for calling methods on the bucket
         var bucketParams = {
             Bucket : 'helpinghalpin' + gameName,
             ACL : 'public-read'
@@ -208,7 +197,7 @@ submit.addEventListener("click", async function(e) {
 
 
 
-        // call S3 to create the bucket
+        // Call S3 to create the bucket
         await s3.createBucket(bucketParams, function(err, data) {
             if (err) {
             console.log("Error", err);
@@ -217,22 +206,24 @@ submit.addEventListener("click", async function(e) {
             }
         });
 
+        // Wait for the bucket to exist before uploading files
         await s3.waitFor('bucketExists', params, async function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
             else     
                 console.log("success" + data); // successful response
-               //  setTimeout(redirect(), 15000);
-
+               
+                // Put the bucket policy in place            
                 await s3.putBucketPolicy(policyParams, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
                 });
+                // Activate web hosting
                 await s3.putBucketWebsite(websiteParams, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
                 });
                 
-                
+                // If there is a file, upload it to the bucket
                 if(css != undefined) {
                     await s3.upload (uploadParamsCSS, function (err, data) {
                         if (err) {
@@ -280,9 +271,7 @@ submit.addEventListener("click", async function(e) {
                 
         });
        
-       
-       
-   
+    // Reference the database and add the game name, user UID, and game URL
     var name = document.getElementById("gameName").value;
     const docRef = db.doc("games/" + name);
     var user = firebase.auth().currentUser;
@@ -292,7 +281,7 @@ submit.addEventListener("click", async function(e) {
         userID: user.uid,
         URL: "http://helpinghalpin" + gameName + ".s3-website-us-east-1.amazonaws.com"
     }).then(function() {
-        console.log("Game saved!");
+        // console.log("Game saved!");
         
     });
     document.forms['input'].reset();

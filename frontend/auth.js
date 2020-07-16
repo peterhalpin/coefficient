@@ -1,5 +1,7 @@
+// Instantiate the Firebase Auth UI widget
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+// Set configuration object
 var uiConfig = {
   // signInSuccessURL: 'home.html',
   signInOptions: [
@@ -8,8 +10,7 @@ var uiConfig = {
   // Other config options...
   };
 
-// ui.start('#firebaseui-auth-container', uiConfig);
-
+// Set up user
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     var uid = user.uid;
@@ -23,6 +24,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+// Set persistent login status across session 
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
   return ui.start('#firebaseui-auth-container', uiConfig);
 })
