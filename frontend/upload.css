@@ -1,0 +1,102 @@
+html {
+    background: #8FAADC;
+}
+
+h1 {
+    position: absolute;
+    width: 1736px;
+    height: 113px;
+    left: 130px;
+    top: -60px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 53px;
+    line-height: 150px;
+
+    color: white;
+}
+
+#html{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 140px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: #EB7021;*/
+}
+
+#css{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 200px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: white;*/
+}
+
+#js{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 260px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: #EB7021;*/
+}
+
+#data{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 320px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: white;*/
+}
+
+h2{
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 25px;
+    line-height: 150px;
+    color: #EB7021;
+    font-weight: bolder;
+}
+
+h2.html{
+    position: absolute;
+    left: 145px;
+    top:  65px;
+}
+
+h2.css{
+    position: absolute;
+    left: 155px;
+    top:  142px;
+}
+
+h2.js{
+    position: absolute;
+    left: 165px;
+    top:  219px;
+}
+
+h2.csv{
+    position: absolute;
+    left: 155px;
+    top:  300px;
+}
+
+
+#gamename{
+    margin-left: 750px;
+    margin-top: 200px;
+    font-size: 20px;
+    text-align: center;
+    padding: 15px 90px
+}
+
+#add{
+
+}

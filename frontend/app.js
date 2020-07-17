@@ -57,7 +57,8 @@ var gameName;
 
 // Add event listener to the HTML file upload button
 var htmlFileButton = document.getElementById("html");
-htmlFileButton.addEventListener('change', async function(e) {
+<<<<<<< HEAD
+htmlFileButton.addEventListener('change', function(e) {
     html = e.target.files[0]; 
     let fileAsString = await readFileAsync(html);
     // console.log(file);
@@ -69,7 +70,6 @@ htmlFileButton.addEventListener('change', async function(e) {
             '<script> TogetherJSConfig_autoStart = true </script> \n' +
             '<script src="https://togetherjs.com/togetherjs-min.js"></script> \n' +
             '</head>\n');
-    // console.log(togetherJS_String);
 
 });
  
