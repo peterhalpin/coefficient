@@ -57,8 +57,8 @@ var gameName;
 
 // Add event listener to the HTML file upload button
 var htmlFileButton = document.getElementById("html");
-<<<<<<< HEAD
-htmlFileButton.addEventListener('change', function(e) {
+
+htmlFileButton.addEventListener('change', async function(e) {
     html = e.target.files[0]; 
     let fileAsString = await readFileAsync(html);
     // console.log(file);
