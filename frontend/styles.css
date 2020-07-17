@@ -1,5 +1,5 @@
 html {
-    background: #83A1D9;
+    background: #8FAADC;
 }
 
 /* */
@@ -20,36 +20,42 @@ INDEX
 */
 
 h1.intro{
+img {
+  display: block;
+  margin-left: 100px;
+  margin-right: 2000px;
+}
+
+h1.intro1{
    /* Orange Welcome */    
     position: absolute;
     width: 610px;
     height: 175px;
-    left: 1349px;
-    top: 152px;
+    left: 875px;
+    top: 30px;
 
     font-family: Staatliches;
     font-style: normal;
     font-weight: normal;
-    font-size: 144px;
+    font-size: 72px;
     line-height: 180px;
-
     color: #EB7021;
 }
 
 
 
-h2.intro{
+
+h2.intro1{
     /* White Welcome */    
     position: absolute;
     width: 610px;
     height: 175px;
-    left: 1343px;
-    top: 143px;
-
+    left: 875px;
+    top: 15px;
     font-family: Staatliches;
     font-style: normal;
     font-weight: normal;
-    font-size: 144px;
+    font-size: 72px;
     line-height: 180px;
 
     color: #FFFFFF;
@@ -60,8 +66,8 @@ h2.intro{
     position: absolute;
     width: 685px;
     height: 522px;
-    left: 1253px;
-    top: 358px;
+    left: 675px;
+    top: 220px;
 }
 
 h2.content{
@@ -98,7 +104,6 @@ UPlOAD
     border: 10px solid #FFFFFF;
     width: 568px;
     height: 101px;
-    transition-duration: 0.4s;
 }
 
 /*
