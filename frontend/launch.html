@@ -9,6 +9,7 @@
     </head>
     <body style="overflow:hidden;">
 
+
         <!--Need some kind of list that displays from games database-->
         <h1 class="WhiteYour">Your</h1>
         <h1 class="OrangeYour">Your</h1>
@@ -27,24 +28,20 @@
         <hr id="orange2">
         <hr id="orange3">
         <hr id="orange4">
-        <hr id="orange5">
-        
-        <form id = "game-list">
-
-        
-           
+        <hr id="orange5">        
+        <form id = "game-list">           
         </form>
 
-        <form onsubmit="myFunction()">
+        <form>
             <input id = "groups" type="text", placeholder="Number of Groups">
             <br>
-            <input id = "submit" type="submit" value="Generate Sessions" />
+            <button id = "generate" type = "button">Generate Session</button>
         </form>
         
         <a href='upload.html'>
             <button id = "upload">Upload New Game</button>
         </a>
-
+        <div id="launch"></div>
         
         <script src="launch.js"></script>
     </body>
