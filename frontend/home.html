@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <!--Import Firebase libraries-->
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+        <link rel="stylesheet" href="home.css">
+    </head>
+    <body style="overflow:hidden;">
+        <a href="upload.html">
+            <button type="button" class="btn-primary" id="create">Create</button>
+        </a>
+        <a href="launch.html">
+            <button type="button" class="btn-primary" id="launch">Launch</button>
+        </a>
+        <h1 class="launch2">Launch</h1>
+        <h1 class="launch1">Launch</h1>
+        <h1 class="create2">Create</h1>
+        <h1 class="create1">Create</h1>
+        <!-- top row -->
+        <hr id="white1">
+        <hr id="white2">
+        <hr id="white3">
+        <hr id="white4">
+        <hr id="white5">
+        <!-- bottom row -->
+        <hr id="white6">
+        <hr id="white7">
+        <hr id="white8">
+        <hr id="white9">
+        <hr id="white10">
+        <!-- middle row -->
+        <hr id="white11">
+        <hr id="white12">
+        <hr id="white13">
+        <hr id="white14">
+        <hr id="white15">
+         <!-- top orange diagonal -->
+        <hr id="orange1">
+        <hr id="orange2">
+        <hr id="orange3">
+        <hr id="orange4">
+        <hr id="orange5">
+        <!-- bottom orange diagonal -->
+        <hr id="orange6">
+        <hr id="orange7">
+        <hr id="orange8">
+        <hr id="orange9">
+        <hr id="orange10">
+
+        <script>
+            // Initialize Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyBqmO5EvF3KUrXn7XGEHjku9Z7a_C_P-AM",
+                authDomain: "multiplayer-math-maker.firebaseapp.com",
+                databaseURL: "https://multiplayer-math-maker.firebaseio.com",
+                projectId: "multiplayer-math-maker",
+                storageBucket: "multiplayer-math-maker.appspot.com",
+                messagingSenderId: "489127211642",
+                appId: "1:489127211642:web:f71688bd2932cb9c8281c3",
+                measurementId: "G-TGFPT2WKPK"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            db.settings({ timestampsInSnapshots: true }); 
+
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    var uid = user.uid;
+                    window.user = user;
+                    // console.log(window.user);
+
+                } else {
+                    // No user is signed in.
+                }
+                });
+            // console.log(window.user);
+        </script>
+        
+
+
+    </body>
+</html>
