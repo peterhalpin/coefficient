@@ -4,7 +4,7 @@ html {
 
 h1.WhiteYour{
 
-    position: absolute;
+    position: fixed;
     left: 35px;
     top: -200px;
 
@@ -17,7 +17,7 @@ h1.WhiteYour{
     z-index:-10
 }
 h1.OrangeYour{
-    position: absolute;
+    position: fixed;
     left: 40px;
     top: -200px;
 
@@ -30,7 +30,7 @@ h1.OrangeYour{
     z-index:-10
 }
 h1.WhiteSaved{
-    position: absolute;
+    position: fixed;
     left: 40px;
     top: -25px;
 
@@ -43,7 +43,7 @@ h1.WhiteSaved{
     z-index:-10
 }
 h1.OrangeSaved{
-    position: absolute;
+    position: fixed;
     left: 35px;
     top: -25px;
 
@@ -56,7 +56,7 @@ h1.OrangeSaved{
     z-index:-10
 }
 h1.WhiteGames{
-    position: absolute;
+    position: fixed;
     left: 35px;
     top: 150px;
 
@@ -69,7 +69,7 @@ h1.WhiteGames{
     z-index:-10
 }
 h1.OrangeGames{
-    position: absolute;
+    position: fixed;
     left: 40px;
     top: 150px;
 
@@ -83,7 +83,7 @@ h1.OrangeGames{
 }
 
 #orange1{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: -95px;
@@ -95,7 +95,7 @@ h1.OrangeGames{
 }
 
 #orange2{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: -45px;
@@ -108,7 +108,7 @@ h1.OrangeGames{
 
 
 #orange3{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: 5px;
@@ -121,7 +121,7 @@ h1.OrangeGames{
 
 
 #orange4{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: 55px;
@@ -134,7 +134,7 @@ h1.OrangeGames{
 
 
 #orange5{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: 105px;
@@ -147,7 +147,7 @@ h1.OrangeGames{
 
 
 #white1{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: -85px;
@@ -159,7 +159,7 @@ h1.OrangeGames{
 }
 
 #white2{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: -35px;
@@ -172,7 +172,7 @@ h1.OrangeGames{
 
 
 #white3{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: 15px;
@@ -185,7 +185,7 @@ h1.OrangeGames{
 
 
 #white4{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: 65px;
@@ -198,7 +198,7 @@ h1.OrangeGames{
 
 
 #white5{
-    position: absolute;
+    position: fixed;
     width: 1200px;
     height: 0px;
     left: 115px;
@@ -209,20 +209,80 @@ h1.OrangeGames{
     transform: rotate(70deg);
 }
 
+
+#game-list{
+    position: relative;
+    left: 950px;
+    top: 20px;
+    font-size: 70px;
+/*
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 70px;
+    line-height: 375px;
+    color: #FFFFFF;
+*/
+}
+input[type='radio'] { 
+    height: 25px;
+    width: 25px;
+    vertical-align: 50%;
+    margin-right: 20;
+    margin-bottom: 0;
+ }
+
+
+ #upload{
+    position: relative;
+    left: 1000px;
+    top: -100px;
+    font-size: 19px;
+    text-align: center;
+}
+
+#delete{
+    position: relative;
+    left: 1030px;
+    top: -56px;
+    font-size: 19px;
+    text-align: center;
+}
+
+#groups{
+    position: relative;
+    left: 1036px;
+    top: 50px;
+    font-size: 27px;
+    text-align: center;
+}
+
+#generate{
+    position: relative;
+    left: 1105px;
+    top: 65px;
+    font-size: 19px;
+    text-align: center;
+}
+
+body{
+    overflow-x: hidden;
+}
+/*
+
 #submit{
     position: absolute;
     left: 900px;
-    top: 195px;
+    top: 395px;
+    font-size: 20px;
+    text-align: center;
 }
 
-#upload{
-    position: absolute;
-    left: 900px;
-    top: 255px;
+#groups{
+    position: relative;
+    left: 1000px;
+    font-size: 20px;
+    text-align: center;
 }
 
-#game-list{
-    position: absolute;
-    left: 900px;
-    top: 95px;
-}
+*/

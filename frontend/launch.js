@@ -66,6 +66,20 @@ function renderGame(doc) {
 
 
 }
+
+function deleteGame(selected) {
+    db.collection('games').doc(selected.id).delete();
+    // console.log(selected.id + "deleted");
+    var element = document.getElementById(selected.id);
+    console.log(element.parentElement);
+    var parent = element.parentElement;
+    parent.removeChild(element.nextSibling);
+    parent.removeChild(element);
+    
+    
+
+}
+
 // Add event listener to the submit button to generate URLs
 let submit = document.getElementById('generate');
 submit.addEventListener("click", async function(e) {
@@ -121,3 +135,18 @@ function renderURLs(urls) {
     document.getElementById('launch').appendChild(list);
 }
 
+let del = document.getElementById('delete');
+del.addEventListener("click", async function(e) {
+    e.preventDefault();
+    var inputs = gameList.getElementsByTagName("input");
+    var selected;
+        // Find the checked radio button
+        for(var i = 0; i < inputs.length; i++) {
+            if (inputs[i].checked) {
+                selected = inputs[i];
+                break;
+             } 
+        }
+    deleteGame(selected);
+
+});
