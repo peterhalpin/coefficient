@@ -12,8 +12,26 @@ font-weight: normal;
 font-size: 144px;
 line-height: 199px;
 /* identical to box height */
-
 text-align: center;
+
+color: #4B9CD3;
+}
+
+#subtitle{
+    position: absolute;
+width: 1000px;
+height: 135px;
+top: 300px;
+left: 320px;
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 90px;
+line-height: 100px;
+text-align: center;
+
+color: #000000;
+
 }
 
 div.modal-background{
@@ -23,12 +41,12 @@ background: #FEFEFE;
 }
 
 div.modal-content {
-    width: 1500px;
-    height: 700px;
+width: 1500px;
+height: 700px;
 }
 
 p#l2nseedsubmit {
-    position: absolute;
+position: absolute;
 width: 1110px;
 height: 59px;
 top: 300px;
@@ -39,61 +57,67 @@ font-weight: normal;
 font-size: 64px;
 line-height: 88px;
 text-align: center;
-
 color: #000000;
 }
 
-span#button_text {
-    
+span#button_text { 
 width: 787px;
 height: 171px;
-
-
 font-family: Stardos Stencil;
 font-style: normal;
 font-weight: normal;
 font-size: 144px;
 line-height: 150px;
 text-align: center;
-
 color: #000000;
-
-
 }
+
+span#l2n_submit_final_text { 
+
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 10px;
+top: 5px;
+    font-family: Stardos Stencil;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 60px;
+    text-align: center;
+    color: #000000;
+    }
+
 div {
-    padding: 15px;
+padding: 15px;
 }
 
 textarea#seed{
-    width: 442px;
+ width: 442px;
 height: 72px;
 }
 
-button#submit_seed, button#submit_start{
-    width: 798px;
+button#submit_seed, button#submit_start,  button#l2n_return{
+width: 798px;
 height: 175px;
 }
 
 p#textbar {
-    border-style: solid;
+border-style: solid;
 }
 
 p#l2nmodal_Subtitle {
-    position: absolute;
+position: absolute;
 width: 597px;
 height: 96px;
 left: 450px;
 top: 278px;
-
 font-family: Stardos Stencil;
 font-style: normal;
 font-weight: normal;
 font-size: 64px;
 line-height: 88px;
 text-align: center;
-
 color: #000000;
-
 }
 
 div#l2nmodal_Instructions > * {
@@ -101,83 +125,126 @@ position: absolute;
 height: 165px;
 left: 320px;
 top: 360px;
-
 font-family: Stardos Stencil;
 font-style: normal;
 font-weight: normal;
 font-size: 48px;
 line-height: 66px;
+color: #000000; 
+}
 
+#l2n_title_container{
+    padding: 0px;
+    margin: 0px;
+}
+
+#l2n_title{
+    font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 70px;
+color: #4B9CD3;
+padding-left: 600px;
+margin: 0px;
+}
+
+#l2n_left_half {
+    padding-left:60px;
+
+}
+#l2n_right_half {
+    margin-right:60px;
+}
+#l2n_right_half , #l2n_top_left_quarter, #l2n_bottom_left_quarter {
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+#l2n_bottom {
+    padding-left: 60px;
+}
+
+#l2n_bottom_left_quarter, #l2n_top_left_quarter {
+width: 633px;
+}
+
+#l2n_bottom_table_row {
+width: 1500px;
+height: 100px;
+line-height: 90px;
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 96px;
+color: #4B9CD3;
+}
+
+#l2n_bottom_table_row > td {
+padding-right: 20px;
+}
+
+#l2n_bottom_table_row > td > input {
+    height:100px;
+    width:200px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#l2n_submit_final{
+    position: absolute;
+    height:100px;
+    width:200px;
+    left: 1620px;
+top: 750px;
+}
+
+#l2n_left_half_title , #l2n_right_half_title{
+
+font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 55px;
+color: #4B9CD3;
+
+}
+
+#l2n_guess_send, #l2n_equation_send {
+    width:100px;
+    height:50px;
+}
+
+#l2n_equation_send_text, #l2n_guess_send_text {
+    font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 30px;
 color: #000000;
+}
 
+#l2n_step1_subtitle  , #l2n_step2_subtitle {
+    font-family: Stardos Stencil;
+font-style: normal;
+font-weight: normal;
+font-size: 40px;
+color: #ffffff;
+background-color: #4B9CD3;
 }
-div#text.container {
-    overflow-y: auto;
-    height: 200px;
-    width: 888px;
-}
+
+
 body {
-    overflow-x: auto;
-}
-
-div#guess.container{
-    overflow-y: auto;
-    height: 500px;
-    width: 888px;
+overflow-x: auto;
 }
 
 section#main2.section {
-    padding: 15px;
-    margin: 15px;
+padding: 15px;
+margin: 0px;
 }
 
-div#topHalf.container {
-    margin: 15px;
-    height: 480px;
-    width: 800px;
+tr#one, tr#three, tr#five, tr#seven, tr#nine, tr#eleven {
+    background-color: #4B9CD3;
+    color: #ffffff;
 }
 
-div#keyboard.container {
-    height: 120px;
-    width: 500px;
-}
-
-div#text.container {
-    border-style: solid;
-    height: 200px;
-    width: 540px;
-}
-
-div#question.container {
-    height: 100px;
-    width: 540px;
-}
-
-div.column {
-    border-style: solid;
-}
-
-table#buttons {
-    width:540px;
-}
-
-table#buttons > tr > td  {
-    width:54px;
-}
-
-td#I {
-    width: 34px;
-}
-
-div#guess.container{
-    width:640px;
-}
-
-div#bottomHalf.container{
-    border-style: solid;
-}
-
-td#blank {
-    width: 44px;
-    height: 44px;
+tr#one > * , tr#three > *, tr#five > *, tr#seven > *, tr#nine > *, tr#eleven > * {
+    color: #ffffff;
 }

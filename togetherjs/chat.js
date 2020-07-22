@@ -28,11 +28,14 @@ let hasSeed = false;
 
 let keys = {} ;
 
-let trial_num = 0;
+let trial_num = 1;
 
 let has_guessed = false;
 
+//Prevented double backspacing
 let backspace = false;
+
+//Express counts expression symbols
 let express = 0;
 
 let expressdouble = false;
@@ -41,90 +44,70 @@ let group = 1;
 
 let members = 0;
 
+let shown_up = true;
+
+// let modalnum = 0;
+
 
 $(function () {
 
     // $("section#main2.section").hide();
 
-    $("body").on("click", "button#submit_seed", function (event) {
+    $("div#l2nmodal").on("click", "button#submit_seed", function (event) {
+        console.log("Test 0");
         seed();
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive" , modal: "12nmodal"});
-        };
+
+        $( "div#l2nmodal_seed_content" ).replaceWith( `<div class="modal-content" style="background-color:white;" id="l2nmodal_instructions_content">
+        <p id="title">
+          Letters to Numbers
+        </p>
+        <p id="l2nmodal_Subtitle">
+          How To Play
+        </p>
+  
+        <div id="l2nmodal_Instructions">
+          <ul>
+            <li>Try to guess the number value of each letter in 10 tries!</li>
+            <li>Step 1: Enter a sentence equation into the calculator!</li>
+            <li>Step 2: Try to guess a single letter value!</li>
+            <li>Step 3: Repeat 1-2 or try to guess the final code!</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <button class="button" id="submit_start"><span id="button_text">Start</span></button>
+      </div>` );
+      $( "#submit_seed" ).remove();
         hasSeed=true;
+    });
+
+    $("div#l2nmodal").on("click", "#submit_start", function (event) {
         $("div#l2nmodal").removeClass("is-active");
-        $("div#l2nmodal_instructions").addClass("is-active");
+        shown_up = true;
     });
-
-    $("body").on("click", "button#submit_start", function (event) {
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive" , modal: "12nmodal_Instructions"});
-        };
-        $("div#l2nmodal_instructions").removeClass("is-active");s
+    
+    $("div#l2nmodal2").on("click", "button#l2n_return", function (event) {
+        $("div#l2nmodal2").removeClass("is-active");
+        console.log("hello");
     });
-
+    $("div#l2nmodal").on("click", "#l2n_return", function (event) {
+        $("div#l2nmodal").removeClass("is-active");
+    });
+    
     // TogetherJS sends the message to the other web page 
     // The functions have to be repeated again so that the current webpage also updates
-
-    $("div#topHalf.container").on("click", "button.is-light", function (event) {
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "keyboard", event: event.currentTarget.id});
-        }
-        keyboard(event.currentTarget.id);
-    });
-
-    $("div#middleHalf.container").on("click", "button.is-light#check_guess", function (event) {
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "checkguess"});
-        }
-        checkguess()
+    $("div#l2n_left_half").on("click", "#l2n_equation_send", function (event) {
+        equation();
     })
-    $("div#middleHalf.container").on("click", "button#final_Answer.button.is-light", function (event) {
-        $("div#bottomHalf.container").show();
+
+    $("div#l2n_left_half").on("click", "#l2n_guess_send", function (event) {
+        checkguess();
     });
 
-    $("div#bottomHalf.container").on("click", "button.is-light#submit_answer", function (event) {
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "modalactive"});
-        }
-        $("div#modal").addClass("is-active");
+    $("#l2n_bottom").on("click", "#l2n_submit_final", function (event) {
+       submit();  
     });
 
-    $("div#modal").on("click", "button#close_modal", function (event) {
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive",  modal: "12nmodal"});
-        };
-        $("div#modal").removeClass("is-active");
-    });
-
-    $("div#modal").on("click", "button#confirm.button.is-light", function (event) {
-        members++;
-        if (members == group) {
-            if (TogetherJS.running) {
-                TogetherJS.send({type: "update" , member: members});
-                TogetherJS.send({type: "submit" , member: members});   
-                members = 0; 
-            };
-            $("#members").html(""+members);
-            $("div#modal").removeClass("is-active");
-            TogetherJS.send({type: "update" , member: members});
-            submit(event);
-        } else {
-            if (TogetherJS.running) {
-                TogetherJS.send({type: "update" , member: members});    
-            };
-            $("#members").html(""+members);
-        }
-       
-    });
-    $("div#modal").on("click", "button#cancel.button.is-light", function (event) {
-        members = 0;
-        if (TogetherJS.running) {
-            TogetherJS.send({type: "modalinactive" , event:event ,  modal: "12nmodal"});
-        };
-        $("#members").html(""+members);
-        $("div#modal").removeClass("is-active");
-    });
 });
     
 
@@ -159,11 +142,10 @@ function seed(){
 
 
 // Final Portion
-function submit(event) {
-
+function submit() {
     let answers = new Array();
     for (let i = 0 ; i < 9 ; i++){
-        answers[i] = $( "textarea#" + i + ".textarea").val();
+        answers[i] = $("input" + "#l2n_bottom_text_"+i).val();
         
         //Checks for answers that are not single digits
         if (answers[i].length != 1){
@@ -187,184 +169,146 @@ function submit(event) {
               if (combination[num] == "A"){
                   continue;
               } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 1:
             if (combination[num] == "B"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 2:
             if (combination[num] == "C"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 3:
             if (combination[num] == "D"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 4:
             if (combination[num] == "E"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 5:
             if (combination[num] == "F"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 6:
             if (combination[num] == "G"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 7:
             if (combination[num] == "H"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 8:
             if (combination[num] == "I"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           case 9:
             if (combination[num] == "J"){
                 continue;
             } else {
-                alert("you're wrong");
-                if(trial_num != 10){
-                    $("div#bottomHalf.container").hide();
-                }
+                incorrect();
                 return;
             }
           default:
               break;
       }
     }
-
-    alert("You're correct!");
-
+    correct();
 
 }
 
+function correct(){$("div#l2nmodal").addClass("is-active");
+$( "#submit_start" ).remove();
+let turn_string = "";
+if(trial_num == 1) {
+    turn_string = "turn!";
+} else {
+    turn_string = "turns!";
+}
+$( "#l2nmodal_instructions_content" ).replaceWith(
+    `<div class="modal-content" style="background-color:white;" id="l2n_final_modal">
+  <p id="title">
+   CONGRATS!
+  </p>
+  <p id ="subtitle">
+  Nice job, team! 
+  <br>
+  You solved the puzzle in `+ trial_num +`  `+ turn_string + `
+  </p>
+</div>
+</div>` );
+$( "#l2n_try_again_modal" ).replaceWith( `
+<div class="modal-content" style="background-color:white;" id="l2n_final_modal">
+  <p id="title">
+   CONGRATS!
+  </p>
+  <p id ="subtitle">
+  Nice job, team! 
+  <br>
+  You solved the puzzle in `+ trial_num +`  `+ turn_string + `
+  </p>
+</div>
+</div>`);
+$( "#l2n_return" ).remove();
+;}
+
+function incorrect(){ 
+$("div#l2nmodal").addClass("is-active");
+$( "#submit_start" ).remove();
+$( "#l2nmodal_instructions_content" ).replaceWith( `
+<div class="modal-content" style="background-color:white;" id="l2n_try_again_modal">
+  <p id="title">
+    NOT QUITE,
+    <br>
+    TRY AGAIN!
+  </p>
+</div>
+<button class="button" id="l2n_return"><span id="button_text">Return</span></button>
+</div>` );}
 
 //Handles all actions on the top half of the Excercise webpage
-function keyboard(event) {
-    console.log(event);
+function equation() {
 
-    let id = event;
-    let textbar_content =  $("p#textbar").text();
+    let textbar_content =  $("#l2n_step1_text").val();
 
     //Makes sure user follows step 2 before doing step 1 again
-    if ( !has_guessed && trial_num != 0){
+    if ( !has_guessed && trial_num != 1){
         if (TogetherJS.running) {
             TogetherJS.send({type: "alert"});
         }
+        $( "#l2n_step1_text").val("");
         return;
     }
-
-    //Determines which button is pressed and changes the text bar accordingly
-    switch(id) {
-        case "A":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "B":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "C":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "D":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "E":
-            $( "p#textbar" ).text( textbar_content +  id);
-            break;
-        case "F":
-            $( "p#textbar" ).text( textbar_content +  id);
-            break;
-        case "G":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "H":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "I":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "J":
-            $( "p#textbar" ).text( textbar_content +  id);
-          break;
-        case "addition":
-            $( "p#textbar" ).text( textbar_content +  "+");
-          break;
-        case "subtraction":
-            $( "p#textbar" ).text( textbar_content +  "-");
-            break;
-        case "delete":
-            let length = textbar_content.length-1;
-            let short_string = textbar_content.substring(0, length);
-            //If statement here because of clone clicking in together.js 
-            //Without it, two characters would be deleted. 
-            if (!backspace){
-                backspace=true;
-                return;
-            }
-            $( "p#textbar" ).text(short_string);
-            backspace=false;
-            break;
-        case "Send":
             answer(textbar_content.trim());
-            $( "p#textbar").html("&nbsp;");
-            break;
-        default:
-      }
+            $( "#l2n_step1_text").val("");
+            return;
+        
 }
 
 /*
@@ -372,25 +316,20 @@ function keyboard(event) {
 */
 function answer(textbar_content){
 
-    if(trial_num == 9) {
-        $("div#question.container").remove();
-        $("div#keyboard.container").remove();
-        $("div#bottomHalf.container").show();
-    }
+    console.log(textbar_content);
 
     let position = 0;
     let answer  = "";
     let terms = new Array();
     let expressions = new Array();
 
-    //Breaks up the textbar string into seperate string values 
+    //Breaks up the textarea string into seperate string values 
     for (let i = 0 ; i < textbar_content.length ; i++){
-        let char = textbar_content.charAt(i);
+        let char = textbar_content.charAt(i).toUpperCase();
 
         if((i == 0 && (char == "+" || char == "-")) || express >= 2){
             alert("Please write a correct full expression");
-            console.log("1");
-            $( "p#textbar").html("&nbsp;");
+            $("#l2n_step1_text").val("");
             express = 0;
             return;
         }
@@ -420,8 +359,7 @@ function answer(textbar_content){
 
     if(expressions.length == 0 || expressions.length != terms.length-1 || terms.length == 0 ){
         alert("Please write a correct full expression");
-        console.log("2");
-        $( "p#textbar").html("&nbsp;");
+        $("#l2n_step1_text").val("");
         return;
     }
 
@@ -449,36 +387,33 @@ function answer(textbar_content){
   
     let index = terms.length - 1;
     answer = terms[index];
-    trial_num++;
-    $( "p#text" ).append("<p>Trial <span id='num'>"+ trial_num + "</span></p>");
-    $( "p#text" ).append("<p>You: " + textbar_content + "</p>");
-    $( "p#text" ).append("<p>Computer: " + textbar_content + " = " + answer + "</p>");
+    console.log(textbar_content);
+    console.log(trial_num);
+    $( "td#equation_"+ trial_num ).append(textbar_content + " = " + answer);
     has_guessed = false;
 
-    if (TogetherJS.running) {
-        TogetherJS.send({type: "addguess"});
-    }
 }
 
-//Adds guess button
-function addguess(){
-    $("div.container#guess"+trial_num).append(`
-        <button class="button is-light" id="check_guess">Check Guess</button>
-    `);
-}
 
 function checkguess(){
-    let letter = $("textarea#letter" + trial_num + ".textarea").val().toUpperCase();
-    let number = $("textarea#number" + trial_num + ".textarea").val();
-
+    let hypothesis =  $("#l2n_step2_text").val();
+    $("#l2n_step2_text").val("");
+    $("td#hypothesis_"+trial_num).append(hypothesis);
+    let letter = hypothesis[0].toUpperCase();
+    let number = hypothesis[2];
+    console.log(letter);
+    console.log(number);
     if(keys[letter] == number){
-        $("div#guess" + trial_num).append("<p id='value'>TRUE</p>");
+        $("td#feedback_" + trial_num).append("TRUE");
     } else {
-        $("div#guess" + trial_num).append("<p id='value'>FALSE</p>")
+        $("td#feedback_" + trial_num).append("FALSE")
     }  
-    $("button#check_guess").remove();
     has_guessed = true;
-
+    if(trial_num == 10) {
+        $("#l2n_equation_send").remove();
+        $("#l2n_guess_send").remove();
+    }
+    trial_num++;
 }
 
 // Encrypts the number into a string
@@ -567,47 +502,11 @@ TogetherJS.hub.on("randomseed", function (msg) {
   });
   
 
-TogetherJS.hub.on("keyboard", function (msg) {
-    if (! msg.sameUrl) {
-      return;
-    }
-    keyboard(msg.event)
-
-  });
-  
-TogetherJS.hub.on("checkguess", function (msg) {
-    if (! msg.sameUrl) {
-      return;
-    }
-    checkguess();
-  });
-
-TogetherJS.hub.on("modalactive", function (msg) {
-    if (! msg.sameUrl) {
-      return;
-    }
-    $("div#modal").addClass("is-active");
-  });
-
-
-  TogetherJS.hub.on("modalinactive", function (msg) {
-    if (! msg.sameUrl) {
-      return;
-    }
-  
-    members = 0;
-    $("#members").html(""+ members);
-    $("div#" + msg.modal).removeClass("is-active");
-    if(msg.modal == "l2nmodal") {
-        $("div#12nmodal_instructions").addClass("is-active");
-    }
-  });
-
   TogetherJS.hub.on("submit", function (msg) {
     if (! msg.sameUrl) {
       return;
     }
-    submit(msg.event);
+    submit();
   }); 
 
   TogetherJS.hub.on("alert", function (msg) {
@@ -615,46 +514,29 @@ TogetherJS.hub.on("modalactive", function (msg) {
       return;
     }
     alert("Please guess first before asking the computer a question");
+    return;
   }); 
 
-  TogetherJS.hub.on("addguess", function (msg) {
-    if (! msg.sameUrl) {
-      return;
-    }
-    addguess();
-  }); 
 
 // Makes sure to synch other pages if players come in to load late
   TogetherJS.hub.on("togetherjs.hello", function (msg) {
     if (! msg.sameUrl) {
         return;
     }
-    group++;
     TogetherJS.send({
         type: "randomseed",
         combo: combination,
         key: keys,
     });
-
-    let chat_text = $("p#text").html();
-    let groupnum = group;
-
-    $("#group").html(groupnum + "");
-    let text = $( "p#textbar" ).text();
-    let values = $( "p#value" ).get();
-    let textValues = new Array(values.length)
-    for(let i = 0 ; i < values.length ; i++){
-        textValues[i] = values[i].outerHTML;
-    }
+    // `<table class="table is-bordered is-striped is-narrow is-fullwidth" id="l2n_results">`
+    // `</table>`
+    // let current_table =  $("#l2n_results").html() ;
 
     TogetherJS.send({
         type: "standardize",
         trialnum: trial_num,
-        chattext: chat_text,
+        current_table : current_table,
         hasguessed: has_guessed,
-        groupn: groupnum,
-        textbar: text,
-        values: textValues
     });
 
 });
@@ -666,30 +548,8 @@ TogetherJS.hub.on("standardize", function (msg) {
 
   trial_num = msg.trialnum;
   has_guessed = msg.hasguessed;
+//   $("#l2n_results").replaceWith(msg.current_table);
 
-  if(!has_guessed) {
-    $("div.container#guess"+trial_num).append(`
-    <button class="button is-light" id="check_guess">Check Guess</button>
-    `);
-   }
-
-  group = msg.groupn;
-  $("p#text").append(msg.chattext);
-  $("#group").html(msg.groupn + "");
-  $( "p#textbar" ).text(msg.textbar);
-
-    let val = msg.values;
-    for(let i = 0 ; i < val.length; i++){
-        let v = i + 1;
-        $("div.container#guess" + v).append(val[i]);
-    }
 });
 
-
-TogetherJS.hub.on("update", function (msg) {
-    if (! msg.sameUrl) {
-        return;
-    }
-    $("#members").html(""+msg.member);
-});
 

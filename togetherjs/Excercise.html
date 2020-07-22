@@ -1,11 +1,12 @@
+<!DOCTYPE html>
 <!-- MAJOR TODO: C
   * Center things / prettify the layout 
 -->
-<!DOCTYPE html>
+
 
 <head>
   <meta charset="UTF-8">
-  <title>TogetherJS Example</title>
+  <title>Letters-To-Numbers</title>
   <style type="text/css">
     textarea {
       margin-top: 20px;
@@ -21,6 +22,7 @@
     var TogetherJSConfig_cloneClicks = true;
     var TogetherJSConfig_dontShowClicks = true;
     var TogetherJSConfig_suppressJoinConfirmation = true;
+    var TogetherJSConfig_autoStart = true;
   </script>
   <script src="https://togetherjs.com/togetherjs-min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
@@ -29,49 +31,23 @@
 </head>
 
 <body>
-
   <div class="modal is-active" id="l2nmodal">
-    <div class="modal-background"></div>
-    <div class="modal-content" style="background-color:white;">
+    <div class="modal-background" id="l2nmodal_bg"></div>
+    <div class="modal-content" style="background-color:white;" id="l2nmodal_seed_content">
       <p id="title">
         Letters to Numbers
       </p>
       <p id="l2nseedsubmit">
         If you were given a code, enter it here
-        <textarea class="textarea"  rows="1" id="seed"></textarea>
+        <textarea class="textarea" rows="1" id="seed"></textarea>
     </div>
     <div class="container">
       <button class="button" id="submit_seed"><span id="button_text">Begin</span></button>
     </div>
   </div>
 
-  <div class="modal" id="l2nmodal_instructions">
-    <div class="modal-background"></div>
-    <div class="modal-content" style="background-color:white;">
-      <p id="title">
-        Letters to Numbers
-      </p>
-      <p id="l2nmodal_Subtitle">
-       How To Play 
-      </p>
-      
-      <div id="l2nmodal_Instructions"> 
-        <ol>
-          <li>Try to guess the number value of each letter in 10 tries!</li>
-          <li>Step 1: Enter a sentence equation into the calculator!</li>
-          <li>Step 2: Try to guess a single letter value!</li>
-          <li>Step 3: Repeat 1-2 or try to guess the final code!</li>
-        </ol>
-      </div>  
-    </div>
-    <div class="container">
-      <button class="button" id="submit_start"><span id="button_text">Start</span></button>
-    </div>
-  </div>
-
-  <div class="container">
-    <h1 class="title">Letters-To-Numbers</h1>
-    <button class="button is-light" onclick="TogetherJS(this); return false;">Start TogetherJS</button>
+  <div class="container" id="l2n_title_container">
+    <h1 id="l2n_title">Letters-To-Numbers</h1>
   </div>
 
 
@@ -79,298 +55,144 @@
     <!--Columns necessary to keep guess/chat area on the same level-->
     <div class="columns">
       <!-- This section is the "chat" feature . -->
-      <div class="column">
-        <div class="container" id="topHalf">
-          <div class="container" id="Chat">
-            <div class="container" id="text">
-
-              <p id="text"></p>
-              &nbsp;
-              </p>
-
-            </div>
-            <div class="container" id="question">
-
-              <p id="textbar">
-                &nbsp;
-              </p>
-
-              <button class="button is-light" id="Send">Send</button>
-            </div>
-
-          </div>
-
-          <div class="container" id="keyboard">
-
-            <table id="buttons">
-
-              <tr>
-                <td id="A">
-                  <button class="button is-light" id="A">A</button>
-                </td>
-                <td id="B">
-                  <button class="button is-light" id="B">B</button>
-                </td>
-                <td id="C">
-                  <button class="button is-light" id="C">C</button>
-                </td>
-                <td id="D">
-                  <button class="button is-light" id="D">D</button>
-                </td>
-                <td id="E">
-                  <button class="button is-light" id="E">E</button>
-                </td>
-                <td id="F">
-                  <button class="button is-light" id="F">F</button>
-                </td>
-                <td id="G">
-                  <button class="button is-light" id="G">G</button>
-                </td>
-                <td id="H">
-                  <button class="button is-light" id="H">H</button>
-                </td>
-                <td id="I">
-                  <button class="button is-light" id="I">I</button>
-                </td>
-                <td id="J">
-                  <button class="button is-light" id="J">J</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td id="blank"></td>
-                <td id="addition">
-                  <button class="button is-light" id="addition">+</button>
-                </td>
-                <td id="blank"></td>
-                <td id="subtraction">
-                  <button class="button is-light" id="subtraction">-</button>
-                </td>
-                <td id="blank"></td>
-                <td id="blank"></td>
-                <td id="blank"></td>
-                <td id="blank"></td>
-                <td id="blank"></td>
-                <td id="backspace">
-                  <button class="button is-light" id="delete">Backspace</button>
-                </td>
-              </tr>
-
-            </table>
-
-          </div>
+      <div class="column" id="l2n_left_half">
+        <p id="l2n_left_half_title">Trials</p>
+        <div class="container" id="l2n_top_left_quarter">
+          <h6 class="subtitle" id="l2n_step1_subtitle"> Step 1 : Equation </h6>
+          <textarea class="textarea" rows="1" id="l2n_step1_text"></textarea>
+          <button class="button is-light" id="l2n_equation_send"><span id="l2n_equation_send_text">Send</span></button>
+        </div>
+        <!-- This section is the guess area. -->
+        <div class="container" id="l2n_bottom_left_quarter">
+          <h6 class="subtitle" id="l2n_step2_subtitle"> Step 2 : Hypothesis </h6>
+          <textarea class="textarea" rows="1" id="l2n_step2_text"></textarea>
+          <button class="button is-light" id="l2n_guess_send"><span id="l2n_guess_send_text">Guess</span></button>
         </div>
       </div>
 
-      <!-- This section is the guess area. -->
-      <div class="column">
-        <div class="container" id="middleHalf">
-          <div class="container" id="guess">
-            <p>
-            <h1 class="title">
-              Guesses
-            </h1>
-            </p>
-            <p>
-            <pre><h6 class="subtitle"> Letter  =   Number
-        </h6></pre>
-            </p>
-            <div class="container" id="factcheck">
-              <div class="container" id="guess1">
-                <p> Trial 1</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter1" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number1" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess2">
-                <p> Trial 2</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter2" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number2" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess3">
-                <p> Trial 3</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter3" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number3" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess4">
-                <p> Trial 4</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter4" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number4" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess5">
-                <p> Trial 5</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter5" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number5" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess6">
-                <p> Trial 6</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter6" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number6" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess7">
-                <p> Trial 7</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter7" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number7" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess8">
-                <p> Trial 8</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter8" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number8" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess9">
-                <p> Trial 9</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter9" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number9" cols="1"></textarea>
-              </div>
-              <div class="container" id="guess10">
-                <p> Trial 10</p>
-                <br>
-                <textarea class="textarea" rows="1" id="letter10" cols="1"></textarea>
-                =
-                <textarea class="textarea" rows="1" id="number10" cols="1"></textarea>
-              </div>
-            </div>
-            <button class="button is-light" id="final_Answer">Guess Full Answer?</button>
-          </div>
-        </div>
+      <div class="column" id="l2n_right_half">
+        <p id="l2n_right_half_title">Results</p>
+        <table class="table is-bordered is-striped is-narrow is-fullwidth" id="l2n_results">
+          <thead>
+            <tr id="one">
+              <th>Trial</th>
+              <th>Equation</th>
+              <th>Hypothesis</th>
+              <th>Feedback</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="two">
+              <th>1</th>
+              <td id="equation_1"></td>
+              <td id="hypothesis_1"></td>
+              <td id="feedback_1"></td>
+            </tr>
+            <tr id="three">
+              <th>2</th>
+              <td id="equation_2"></td>
+              <td id="hypothesis_2"></td>
+              <td id="feedback_2"></td>
+            </tr>
+            <tr id="four">
+              <th>3</th>
+              <td id="equation_3"></td>
+              <td id="hypothesis_3"></td>
+              <td id="feedback_3"></td>
+            </tr>
+            <tr id="five">
+              <th>4</th>
+              <td id="equation_4"></td>
+              <td id="hypothesis_4"></td>
+              <td id="feedback_4"></td>
+            </tr>
+            <tr id="six">
+              <th>5</th>
+              <td id="equation_5"></td>
+              <td id="hypothesis_5"></td>
+              <td id="feedback_5"></td>
+            </tr>
+            <tr id="seven">
+              <th>6</th>
+              <td id="equation_6"></td>
+              <td id="hypothesis_6"></td>
+              <td id="feedback_6"></td>
+            </tr>
+            <tr id="eight">
+              <th>7</th>
+              <td id="equation_7"></td>
+              <td id="hypothesis_7"></td>
+              <td id="feedback_7"></td>
+            </tr>
+            <tr id="nine">
+              <th>8</th>
+              <td id="equation_8"></td>
+              <td id="hypothesis_8"></td>
+              <td id="feedback_8"></td>
+            </tr>
+            <tr id="ten">
+              <th>9</th>
+              <td id="equation_9"></td>
+              <td id="hypothesis_9"></td>
+              <td id="feedback_9"></td>
+            </tr>
+            <tr id="eleven">
+              <th>10</th>
+              <td id="equation_10"></td>
+              <td id="hypothesis_10"></td>
+              <td id="feedback_10"></td>
+            </tr>
+          </tbody>
+          </table>
       </div>
     </div>
-    </div>
-
-    <!-- This section is the submit area. -->
-    <div class="container" id="bottomHalf">
-      <div class="container" id="input">
-        <table>
-
-          <tr>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/A.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/B.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/C.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/D.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/E.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/F.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/G.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/H.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/I.png">
-              </figure>
-            </td>
-            <td>
-              <figure class="image is-128x128">
-                <img src="./Letters/J.png">
-              </figure>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <textarea class="textarea" rows="1" id="0"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="1"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="2"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="3"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="4"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="5"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="6"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="7"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="8"></textarea>
-            </td>
-            <td>
-              <textarea class="textarea" rows="1" id="9"></textarea>
-            </td>
-          </tr>
-
-        </table>
-
-        <div id="submit_answer">
-          <button class="button is-light" id="submit_answer">Submit</button>
-        </div>
-
-        <!-- Modal Code -->
-        <div class="modal" id="modal">
-          <div class="modal-background"></div>
-          <div class="modal-content" style="background-color:white;">
-            <p>
-              Are you ok with these answers?
-            </p>
-            <p>
-              Awaiting: <span id="members">0</span>/<span id="group">4</span> Confirmations
-            <p>
-              <button class="button is-light" id="confirm">Confirm</button>
-              <button class="button is-light" id="cancel">Cancel</button>
-            </p>
-            </p>
-          </div>
-          <button class="modal-close is-large" aria-label="close" id="close_modal"></button>
-        </div>
-      </div>
-
+    
+    <div id="l2n_bottom">
+      <table class="is-fullwidth" id="l2n_finalguess">
+        <tr id="l2n_bottom_table_row">
+          <td>A</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_0'></td>
+          <td>B</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_1'></td>
+          <td>C</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_2'></td>
+          <td>D</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_3'></td>
+          <td>E</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_4'></td>
+        </tr>
+        <tr id="l2n_bottom_table_row">
+          <td>F</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_5'></td>
+          <td>G</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_6'></td>
+          <td>H</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_7'></td>
+          <td>I</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_8'></td>
+          <td>J</td>
+          <td><input class="input is-large" type="text" placeholder="" id='l2n_bottom_text_9'></td>
+        </tr>
+      </table>
+      <button class="button is-light" id="l2n_submit_final"><span id="l2n_submit_final_text">Submit</span></button>
     </div>
   </section>
 
+    <!-- <div class="modal" id="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content" style="background-color:white;">
+        <p>
+          Are you ok with these answers?
+        </p>
+        <p>
+          Awaiting: <span id="members">0</span>/<span id="group">4</span> Confirmations
+        <p>
+          <button class="button is-light" id="confirm">Confirm</button>
+          <button class="button is-light" id="cancel">Cancel</button>
+        </p>
+      </div>
+      <button class="modal-close is-large" aria-label="close" id="close_modal"></button>
+    </div>
+    </div> -->
+    
 </body>
