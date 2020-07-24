@@ -1,15 +1,14 @@
 // Set up Firebase configuration object
 const firebaseConfig = {
-    apiKey: "AIzaSyBqmO5EvF3KUrXn7XGEHjku9Z7a_C_P-AM",
-    authDomain: "multiplayer-math-maker.firebaseapp.com",
-    databaseURL: "https://multiplayer-math-maker.firebaseio.com",
-    projectId: "multiplayer-math-maker",
-    storageBucket: "multiplayer-math-maker.appspot.com",
-    messagingSenderId: "489127211642",
-    appId: "1:489127211642:web:f71688bd2932cb9c8281c3",
-    measurementId: "G-TGFPT2WKPK"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
 };
-// Initialize Firebase and reference Database
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true }); 

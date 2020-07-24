@@ -1,13 +1,13 @@
 // Declare firebase settings for initialization
 const firebaseConfig = {
-    apiKey: "AIzaSyBqmO5EvF3KUrXn7XGEHjku9Z7a_C_P-AM",
-    authDomain: "multiplayer-math-maker.firebaseapp.com",
-    databaseURL: "https://multiplayer-math-maker.firebaseio.com",
-    projectId: "multiplayer-math-maker",
-    storageBucket: "multiplayer-math-maker.appspot.com",
-    messagingSenderId: "489127211642",
-    appId: "1:489127211642:web:f71688bd2932cb9c8281c3",
-    measurementId: "G-TGFPT2WKPK"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -17,8 +17,8 @@ db.settings({ timestampsInSnapshots: true });
 
 // AWS configuration 
 AWS.config = new AWS.Config();
-AWS.config.accessKeyId = "AKIAUYKTSY5UQLZFQCVV";
-AWS.config.secretAccessKey = "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";
+AWS.config.accessKeyId = "";
+AWS.config.secretAccessKey = "";
 AWS.config.region = 'us-east-1';
 
 // Create S3 service object
@@ -64,7 +64,8 @@ htmlFileButton.addEventListener('change', async function(e) {
     // console.log(file);
     
     // Call script to add TogetherJS functionality 
-    togetherJS_String = fileAsString.replace("</head>", 
+    togetherJS_String = fileAsString.replace("</head>",
+    // You will have to change hub base to be your own together JS server 
             '<script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>\n' + 
             '<script> TogetherJSConfig_suppressJoinConfirmation = true </script> \n' +
             '<script> TogetherJSConfig_autoStart = true </script> \n' +
@@ -99,11 +100,11 @@ submit.addEventListener("click", async function(e) {
     
     // Create the parameters for calling methods on the bucket
         var bucketParams = {
-            Bucket : 'helpinghalpin' + gameName,
+            Bucket : 'coefficient' + gameName,
             ACL : 'public-read'
         };
         var websiteParams = {
-            Bucket: "helpinghalpin" + gameName,
+            Bucket: "coefficient" + gameName,
             ContentMD5: "",
             WebsiteConfiguration: {
              ErrorDocument: {
@@ -115,28 +116,28 @@ submit.addEventListener("click", async function(e) {
             }
            };
         var params = {
-            Bucket: "helpinghalpin" + gameName
+            Bucket: "coefficient" + gameName
         };
         var uploadParams = {
-            Bucket: "helpinghalpin" + gameName, 
+            Bucket: "coefficient" + gameName, 
             Key: 'index.html', 
             Body: togetherJS_String,
             ContentType: 'text/html'
         };
         var uploadParamsCSS = {
-            Bucket: "helpinghalpin" + gameName, 
+            Bucket: "coefficient" + gameName, 
             Key: 'styles.css', 
             Body: css,
             ContentType: 'text/css'
         };
         var uploadParamsJS = {
-            Bucket: "helpinghalpin" + gameName, 
+            Bucket: "coefficient" + gameName, 
             Key: 'app.js', 
             Body: js
           
         };
         var uploadParamsCSV = {
-            Bucket: "helpinghalpin" + gameName, 
+            Bucket: "coefficient" + gameName, 
             Key: 'data.csv', 
             Body: csv
           
@@ -150,13 +151,13 @@ submit.addEventListener("click", async function(e) {
                         Effect: "Allow",
                         Principal: "*",
                         Action: "s3:GetObject",
-                        Resource: "arn:aws:s3:::helpinghalpin" + gameName +"/*"
+                        Resource: "arn:aws:s3:::coefficient" + gameName +"/*"
                     }
                 ]
             
         };
         var policyParams = {
-            Bucket: "helpinghalpin" + gameName,
+            Bucket: "coefficient" + gameName,
             Policy: JSON.stringify(policy)
 
 
@@ -244,7 +245,7 @@ submit.addEventListener("click", async function(e) {
     docRef.set({
         gameTitle: name,
         userID: user.uid,
-        URL: "http://helpinghalpin" + gameName + ".s3-website-us-east-1.amazonaws.com"
+        URL: "http://coefficient" + gameName + ".s3-website-us-east-1.amazonaws.com"
     }).then(function() {
         // console.log("Game saved!");
         
