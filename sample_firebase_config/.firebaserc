@@ -1,5 +1,6 @@
 {
   "projects": {
+    "coefficient": "multiplayer-math-maker",
     "default": "multiplayer-math-maker"
   }
 }

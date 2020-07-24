@@ -5,23 +5,58 @@
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
+        <link rel="stylesheet" href="launch.css">
     </head>
     <body>
 
-        <h1>Saved Games</h1>
+        <!--Need some kind of list that displays from games database-->
+        <!-- <div id = "your"> -->
+            <h1 class="WhiteYour">Your</h1>
+            <h1 class="OrangeYour">Your</h1>
+        <!-- </div> -->
+
+
         
+        <div id = "heading"> 
+            
+            <h1 class="OrangeSaved">Saved</h1>
+            <h1 class="WhiteSaved">Saved</h1>
+            <h1 class="WhiteGames">Games</h1>
+            <h1 class="OrangeGames">Games</h1>
+        </div> 
+        
+        <div id="url">
+            <h1 class="OrangeURLs">URLs</h1>
+            <h1 class="WhiteURLs">URLs</h1>
+        </div>
+
+        <hr id="white1">
+        <hr id="white2">
+        <hr id="white3">
+        <hr id="white4">
+        <hr id="white5">
+
+        <hr id="orange1">
+        <hr id="orange2">
+        <hr id="orange3">
+        <hr id="orange4">
+        <hr id="orange5">        
         <form id = "game-list">           
         </form>
 
-        <form>
+        <form id= "buttons">
             <input id = "groups" type="text", placeholder="Number of Groups">
             <br>
             <button id = "generate" type = "button">Generate Session</button>
+
+            <button id = "delete" type = "button">Delete Old Game</button>
+
         </form>
         
         <a href='upload.html'>
-            <button>Upload New Game</button>
+            <button id = "upload">Upload New Game</button>
         </a>
+        <!-- div for storing the generated URLs -->
         <div id="launch"></div>
         
         <script src="launch.js"></script>

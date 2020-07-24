@@ -1,5 +1,4 @@
 // Declare firebase settings for initialization
-// You will get these settings after creating the Firebase project in the console
 const firebaseConfig = {
     apiKey: "",
     authDomain: "",
@@ -17,7 +16,6 @@ const db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });  
 
 // AWS configuration 
-// Enter your IAM user information, we will provide instructions on how to do this
 AWS.config = new AWS.Config();
 AWS.config.accessKeyId = "";
 AWS.config.secretAccessKey = "";
@@ -59,19 +57,20 @@ var gameName;
 
 // Add event listener to the HTML file upload button
 var htmlFileButton = document.getElementById("html");
+
 htmlFileButton.addEventListener('change', async function(e) {
     html = e.target.files[0]; 
     let fileAsString = await readFileAsync(html);
     // console.log(file);
     
     // Call script to add TogetherJS functionality 
-    togetherJS_String = fileAsString.replace("</head>", 
+    togetherJS_String = fileAsString.replace("</head>",
+    // You will have to change hub base to be your own together JS server 
             '<script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>\n' + 
             '<script> TogetherJSConfig_suppressJoinConfirmation = true </script> \n' +
             '<script> TogetherJSConfig_autoStart = true </script> \n' +
             '<script src="https://togetherjs.com/togetherjs-min.js"></script> \n' +
             '</head>\n');
-    // console.log(togetherJS_String);
 
 });
  
@@ -128,8 +127,8 @@ submit.addEventListener("click", async function(e) {
         var uploadParamsCSS = {
             Bucket: "coefficient" + gameName, 
             Key: 'styles.css', 
-            Body: css
-            
+            Body: css,
+            ContentType: 'text/css'
         };
         var uploadParamsJS = {
             Bucket: "coefficient" + gameName, 
