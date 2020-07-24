@@ -1,0 +1,336 @@
+html {
+    background: #8FAADC;
+}
+
+h1.WhiteYour{
+
+    position: fixed;
+    left: 35px;
+    top: -200px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #FFFFFF;
+    z-index:-10
+}
+h1.OrangeYour{
+    position: fixed;
+    left: 40px;
+    top: -200px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #EB7021;
+    z-index:-10
+}
+h1.WhiteSaved{
+    position: fixed;
+    left: 40px;
+    top: -25px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #FFFFFF;
+    z-index:-10
+}
+h1.OrangeSaved{
+    position: fixed;
+    left: 35px;
+    top: -25px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #EB7021;
+    z-index:-10
+}
+h1.WhiteGames{
+    position: fixed;
+    left: 35px;
+    top: 150px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #FFFFFF;
+    z-index:-10
+}
+h1.OrangeGames{
+    position: fixed;
+    left: 40px;
+    top: 150px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px; 
+    color: #EB7021;  
+    z-index:-10
+}
+
+#orange1{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: -95px;
+    top: 95px;
+
+    border: 7px solid #EB7021;
+    z-index:-5;
+    transform: rotate(70deg);
+}
+
+#orange2{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: -45px;
+    top: 95px;
+
+    border: 7px solid #EB7021;
+    z-index:-5;
+    transform: rotate(70deg);
+}
+
+
+#orange3{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: 5px;
+    top: 95px;
+
+    border: 7px solid #EB7021;
+    z-index:-5;
+    transform: rotate(70deg);
+}
+
+
+#orange4{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: 55px;
+    top: 95px;
+
+    border: 7px solid #EB7021;
+    z-index:-5;
+    transform: rotate(70deg);
+}
+
+
+#orange5{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: 105px;
+    top: 95px;
+
+    border: 7px solid #EB7021;
+    z-index:-5;
+    transform: rotate(70deg);
+}
+
+
+#white1{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: -85px;
+    top: 95px;
+
+    border: 7px solid #FFFFFF;
+    z-index:-1;
+    transform: rotate(70deg);
+}
+
+#white2{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: -35px;
+    top: 95px;
+
+    border: 7px solid #FFFFFF;
+    z-index:-1;
+    transform: rotate(70deg);
+}
+
+
+#white3{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: 15px;
+    top: 95px;
+
+    border: 7px solid #FFFFFF;
+    z-index:-1;
+    transform: rotate(70deg);
+}
+
+
+#white4{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: 65px;
+    top: 95px;
+
+    border: 7px solid #FFFFFF;
+    z-index:-1;
+    transform: rotate(70deg);
+}
+
+
+#white5{
+    position: fixed;
+    width: 1200px;
+    height: 0px;
+    left: 115px;
+    top: 95px;
+
+    border: 7px solid #FFFFFF;
+    z-index:-1;
+    transform: rotate(70deg);
+}
+
+
+#game-list{
+    position: relative;
+    left: 900px;
+    top: 20px;
+    font-size: 30px;
+/*
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 70px;
+    line-height: 375px;
+    color: #FFFFFF;
+*/
+}
+input[type='radio'] { 
+    height: 20px;
+    width: 20px;
+    vertical-align: 10%;
+    margin-right: 15;
+    margin-bottom: 0;
+ }
+
+
+ #upload{
+    position: relative;
+    left: 950px;
+    top: -100px;
+    font-size: 19px;
+    text-align: center;
+}
+
+#delete{
+    position: relative;
+    left: 980px;
+    top: -56px;
+    font-size: 19px;
+    text-align: center;
+}
+
+#groups{
+    position: relative;
+    left: 986px;
+    top: 50px;
+    font-size: 27px;
+    text-align: center;
+}
+
+#generate{
+    position: relative;
+    left: 1055px;
+    top: 65px;
+    font-size: 19px;
+    text-align: center;
+}
+
+body{
+    overflow-x: hidden;
+}
+/*
+
+#submit{
+    position: absolute;
+    left: 900px;
+    top: 395px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#groups{
+    position: relative;
+    left: 1000px;
+    font-size: 20px;
+    text-align: center;
+}
+
+*/
+/* #launch li {
+    position: relative;
+    left: 1000px;
+    top: 100px;
+    font-size: 19px;
+    text-align: center;
+    visibility: none;
+} */
+#launch a {
+    position: relative;
+    left: 1000px;
+    top: 50px;
+    font-size: 30px;
+    text-align: center;
+    visibility: visible;
+}
+#buttons {
+    padding-top: 3.5em;
+}
+#url {
+    visibility: hidden;
+    
+}
+.OrangeURLs {
+    position: fixed;
+    left: 35px;
+    top: -25px;
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #EB7021;
+    z-index:-10
+}
+.WhiteURLs {
+    position: fixed;
+    left: 40px;
+    top: -25px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 200px;
+    line-height: 375px;
+    color: #FFFFFF;
+    z-index:-10
+}

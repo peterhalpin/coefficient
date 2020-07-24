@@ -1,0 +1,249 @@
+html {
+    background: #8FAADC;
+}
+
+h1.white {
+    position: absolute;
+    width: 1736px;
+    height: 113px;
+    left: 120px;
+    top: -60px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 57px;
+    line-height: 150px;
+
+    color: white;
+}
+
+h1.orange {
+    position: absolute;
+    width: 1736px;
+    height: 113px;
+    left: 115px;
+    top: -60px;
+
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 57px;
+    line-height: 150px;
+
+    color: #EB7021;
+}
+
+#html{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 140px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: #EB7021;*/
+}
+
+#css{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 200px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: white;*/
+}
+
+#js{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 260px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: #EB7021;*/
+}
+
+#data{
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 320px;
+    font-size: 25px;
+    padding: 25px 0px
+    /*background-color: white;*/
+}
+
+h2{
+    font-family: Staatliches;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 25px;
+    line-height: 150px;
+    color: #EB7021;
+    font-weight: bolder;
+}
+
+h2.html1{
+    position: absolute;
+    left: 245px;
+    top:  65px;
+}
+
+h2.css1{
+    position: absolute;
+    left: 255px;
+    top:  142px;
+}
+
+h2.js1{
+    position: absolute;
+    left: 270px;
+    top:  219px;
+}
+
+h2.csv1{
+    position: absolute;
+    left: 255px;
+    top:  297px;
+}
+
+
+h2.html2{
+    position: absolute;
+    left: 243px;
+    top:  65px;
+    color: white;
+}
+
+h2.css2{
+    position: absolute;
+    left: 258px;
+    top:  142px;
+    color: white;
+}
+
+h2.js2{
+    position: absolute;
+    left: 268px;
+    top:  219px;
+    color: white;
+}
+
+h2.csv2{
+    position: absolute;
+    left: 258px;
+    top:  297px;
+    color: white;
+}
+
+
+#gamename{
+    margin-left: 750px;
+    margin-top: 200px;
+    font-size: 20px;
+    text-align: center;
+    padding: 15px 90px
+}
+
+#add{
+    margin-left: 890px;
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+.triangle-orange{
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-left: -128px;
+    margin-top: 395px;
+
+    border-left   : 25px solid transparent;
+    border-right  : 25px solid transparent;  
+    border-bottom : 100px solid #EB7021;
+
+    border: solid 120px;
+    border-color: transparent transparent #EB7021 transparent;
+    z-index: -10;
+    margin-top: 395px;
+}
+.triangle-white{
+    position: absolute;
+    width: 0;
+    height: 0;
+
+    border-left   : 25px solid transparent;
+    border-right  : 25px solid transparent;  
+    border-bottom : 100px solid #EB7021;
+
+    border: solid 120px;
+    border-color: transparent transparent white transparent;
+    z-index: -10;
+    margin-top: 395px;
+}
+
+#t1{
+    margin-left: -128px;
+}
+#t2{
+   margin-left: -58px;
+}
+#t3{
+    margin-left: 12px;
+}
+#t4{
+   margin-left: 82px;
+}
+#t5{
+    margin-left: 152px;
+}
+#t6{
+   margin-left: 222px;
+}
+#t7{
+    margin-left: 292px;
+}
+#t8{
+   margin-left: 362px;
+}
+#t9{
+    margin-left: 432px;
+}
+#t10{
+   margin-left: 502px;
+}
+#t11{
+    margin-left: 572px;
+}
+#t12{
+   margin-left: 642px;
+}
+#t13{
+    margin-left: 712px;
+}
+#t14{
+   margin-left: 782px;
+
+}
+#t15{
+    margin-left: 852px;
+}
+#t16{
+   margin-left: 922px;
+}
+#t17{
+    margin-left: 992px;
+}
+#t18{
+   margin-left: 1062px;
+}
+#t19{
+    margin-left: 1132px;
+}
+#t20{
+   margin-left: 1202px;
+}
+#t21{
+    margin-left: 1272px;
+}
+#t22{
+   margin-left: 1342px;
+}
+
