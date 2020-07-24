@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Covid-19 Excercise</title>
+  <link rel="stylesheet" href="covid.css">
+  <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
+  <script src="..\node_modules\jquery\dist\jquery.js"></script>
+  <script>
+    var TogetherJSConfig_cloneClicks = true;
+    var TogetherJSConfig_dontShowClicks = true;
+    var TogetherJSConfig_suppressJoinConfirmation = true;
+  </script>
+  <script src="https://togetherjs.com/togetherjs-min.js"></script>
+  <script src="..\node_modules\papaparse\papaparse.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
+  <script src=".\covid.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['geochart'],
+      'mapsApiKey': 'AIzaSyDCtgWwRM37944AAP1SgUdLANl57Xmc-m8'
+    });
+
+    google.charts.setOnLoadCallback(drawMarkersMap);
+
+    function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['States', 'Population'],
+        ['North Carolina', 65700000],
+        ['New York', 81890000],
+        ['Dakota', 38540000]
+      ]);
+
+      var options = {
+        sizeAxis: { minValue: 0, maxValue: 100 },
+        region: 'US',
+        colorAxis: { colors: ['#e7711c', '#4374e0'] },// orange to blue
+        backgroundColor: '#81d4fa',
+        datalessRegionColor: '#f8bbd0',
+        defaultColor: '#f5f5f5',
+        displayMode: 'regions',
+        resolution: 'provinces',
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+      chart.draw(data, options);
+    };
+  </script>
+
+
+</head>
+
+
+
+<body>
+  <section class="section" id="page">
+    <div class="container" id="page">
+      <div class="columns" id="data">
+        <div class="column">
+          <div id="months" class="slidecontainer">
+            <p>Month</p>
+            <input id="sliderWithValue1" class="slider has-output-tooltip is-fullwidth" step="1" min="1" max="12"
+              value="1" type="range">
+          </div>
+          <div id="days" class="slidecontainer">
+            <p>Day</p>
+            <input class="slider is-fullwidth" step="1" min="1" max="30" value="1" type="range" id="sliderWithValue2">
+            <p>Date: <span id="Value1">January</span> <span id="Value2">1</span></p>
+          </div>
+          <div id="dropdown">
+            <div class="select">
+              <select id="dropdown">
+                <!-- This section will be added at run time when parsing the csv file-->
+                <!-- <option value="TBA">TBA</option>
+                <option value="TBA">TBA</option>
+                <option value="TBA">TBA</option>
+                <option value="TBA">TBA</option>
+                <option value="TBA">TBA</option> -->
+              </select>
+            </div>
+          </div>
+          <input type="file" id="fileInput">
+          <script>
+            let svc;
+            document.getElementById('fileInput').addEventListener('change', function selectedFileChanged() {
+              if (this.files.length === 0) {
+                console.log('No file selected.');
+                return;
+              }
+              Papa.parse(this.files[0], {
+                delimiter: "",	// auto-detect
+                newline: "",	// auto-detect
+                quoteChar: '"',
+                escapeChar: '"',
+                header: false,
+                transformHeader: false,
+                dynamicTyping: true,
+                preview: 0,
+                encoding: "",
+                worker: false,
+                comments: false,
+                step: undefined,
+                complete: function (results, file) {
+                  console.log("Parsing complete:", results, file);
+                  svc = results;
+                  console.log(svc);
+                  let keys =  svc.data[0];
+                  for(let i = 0 ; i < keys.length ; i++){
+                    if(keys[i] == null) {
+                      continue;
+                    } else {
+                      $("select#dropdown").append("<option>"+ keys[i]+"</option>");
+                    }
+                
+                  }
+                  console.log(keys);
+                },
+                error: undefined,
+                download: false,
+                downloadRequestHeaders: undefined,
+                downloadRequestBody: undefined,
+                skipEmptyLines: true,
+                chunk: undefined,
+                fastMode: undefined,
+                beforeFirstChunk: undefined,
+                withCredentials: undefined,
+                transform: undefined,
+                delimitersToGuess: [',', '\t', '|', ';', Papa.RECORD_SEP, Papa.UNIT_SEP]
+              });
+            });
+          </script>
+        </div>
+        <div class="column" id="map">
+          <div id="regions_div" style="width: 900px; height: 500px;"></div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
+  </section>
+</body>

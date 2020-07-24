@@ -1,0 +1,296 @@
+div#txt {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  width: 200px;
+  height: 100px;
+  padding-top: 20px;
+  margin: 0px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 75px;
+  text-align: center;
+  border-style: solid;
+  border-color: #4b9cd3;
+  color: #4b9cd3;
+  line-height: 50px;
+}
+
+p#title {
+  position: absolute;
+  width: 1170px;
+  height: 199px;
+  top: 100px;
+  left: 200px;
+  width: 1170px;
+  height: 199px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 144px;
+  line-height: 199px;
+  text-align: center;
+
+  color: #4b9cd3;
+}
+
+#subtitle {
+  position: absolute;
+  width: 1000px;
+  height: 135px;
+  top: 300px;
+  left: 320px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 90px;
+  line-height: 100px;
+  text-align: center;
+  color: #000000;
+}
+
+div.modal-background {
+  width: 2093px;
+  height: 1024px;
+  background: #fefefe;
+}
+
+div.modal-content {
+  width: 1500px;
+  height: 700px;
+}
+
+p#l2nseedsubmit {
+  position: absolute;
+  width: 1110px;
+  height: 59px;
+  top: 300px;
+  left: 200px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  line-height: 88px;
+  text-align: center;
+  color: #000000;
+}
+
+span#button_text {
+  width: 787px;
+  height: 171px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 144px;
+  line-height: 150px;
+  text-align: center;
+  color: #000000;
+}
+
+span#l2n_submit_final_text {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 10px;
+  top: 5px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  text-align: center;
+  color: #ffffff;
+}
+
+div {
+  padding: 15px;
+}
+
+textarea#seed {
+  width: 442px;
+  height: 72px;
+}
+
+button#submit_seed,
+button#submit_start,
+button#l2n_return {
+  width: 798px;
+  height: 175px;
+}
+
+p#textbar {
+  border-style: solid;
+}
+
+p#l2nmodal_Subtitle {
+  position: absolute;
+  width: 597px;
+  height: 96px;
+  left: 450px;
+  top: 278px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  line-height: 88px;
+  text-align: center;
+  color: #000000;
+}
+
+div#l2nmodal_Instructions > * {
+  position: absolute;
+  height: 165px;
+  left: 320px;
+  top: 360px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 66px;
+  color: #000000;
+}
+
+#l2n_title_container {
+  padding: 0px;
+  margin: 0px;
+}
+
+#l2n_title {
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 70px;
+  color: #4b9cd3;
+  padding-left: 600px;
+  margin: 0px;
+}
+
+#l2n_left_half {
+  padding-left: 60px;
+}
+#l2n_right_half {
+  margin-right: 60px;
+}
+#l2n_right_half,
+#l2n_top_left_quarter,
+#l2n_bottom_left_quarter {
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+#l2n_bottom {
+  padding-left: 60px;
+}
+
+#l2n_bottom_left_quarter,
+#l2n_top_left_quarter {
+  width: 633px;
+}
+
+#l2n_bottom_table_row {
+  width: 1500px;
+  height: 100px;
+  line-height: 90px;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 96px;
+  color: #4b9cd3;
+}
+
+#l2n_bottom_table_row > td {
+  padding-right: 20px;
+}
+
+#l2n_bottom_table_row > td > input {
+  height: 100px;
+  width: 200px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#l2n_submit_final {
+  position: absolute;
+  height: 100px;
+  width: 200px;
+  left: 1620px;
+  top: 750px;
+  background-color: #4b9cd3;
+}
+
+#l2n_left_half_title,
+#l2n_right_half_title {
+  position: relative;
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 55px;
+  color: #4b9cd3;
+  left: 230px;
+}
+
+#l2n_guess_send,
+#l2n_equation_send {
+  width: 100px;
+  height: 50px;
+  position: relative;
+  left: 230px;
+  top: 10px;
+  background-color: #4b9cd3;
+  color: #ffffff;
+}
+
+#l2n_equation_send_text,
+#l2n_guess_send_text {
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  color: #ffffff;
+}
+
+#l2n_step1_subtitle,
+#l2n_step2_subtitle {
+  font-family: Stardos Stencil;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  color: #ffffff;
+  background-color: #4b9cd3;
+}
+
+body {
+  overflow-x: auto;
+}
+
+section#main2.section {
+  padding: 15px;
+  margin: 0px;
+}
+
+tr#one,
+tr#three,
+tr#five,
+tr#seven,
+tr#nine,
+tr#eleven {
+  background-color: #4b9cd3;
+  color: #ffffff;
+}
+
+tr#one > *,
+tr#three > *,
+tr#five > *,
+tr#seven > *,
+tr#nine > *,
+tr#eleven > * {
+  color: #ffffff;
+}
+
+tr#two > *,
+tr#four > *,
+tr#six > *,
+tr#eight > *,
+tr#ten > * {
+  color: #4b9cd3;
+}
