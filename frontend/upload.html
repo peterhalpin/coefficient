@@ -5,8 +5,9 @@
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-storage.js"></script>
-
         <script src="https://sdk.amazonaws.com/js/aws-sdk-2.709.0.min.js"></script>
+        <link rel="stylesheet" href="upload.css">
+
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
@@ -18,16 +19,57 @@
     <body style="overflow:hidden;">
 
         <!--<h1>Games</h1> -->
+        <div class="triangle-orange" id="t1"></div> 
+        <div class="triangle-white" id="t2"></div>
 
+        <div class="triangle-orange" id="t3"></div> 
+        <div class="triangle-white" id="t4"></div> 
+
+        <div class="triangle-orange" id="t5"></div> 
+        <div class="triangle-white" id="t6"></div>
+
+        <div class="triangle-orange" id="t7"></div> 
+        <div class="triangle-white" id="t8"></div> 
+        
+        <div class="triangle-orange" id="t9"></div> 
+        <div class="triangle-white" id="t10"></div> 
+
+        <div class="triangle-orange" id="t11"></div> 
+        <div class="triangle-white" id="t12"></div> 
+
+        <div class="triangle-orange" id="t13"></div> 
+        <div class="triangle-white" id="t14"></div> 
+
+        <div class="triangle-orange" id="t15"></div> 
+        <div class="triangle-white" id="t16"></div> 
+
+        <div class="triangle-orange" id="t17"></div> 
+        <div class="triangle-white" id="t18"></div> 
+
+        <div class="triangle-orange" id="t19"></div> 
+        <div class="triangle-white" id="t20"></div> 
+
+        <div class="triangle-orange" id="t21"></div> 
+        <div class="triangle-white" id="t22"></div> 
+        
+        
+        
+        
         <div class="content">
 
-
+            
             <form id="add-game-form" name = "input">
-                <h1>Upload HTML, CSS, JS, and .csv (data) game files.</h2>
-                <h2 class="html">HTML</h2>
-                <h2 class="css">CSS</h2>
-                <h2 class="js">JS</h2>
-                <h2 class="csv">CSV</h2>
+                <h1 class="orange">Upload HTML, CSS, JS, and .csv (data) game files.</h2>
+                <h1 class="white">Upload HTML, CSS, JS, and .csv (data) game files.</h2>
+                <h2 class="html2">HTML</h2>
+                <h2 class="js2">JS</h2>
+                <h2 class="html1">HTML</h2>
+                <h2 class="css1">CSS</h2>
+                <h2 class="js1">JS</h2>
+                <h2 class="csv1">CSV</h2>
+                <h2 class="css2">CSS</h2>
+                <h2 class="csv2">CSV</h2>
+                
                 <input type="file", id="html", name="html", accept=".html">
                 <br>
                 <input type="file", id="css", name="css", accept=".css">
@@ -46,9 +88,6 @@
             </form>
 
             <br>
-           
-
-
         </div>
         <script src="aws-sdk-2.709.0.js"></script>
         <script src="app.js"></script>
