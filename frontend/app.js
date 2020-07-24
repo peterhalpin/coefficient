@@ -126,8 +126,8 @@ submit.addEventListener("click", async function(e) {
         var uploadParamsCSS = {
             Bucket: "helpinghalpin" + gameName, 
             Key: 'styles.css', 
-            Body: css
-            
+            Body: css,
+            ContentType: 'text/css'
         };
         var uploadParamsJS = {
             Bucket: "helpinghalpin" + gameName, 
