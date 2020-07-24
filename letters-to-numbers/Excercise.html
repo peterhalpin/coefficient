@@ -1,23 +1,12 @@
 <!DOCTYPE html>
-<!-- MAJOR TODO: C
-  * Center things / prettify the layout 
--->
-
-
 <head>
   <meta charset="UTF-8">
   <title>Letters-To-Numbers</title>
-  <style type="text/css">
-    textarea {
-      margin-top: 20px;
-      height: 300px;
-      width: 300px;
-    }
-  </style>
+
   <link rel="stylesheet" href="Excercise.css">
   <script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>
-  <script src="..\node_modules\jquery\dist\jquery.js"></script>
-  <!-- This script makes sure to clone clicks between webpages-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- This script makes sure to clone clicks between webpages , don't show clicked areas, and starts together.js automatically-->
   <script>
     var TogetherJSConfig_cloneClicks = true;
     var TogetherJSConfig_dontShowClicks = true;
@@ -26,11 +15,33 @@
   </script>
   <script src="https://togetherjs.com/togetherjs-min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css">
-  <script src="..\node_modules\seedrandom\seedrandom.js"></script>
-  <script src=".\chat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+  <script src=".\Excercise.js"></script>
+  <script>
+    //CODE FOR CLOCK
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      m = checkTime(m);
+      if(h>12){
+        h = h-12;
+      }
+      document.getElementById('txt').innerHTML =
+      h + ":" + m ;
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i}; 
+      return i;
+    }
+    </script>
+
 </head>
 
-<body>
+<body onload="startTime()">
+
+  <!-- This modal is for all the modals that show up. The internal contents are replaced-->
   <div class="modal is-active" id="l2nmodal">
     <div class="modal-background" id="l2nmodal_bg"></div>
     <div class="modal-content" style="background-color:white;" id="l2nmodal_seed_content">
@@ -46,28 +57,35 @@
     </div>
   </div>
 
+  <!-- CLOCK -->
+  <div id="txt"></div>
+
+
   <div class="container" id="l2n_title_container">
     <h1 id="l2n_title">Letters-To-Numbers</h1>
   </div>
+      
 
 
   <section class="section" id="main2">
     <!--Columns necessary to keep guess/chat area on the same level-->
     <div class="columns">
-      <!-- This section is the "chat" feature . -->
+      
       <div class="column" id="l2n_left_half">
         <p id="l2n_left_half_title">Trials</p>
+
         <div class="container" id="l2n_top_left_quarter">
           <h6 class="subtitle" id="l2n_step1_subtitle"> Step 1 : Equation </h6>
           <textarea class="textarea" rows="1" id="l2n_step1_text"></textarea>
           <button class="button is-light" id="l2n_equation_send"><span id="l2n_equation_send_text">Send</span></button>
         </div>
-        <!-- This section is the guess area. -->
+
         <div class="container" id="l2n_bottom_left_quarter">
           <h6 class="subtitle" id="l2n_step2_subtitle"> Step 2 : Hypothesis </h6>
           <textarea class="textarea" rows="1" id="l2n_step2_text"></textarea>
           <button class="button is-light" id="l2n_guess_send"><span id="l2n_guess_send_text">Guess</span></button>
         </div>
+
       </div>
 
       <div class="column" id="l2n_right_half">
@@ -177,22 +195,5 @@
       <button class="button is-light" id="l2n_submit_final"><span id="l2n_submit_final_text">Submit</span></button>
     </div>
   </section>
-
-    <!-- <div class="modal" id="modal">
-      <div class="modal-background"></div>
-      <div class="modal-content" style="background-color:white;">
-        <p>
-          Are you ok with these answers?
-        </p>
-        <p>
-          Awaiting: <span id="members">0</span>/<span id="group">4</span> Confirmations
-        <p>
-          <button class="button is-light" id="confirm">Confirm</button>
-          <button class="button is-light" id="cancel">Cancel</button>
-        </p>
-      </div>
-      <button class="modal-close is-large" aria-label="close" id="close_modal"></button>
-    </div>
-    </div> -->
     
 </body>
