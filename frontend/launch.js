@@ -21,6 +21,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         db.collection('games').where('userID', '==', window.user.uid.trim()).get().then(snapshot => {
             snapshot.docs.forEach(doc => {
                 // Function call to create visual list element for each game
+                // console.log(doc);
                 renderGame(doc);
             });
        
@@ -115,24 +116,43 @@ function renderURLs(urls) {
     for(i = 0; i < urls.length; i++) {
        
         // Create list item for every element 
-        var listItem = document.createElement("li");
+        // var listItem = document.createElement("li");
         
         // Create a text node to store value and an a tag to store link
-        var text = document.createTextNode("Group " + i);
+        var text = document.createTextNode("Group " + (i+1));
         var a = document.createElement('a');
         a.appendChild(text);
         a.href = urls[i] + '\n'; 
         
         // Append the list item in the list
-        listItem.appendChild(a);
-        list.appendChild(listItem);
-       
+        // listItem.appendChild(a);
+        // list.appendChild(listItem);
+        list.appendChild(a);
+        list.appendChild(document.createElement('br'));
 
 
     }
 
-    // Append the launch button to the end of the page
+
+    var gameList = document.getElementById('game-list');
+    gameList.parentNode.removeChild(gameList);
+    var delButton = document.getElementById('delete');
+    var addButton = document.getElementById('generate');
+    var groups = document.getElementById('groups');
+    var uploadButton = document.getElementById('upload');
+    delButton.parentNode.removeChild(delButton);
+    addButton.parentNode.removeChild(addButton);
+    groups.parentNode.removeChild(groups);
+    uploadButton.parentNode.removeChild(uploadButton);
     document.getElementById('launch').appendChild(list);
+
+    // Change the text to Your URLs
+    var heading = document.getElementById('heading');
+    heading.parentNode.removeChild(heading);
+    
+    url.style.visibility = 'visible';
+    
+
 }
 
 let del = document.getElementById('delete');
