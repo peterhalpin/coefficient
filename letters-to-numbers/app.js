@@ -13,6 +13,7 @@ let express = 0;
 
 
 $(function () {
+    document.getElementById("l2n_guess_send").disabled = true;
     $("div#l2nmodal").on("click", "button#submit_seed", function (event) {
         seed();
 
@@ -132,9 +133,11 @@ function equation() {
         return;
     }
 
-    //Sends equation so that the combination can be interperted and given an anser
-    answer(textbar_content.trim());
+    //Sends equation so that the combination can be interperted and given an answer
+    answer(textbar_content.split(" ").join(""));
     $("#l2n_step1_text").val("");
+    document.getElementById("l2n_equation_send").disabled = true;
+    document.getElementById("l2n_guess_send").disabled = false;
     return;
 
 }
@@ -254,7 +257,7 @@ function translate(term) {
 function checkguess() {
 
     //Takes entered value and clears textbar
-    let hypothesis = $("#l2n_step2_text").val();
+    let hypothesis = $("#l2n_step2_text").val().split(" ").join("");
     $("#l2n_step2_text").val("");
 
     $("td#hypothesis_" + trial_num).append(hypothesis);
@@ -271,12 +274,17 @@ function checkguess() {
 
     has_guessed = true;
 
-    if (trial_num == 10) {
-        $("#l2n_equation_send").remove();
-        $("#l2n_guess_send").remove();
+    
+    if (trial_num >= 10) {
+        document.getElementById("l2n_equation_send").disabled = true;
+        document.getElementById("l2n_guess_send").disabled = true;
+        return;
     }
 
-    trial_num++;
+
+trial_num++;
+document.getElementById("l2n_equation_send").disabled = false;
+document.getElementById("l2n_guess_send").disabled = true;
 }
 
 
@@ -501,7 +509,7 @@ TogetherJS.hub.on("standardize", function (msg) {
     trial_num = msg.trialnum;
     has_guessed = msg.hasguessed;
     $("table#l2n_results").html(msg.current_table2);
-    
+
     //Skips through the seed submit page so as not to accidently create a new combination for everyone
     $("div#l2nmodal_seed_content").replaceWith(`<div class="modal-content" style="background-color:white;" id="l2nmodal_instructions_content">
         <p id="title">
