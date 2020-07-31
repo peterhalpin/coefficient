@@ -17,4 +17,4 @@ So, to summarize, Coefficient provides the following value to instructors:
 * Generate unique URLs for an activity which correspond to different groups of students.
 * View interactions between students on published web activities.
 
-Read the official [Documentation](https://docs.google.com/document/d/1y4dKLLg0J7VlolVvKOY6rmUOTVAx74TwTpwrpNHnDaM/edit?usp=sharing) for more information about how to set up / use this project.
+Read the official documentation in the documentation directory for more information about how to set up / use this project.
