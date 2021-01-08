@@ -62,11 +62,11 @@ htmlFileButton.addEventListener('change', async function(e) {
     html = e.target.files[0];
     let fileAsString = await readFileAsync(html);
     // console.log(file);
-
+    
     // Call script to add TogetherJS functionality
     togetherJS_String = fileAsString.replace("</head>",
     // You will have to change hub base to be your own together JS server
-            '<script>TogetherJSConfig_hubBase = "https://large-lightning-perigee.glitch.me/"; </script>\n' + 
+            '<script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>\n' +
             '<script> TogetherJSConfig_suppressJoinConfirmation = true </script> \n' +
             '<script> TogetherJSConfig_autoStart = true </script> \n' +
             '<script src="https://togetherjs.com/togetherjs-min.js"></script> \n' +
