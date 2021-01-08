@@ -13,9 +13,9 @@ firebase.initializeApp(firebaseConfig);
 
 // Reference the firestore database
 const db = firebase.firestore();
-db.settings({ timestampsInSnapshots: true });  
+db.settings({ timestampsInSnapshots: true });
 
-// AWS configuration 
+// AWS configuration
 AWS.config = new AWS.Config();
 AWS.config.accessKeyId = "";
 AWS.config.secretAccessKey = "";
@@ -30,13 +30,13 @@ console.log(s3);
 function readFileAsync(file) {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
-  
+
       reader.onload = () => {
         resolve(reader.result);
       };
-  
+
       reader.onerror = reject;
-  
+
       console.log(reader.readAsText(file));
 
     })
@@ -59,35 +59,35 @@ var gameName;
 var htmlFileButton = document.getElementById("html");
 
 htmlFileButton.addEventListener('change', async function(e) {
-    html = e.target.files[0]; 
+    html = e.target.files[0];
     let fileAsString = await readFileAsync(html);
     // console.log(file);
-    
-    // Call script to add TogetherJS functionality 
+
+    // Call script to add TogetherJS functionality
     togetherJS_String = fileAsString.replace("</head>",
-    // You will have to change hub base to be your own together JS server 
-            '<script>TogetherJSConfig_hubBase = "https://sustaining-classic-beam.glitch.me/"; </script>\n' + 
+    // You will have to change hub base to be your own together JS server
+            '<script>TogetherJSConfig_hubBase = "https://large-lightning-perigee.glitch.me/"; </script>\n' + 
             '<script> TogetherJSConfig_suppressJoinConfirmation = true </script> \n' +
             '<script> TogetherJSConfig_autoStart = true </script> \n' +
             '<script src="https://togetherjs.com/togetherjs-min.js"></script> \n' +
             '</head>\n');
 
 });
- 
-  
+
+
 // Add event listener to CSS file upload button
 var cssFileButton = document.getElementById("css");
 cssFileButton.addEventListener('change', function(e) {
-    css = e.target.files[0]; 
+    css = e.target.files[0];
 });
-  
+
 // Add event listener to the JS file upload button
 var jsFileButton = document.getElementById("js");
 jsFileButton.addEventListener('change', function(e) {
-    js = e.target.files[0];   
+    js = e.target.files[0];
 });
 
-// Add event listener for .json or .csv files 
+// Add event listener for .json or .csv files
 var csvFileButton = document.getElementById('data');
 csvFileButton.addEventListener('change', function(e) {
     csv = e.target.files[0];
@@ -97,7 +97,7 @@ csvFileButton.addEventListener('change', function(e) {
 submit.addEventListener("click", async function(e) {
     e.preventDefault();
     var gameName = document.getElementById("gameName").value;
-    
+
     // Create the parameters for calling methods on the bucket
         var bucketParams = {
             Bucket : 'coefficient' + gameName,
@@ -119,31 +119,31 @@ submit.addEventListener("click", async function(e) {
             Bucket: "coefficient" + gameName
         };
         var uploadParams = {
-            Bucket: "coefficient" + gameName, 
-            Key: 'index.html', 
+            Bucket: "coefficient" + gameName,
+            Key: 'index.html',
             Body: togetherJS_String,
             ContentType: 'text/html'
         };
         var uploadParamsCSS = {
-            Bucket: "coefficient" + gameName, 
-            Key: 'styles.css', 
+            Bucket: "coefficient" + gameName,
+            Key: 'styles.css',
             Body: css,
             ContentType: 'text/css'
         };
         var uploadParamsJS = {
-            Bucket: "coefficient" + gameName, 
-            Key: 'app.js', 
+            Bucket: "coefficient" + gameName,
+            Key: 'app.js',
             Body: js
-          
+
         };
         var uploadParamsCSV = {
-            Bucket: "coefficient" + gameName, 
-            Key: 'data.csv', 
+            Bucket: "coefficient" + gameName,
+            Key: 'data.csv',
             Body: csv
-          
+
         };
         var policy = {
-            
+
                 Version: "2012-10-17",
                 Statement: [
                     {
@@ -154,7 +154,7 @@ submit.addEventListener("click", async function(e) {
                         Resource: "arn:aws:s3:::coefficient" + gameName +"/*"
                     }
                 ]
-            
+
         };
         var policyParams = {
             Bucket: "coefficient" + gameName,
@@ -175,10 +175,10 @@ submit.addEventListener("click", async function(e) {
         // Wait for the bucket to exist before uploading files
         await s3.waitFor('bucketExists', params, async function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
-            else     
+            else
                 console.log("success" + data); // successful response
-               
-                // Put the bucket policy in place            
+
+                // Put the bucket policy in place
                 await s3.putBucketPolicy(policyParams, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
@@ -188,7 +188,7 @@ submit.addEventListener("click", async function(e) {
                     if (err) console.log(err, err.stack); // an error occurred
                     else    console.log("success" + data); // successful response
                 });
-                
+
                 // If there is a file, upload it to the bucket
                 if(css != undefined) {
                     await s3.upload (uploadParamsCSS, function (err, data) {
@@ -198,7 +198,7 @@ submit.addEventListener("click", async function(e) {
                         console.log("Upload Success", data.Location);
                         }
                     });
-                
+
                 }
                 if(js != undefined) {
                     await s3.upload (uploadParamsJS, function (err, data) {
@@ -208,7 +208,7 @@ submit.addEventListener("click", async function(e) {
                         console.log("Upload Success", data.Location);
                         }
                     });
-              
+
                 }
                 if(csv != undefined) {
                     await s3.upload (uploadParamsCSV, function (err, data) {
@@ -218,8 +218,8 @@ submit.addEventListener("click", async function(e) {
                         console.log("Upload Success", data.Location);
                         }
                     });
-                
-                    
+
+
                 }
 
                 if(html != undefined) {
@@ -230,13 +230,13 @@ submit.addEventListener("click", async function(e) {
                         console.log("Upload Success", data.Location);
                         setTimeout(redirect(), 5000);
                         }
-                        
+
                     });
-                
+
                 }
-                
+
         });
-       
+
     // Reference the database and add the game name, user UID, and game URL
     var name = document.getElementById("gameName").value;
     const docRef = db.doc("games/" + name);
@@ -248,8 +248,8 @@ submit.addEventListener("click", async function(e) {
         URL: "http://coefficient" + gameName + ".s3-website-us-east-1.amazonaws.com"
     }).then(function() {
         // console.log("Game saved!");
-        
+
     });
     document.forms['input'].reset();
-    
+
 });
